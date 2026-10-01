@@ -964,22 +964,12 @@ function renderMasterHeader(activePage = '') {
         </div>
       </a>
 
-      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing - Clean Flat Links) -->
-      <nav class="nav-menu">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="/#features" class="nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
-          </li>
-          <li class="nav-item">
-            <a href="/#channels" class="nav-link ${activePage === 'channels' ? 'active' : ''}">Channels</a>
-          </li>
-          <li class="nav-item">
-            <a href="/agents.html" class="nav-link ${activePage === 'agents' ? 'active' : ''}">Agents</a>
-          </li>
-          <li class="nav-item">
-            <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
-          </li>
-        </ul>
+      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing - Flat Sleek Horizontal Row) -->
+      <nav class="nav-menu" style="display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0;">
+        <a href="/#features" class="nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
+        <a href="/#channels" class="nav-link ${activePage === 'channels' ? 'active' : ''}">Channels</a>
+        <a href="/agents.html" class="nav-link ${activePage === 'agents' ? 'active' : ''}">Agents</a>
+        <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
       </nav>
 
       <!-- Action Buttons with Dynamic Auth Detection & All 15 Languages -->
@@ -1889,6 +1879,18 @@ function generateIndexHtml() {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        if (p.has('org')) {
+          window.location.replace('/auth?org=' + encodeURIComponent(p.get('org')));
+        } else if (p.has('added')) {
+          window.location.replace('/launches');
+        }
+      } catch(e) {}
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amana Flow Postiz — Sovereign Social Media Orchestration Platform</title>
