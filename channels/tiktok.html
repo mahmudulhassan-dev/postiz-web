@@ -11,6 +11,73 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     
+  
+  /* Theme Support: Dark / Light / System */
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-hover: #f1f5f9;
+    --border: rgba(15, 23, 42, 0.12);
+    --border-focus: rgba(0, 163, 255, 0.5);
+    --text: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #64748b;
+    --primary: #0284c7;
+    --primary-glow: rgba(2, 132, 199, 0.25);
+    --secondary: #059669;
+    --gradient-glow: radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.1) 0%, transparent 60%);
+  }
+
+  [data-theme="light"] .master-header {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  [data-theme="light"] .brand-text {
+    color: #0f172a !important;
+  }
+
+  [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] .section-title {
+    color: #0f172a !important;
+  }
+
+  [data-theme="light"] .pricing-card {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  [data-theme="light"] .dropdown-postiz {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  [data-theme="light"] .btn-secondary {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+  }
+
+  /* Currency Buttons */
+  .btn-cur {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-cur.active {
+    background: linear-gradient(135deg, #00A3FF 0%, #00FF9D 100%);
+    color: #0b0f19;
+    box-shadow: 0 2px 10px rgba(0, 163, 255, 0.3);
+  }
+
   :root {
     --bg: #090a0f;
     --bg-surface: #12151e;
@@ -462,13 +529,24 @@
   <!-- Master Global Navigation Header -->
   <header class="master-header">
     <div class="container nav-inner">
-      <a href="/home" class="brand" title="Amana Flow Postiz">
+      <a href="/" class="brand" title="Amana Flow Postiz">
         <div class="brand-logo-wrap">
           
 <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="40" height="40" rx="10" fill="#7C3AED" />
-  <path d="M12 10H22C26.4183 10 30 13.5817 30 18C30 22.4183 26.4183 26 22 26H18V30H12V10Z" fill="white" />
-  <circle cx="21" cy="18" r="3.5" fill="#7C3AED" />
+  <defs>
+    <linearGradient id="afBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="100%" stop-color="#00FF9D" />
+    </linearGradient>
+    <linearGradient id="afBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#afBgGrad)" stroke="url(#afBrandGrad)" stroke-width="1.5" />
+  <path d="M10 28.5L18.2 9.5H21.8L30 28.5H25.2L20 16.2L14.8 28.5H10Z" fill="url(#afBrandGrad)" />
+  <path d="M14 22C17.5 19.8 22.5 19.8 26 22" stroke="#00FF9D" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="20" cy="9.5" r="2" fill="#00FF9D" />
 </svg>
 
         </div>
@@ -510,7 +588,7 @@
 
           <!-- 3. Channels Mega Menu -->
           <li class="nav-item">
-            <a class="nav-link active" href="/home#channels">
+            <a class="nav-link active" href="/#channels">
               Channels
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </a>
@@ -532,23 +610,48 @@
 
           <!-- 4. Architecture / Specs -->
           <li class="nav-item">
-            <a href="/home#architecture" class="nav-link">Self-Hosted</a>
+            <a href="/#architecture" class="nav-link">Self-Hosted</a>
           </li>
 
-          <!-- 5. Legal Links -->
+          <!-- 4. Pricing & Plans -->
           <li class="nav-item">
-            <a href="/terms.html" class="nav-link ">Terms</a>
+            <a href="/#pricing" class="nav-link ">Pricing</a>
           </li>
+
+          <!-- 5. Customer Directory -->
           <li class="nav-item">
-            <a href="/privacy.html" class="nav-link ">Privacy</a>
-          </li>
+                      </li>
         </ul>
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Action Buttons with Dynamic Auth Detection -->
       <div class="nav-actions">
-        <a href="/auth" class="btn btn-secondary">Log In</a>
-        <a href="/launches" class="btn btn-primary">Open Dashboard &rarr;</a>
+        <!-- Theme Mode Switcher (Dark / Light / System) -->
+        <div style="position:relative;display:inline-block;">
+          <button id="themeModeBtn" onclick="toggleThemeDropdown(event)" class="btn-theme-toggle" title="Switch Theme" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;transition:all 0.2s;">
+            <span id="themeModeIcon" style="font-size:16px;">🌙</span>
+          </button>
+          <div id="themeDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
+            <div onclick="setAppTheme('dark')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🌙</span> Dark Mode</div>
+            <div onclick="setAppTheme('light')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>☀️</span> Light Mode</div>
+            <div onclick="setAppTheme('system')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>💻</span> System Mode</div>
+          </div>
+        </div>
+
+        <!-- Language Switcher (EN / বাংলা) -->
+        <div style="position:relative;display:inline-block;">
+          <button id="langToggleBtn" onclick="toggleLangDropdown(event)" class="btn-lang-toggle" title="Switch Language" style="display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;">
+            <span id="langFlagIcon">🇬🇧</span> <span id="langTextLabel">EN</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="langDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
+            <div onclick="setAppLanguage('en')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇬🇧</span> English</div>
+            <div onclick="setAppLanguage('bn')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇧🇩</span> বাংলা (BN)</div>
+          </div>
+        </div>
+
+        <a href="/auth" class="btn btn-secondary" id="navLoginBtn" data-i18n="nav_login">Log In</a>
+        <a href="/launches" class="btn btn-primary" id="navDashboardBtn" style="display:none;" data-i18n="nav_dashboard">Open Dashboard &rarr;</a>
         <button class="mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -558,7 +661,7 @@
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer">
-    <a href="/home" class="mobile-nav-link"><span>🏠 Home Showcase</span> &rarr;</a>
+    <a href="/" class="mobile-nav-link"><span>🏠 Home Showcase</span> &rarr;</a>
     <a href="/docs.html" class="mobile-nav-link"><span>📖 Developer Docs</span> &rarr;</a>
     <a href="/agents.html" class="mobile-nav-link"><span>🤖 AI Agent Guides & MCP</span> &rarr;</a>
     <a href="/channels/facebook.html" class="mobile-nav-link"><span>📘 Facebook & Meta Graph</span> &rarr;</a>
@@ -566,13 +669,11 @@
     <a href="/channels/youtube.html" class="mobile-nav-link"><span>▶️ YouTube Shorts & Data v3</span> &rarr;</a>
     <a href="/channels/instagram.html" class="mobile-nav-link"><span>📸 Instagram Reels & Feed</span> &rarr;</a>
     <a href="/channels/linkedin.html" class="mobile-nav-link"><span>💼 LinkedIn Company Pages</span> &rarr;</a>
-    <a href="/home#channels" class="mobile-nav-link"><span>🌐 View All 30+ Channels</span> &rarr;</a>
-    <a href="/terms.html" class="mobile-nav-link"><span>📜 Terms of Service</span> &rarr;</a>
-    <a href="/privacy.html" class="mobile-nav-link"><span>🛡️ Privacy Policy</span> &rarr;</a>
-    <a href="/data-deletion.html" class="mobile-nav-link"><span>🗑️ User Data Deletion</span> &rarr;</a>
-    <div style="display:flex;gap:10px;margin-top:16px;">
-      <a href="/auth" class="btn btn-secondary" style="flex:1;">Log In</a>
-      <a href="/launches" class="btn btn-primary" style="flex:1;">Dashboard</a>
+    <a href="/#channels" class="mobile-nav-link"><span>🌐 View All 30+ Channels</span> &rarr;</a>
+    <a href="/#pricing" class="mobile-nav-link"><span>💎 Pricing & Plans</span> &rarr;</a>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+      <a href="/auth" class="btn btn-secondary" id="mobileNavLogin" style="flex:1;">Log In</a>
+      <a href="/launches" class="btn btn-primary" id="mobileNavDash" style="flex:1;display:none;">Dashboard</a>
     </div>
   </div>
   
@@ -638,13 +739,24 @@
       <div class="footer-grid">
         <!-- Brand Summary -->
         <div>
-          <a href="/home" class="brand">
+          <a href="/" class="brand">
             <div class="brand-logo-wrap">
               
 <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="40" height="40" rx="10" fill="#7C3AED" />
-  <path d="M12 10H22C26.4183 10 30 13.5817 30 18C30 22.4183 26.4183 26 22 26H18V30H12V10Z" fill="white" />
-  <circle cx="21" cy="18" r="3.5" fill="#7C3AED" />
+  <defs>
+    <linearGradient id="afBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="100%" stop-color="#00FF9D" />
+    </linearGradient>
+    <linearGradient id="afBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#afBgGrad)" stroke="url(#afBrandGrad)" stroke-width="1.5" />
+  <path d="M10 28.5L18.2 9.5H21.8L30 28.5H25.2L20 16.2L14.8 28.5H10Z" fill="url(#afBrandGrad)" />
+  <path d="M14 22C17.5 19.8 22.5 19.8 26 22" stroke="#00FF9D" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="20" cy="9.5" r="2" fill="#00FF9D" />
 </svg>
 
             </div>
@@ -672,7 +784,7 @@
             <li><a href="/channels/linkedin.html">LinkedIn B2B</a></li>
             <li><a href="/channels/threads.html">Threads</a></li>
             <li><a href="/channels/x.html">X (Twitter)</a></li>
-            <li><a href="/home#channels">View All 30 Channels &rarr;</a></li>
+            <li><a href="/#channels">View All 30 Channels &rarr;</a></li>
           </ul>
         </div>
 
@@ -683,7 +795,7 @@
             <li><a href="/docs.html">Documentation Hub</a></li>
             <li><a href="/agents.html">AI Agent Setup</a></li>
             <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
-            <li><a href="/home#architecture">Architecture Specs</a></li>
+            <li><a href="/#architecture">Architecture Specs</a></li>
             <li><a href="/auth">Auth Portal</a></li>
             <li><a href="/launches">Workspace Dashboard</a></li>
           </ul>

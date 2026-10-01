@@ -8,9 +8,20 @@ import path from 'path';
 // Authentic Postiz Squircle Logo (as seen in official Postiz UI top-left)
 const postizLogoSvg = `
 <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="40" height="40" rx="10" fill="#7C3AED" />
-  <path d="M12 10H22C26.4183 10 30 13.5817 30 18C30 22.4183 26.4183 26 22 26H18V30H12V10Z" fill="white" />
-  <circle cx="21" cy="18" r="3.5" fill="#7C3AED" />
+  <defs>
+    <linearGradient id="afBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A3FF" />
+      <stop offset="100%" stop-color="#00FF9D" />
+    </linearGradient>
+    <linearGradient id="afBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="10" fill="url(#afBgGrad)" stroke="url(#afBrandGrad)" stroke-width="1.5" />
+  <path d="M10 28.5L18.2 9.5H21.8L30 28.5H25.2L20 16.2L14.8 28.5H10Z" fill="url(#afBrandGrad)" />
+  <path d="M14 22C17.5 19.8 22.5 19.8 26 22" stroke="#00FF9D" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="20" cy="9.5" r="2" fill="#00FF9D" />
 </svg>
 `;
 
@@ -108,6 +119,73 @@ const allAgents = [...col1Agents, ...col2Agents, ...col3Agents];
 // ============================================================================
 
 const sharedStyles = `
+  
+  /* Theme Support: Dark / Light / System */
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-hover: #f1f5f9;
+    --border: rgba(15, 23, 42, 0.12);
+    --border-focus: rgba(0, 163, 255, 0.5);
+    --text: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #64748b;
+    --primary: #0284c7;
+    --primary-glow: rgba(2, 132, 199, 0.25);
+    --secondary: #059669;
+    --gradient-glow: radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.1) 0%, transparent 60%);
+  }
+
+  [data-theme="light"] .master-header {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  [data-theme="light"] .brand-text {
+    color: #0f172a !important;
+  }
+
+  [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] .section-title {
+    color: #0f172a !important;
+  }
+
+  [data-theme="light"] .pricing-card {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  [data-theme="light"] .dropdown-postiz {
+    background: #ffffff !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  [data-theme="light"] .btn-secondary {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: rgba(15, 23, 42, 0.15) !important;
+  }
+
+  /* Currency Buttons */
+  .btn-cur {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-cur.active {
+    background: linear-gradient(135deg, #00A3FF 0%, #00FF9D 100%);
+    color: #0b0f19;
+    box-shadow: 0 2px 10px rgba(0, 163, 255, 0.3);
+  }
+
   :root {
     --bg: #090a0f;
     --bg-surface: #12151e;
@@ -561,7 +639,7 @@ function renderMasterHeader(activePage = '') {
   <!-- Master Global Navigation Header -->
   <header class="master-header">
     <div class="container nav-inner">
-      <a href="/home" class="brand" title="Amana Flow Postiz">
+      <a href="/" class="brand" title="Amana Flow Postiz">
         <div class="brand-logo-wrap">
           ${postizLogoSvg}
         </div>
@@ -603,7 +681,7 @@ function renderMasterHeader(activePage = '') {
 
           <!-- 3. Channels Mega Menu -->
           <li class="nav-item">
-            <a class="nav-link ${activePage === 'channels' ? 'active' : ''}" href="/home#channels">
+            <a class="nav-link ${activePage === 'channels' ? 'active' : ''}" href="/#channels">
               Channels
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </a>
@@ -625,23 +703,48 @@ function renderMasterHeader(activePage = '') {
 
           <!-- 4. Architecture / Specs -->
           <li class="nav-item">
-            <a href="/home#architecture" class="nav-link">Self-Hosted</a>
+            <a href="/#architecture" class="nav-link">Self-Hosted</a>
           </li>
 
-          <!-- 5. Legal Links -->
+          <!-- 4. Pricing & Plans -->
           <li class="nav-item">
-            <a href="/terms.html" class="nav-link ${activePage === 'terms' ? 'active' : ''}">Terms</a>
+            <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
           </li>
+
+          <!-- 5. Customer Directory -->
           <li class="nav-item">
-            <a href="/privacy.html" class="nav-link ${activePage === 'privacy' ? 'active' : ''}">Privacy</a>
-          </li>
+                      </li>
         </ul>
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Action Buttons with Dynamic Auth Detection -->
       <div class="nav-actions">
-        <a href="/auth" class="btn btn-secondary">Log In</a>
-        <a href="/launches" class="btn btn-primary">Open Dashboard &rarr;</a>
+        <!-- Theme Mode Switcher (Dark / Light / System) -->
+        <div style="position:relative;display:inline-block;">
+          <button id="themeModeBtn" onclick="toggleThemeDropdown(event)" class="btn-theme-toggle" title="Switch Theme" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;transition:all 0.2s;">
+            <span id="themeModeIcon" style="font-size:16px;">🌙</span>
+          </button>
+          <div id="themeDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
+            <div onclick="setAppTheme('dark')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🌙</span> Dark Mode</div>
+            <div onclick="setAppTheme('light')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>☀️</span> Light Mode</div>
+            <div onclick="setAppTheme('system')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>💻</span> System Mode</div>
+          </div>
+        </div>
+
+        <!-- Language Switcher (EN / বাংলা) -->
+        <div style="position:relative;display:inline-block;">
+          <button id="langToggleBtn" onclick="toggleLangDropdown(event)" class="btn-lang-toggle" title="Switch Language" style="display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;">
+            <span id="langFlagIcon">🇬🇧</span> <span id="langTextLabel">EN</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="langDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
+            <div onclick="setAppLanguage('en')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇬🇧</span> English</div>
+            <div onclick="setAppLanguage('bn')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇧🇩</span> বাংলা (BN)</div>
+          </div>
+        </div>
+
+        <a href="/auth" class="btn btn-secondary" id="navLoginBtn" data-i18n="nav_login">Log In</a>
+        <a href="/launches" class="btn btn-primary" id="navDashboardBtn" style="display:none;" data-i18n="nav_dashboard">Open Dashboard &rarr;</a>
         <button class="mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -651,7 +754,7 @@ function renderMasterHeader(activePage = '') {
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer">
-    <a href="/home" class="mobile-nav-link"><span>🏠 Home Showcase</span> &rarr;</a>
+    <a href="/" class="mobile-nav-link"><span>🏠 Home Showcase</span> &rarr;</a>
     <a href="/docs.html" class="mobile-nav-link"><span>📖 Developer Docs</span> &rarr;</a>
     <a href="/agents.html" class="mobile-nav-link"><span>🤖 AI Agent Guides & MCP</span> &rarr;</a>
     <a href="/channels/facebook.html" class="mobile-nav-link"><span>📘 Facebook & Meta Graph</span> &rarr;</a>
@@ -659,13 +762,11 @@ function renderMasterHeader(activePage = '') {
     <a href="/channels/youtube.html" class="mobile-nav-link"><span>▶️ YouTube Shorts & Data v3</span> &rarr;</a>
     <a href="/channels/instagram.html" class="mobile-nav-link"><span>📸 Instagram Reels & Feed</span> &rarr;</a>
     <a href="/channels/linkedin.html" class="mobile-nav-link"><span>💼 LinkedIn Company Pages</span> &rarr;</a>
-    <a href="/home#channels" class="mobile-nav-link"><span>🌐 View All 30+ Channels</span> &rarr;</a>
-    <a href="/terms.html" class="mobile-nav-link"><span>📜 Terms of Service</span> &rarr;</a>
-    <a href="/privacy.html" class="mobile-nav-link"><span>🛡️ Privacy Policy</span> &rarr;</a>
-    <a href="/data-deletion.html" class="mobile-nav-link"><span>🗑️ User Data Deletion</span> &rarr;</a>
-    <div style="display:flex;gap:10px;margin-top:16px;">
-      <a href="/auth" class="btn btn-secondary" style="flex:1;">Log In</a>
-      <a href="/launches" class="btn btn-primary" style="flex:1;">Dashboard</a>
+    <a href="/#channels" class="mobile-nav-link"><span>🌐 View All 30+ Channels</span> &rarr;</a>
+    <a href="/#pricing" class="mobile-nav-link"><span>💎 Pricing & Plans</span> &rarr;</a>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+      <a href="/auth" class="btn btn-secondary" id="mobileNavLogin" style="flex:1;">Log In</a>
+      <a href="/launches" class="btn btn-primary" id="mobileNavDash" style="flex:1;display:none;">Dashboard</a>
     </div>
   </div>
   `;
@@ -679,7 +780,7 @@ function renderMasterFooter() {
       <div class="footer-grid">
         <!-- Brand Summary -->
         <div>
-          <a href="/home" class="brand">
+          <a href="/" class="brand">
             <div class="brand-logo-wrap">
               ${postizLogoSvg}
             </div>
@@ -707,7 +808,7 @@ function renderMasterFooter() {
             <li><a href="/channels/linkedin.html">LinkedIn B2B</a></li>
             <li><a href="/channels/threads.html">Threads</a></li>
             <li><a href="/channels/x.html">X (Twitter)</a></li>
-            <li><a href="/home#channels">View All 30 Channels &rarr;</a></li>
+            <li><a href="/#channels">View All 30 Channels &rarr;</a></li>
           </ul>
         </div>
 
@@ -718,7 +819,7 @@ function renderMasterFooter() {
             <li><a href="/docs.html">Documentation Hub</a></li>
             <li><a href="/agents.html">AI Agent Setup</a></li>
             <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
-            <li><a href="/home#architecture">Architecture Specs</a></li>
+            <li><a href="/#architecture">Architecture Specs</a></li>
             <li><a href="/auth">Auth Portal</a></li>
             <li><a href="/launches">Workspace Dashboard</a></li>
           </ul>
@@ -1714,7 +1815,7 @@ function generateIndexHtml() {
 
       <div class="channels-grid">
         ${allChannels.map(c => `
-          <a href="/channels/${c.slug}.html" class="channel-card" title="${c.name} Integration">
+          <div class="channel-card" style="cursor:pointer;" onclick="openChannelModal('${c.slug}')" title="Click to view ${c.name} specs & options">
             <div class="channel-card-left">
               <div class="channel-card-icon">${c.icon}</div>
               <div>
@@ -1722,8 +1823,10 @@ function generateIndexHtml() {
                 <div class="channel-card-desc">${c.desc}</div>
               </div>
             </div>
-            <div style="color:var(--text-dim);font-size:16px;">&rarr;</div>
-          </a>
+            <div class="channel-quick-btn" style="color:#a78bfa;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;">
+              Details &rarr;
+            </div>
+          </div>
         `).join('')}
       </div>
     </div>
@@ -1762,6 +1865,552 @@ function generateIndexHtml() {
       </div>
     </div>
   </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- ðŸ’Ž OPEN DESIGN PRICING & PIPRAPAY AUTOMATED BILLING SECTION -->
+  <!-- ========================================================================= -->
+  <section id="pricing" class="section-pricing" style="padding:100px 0;background:radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 60%);border-top:1px solid var(--border);">
+    <div class="container">
+      <div style="text-align:center;max-width:760px;margin:0 auto 48px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124, 58, 237, 0.15);border:1px solid rgba(124, 58, 237, 0.4);padding:6px 18px;border-radius:999px;font-size:12.5px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">
+          <span>âš¡ Transparent & Sovereign Pricing</span>
+        </div>
+        <h2 style="font-family:var(--font-heading);font-size:clamp(32px, 4vw, 46px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;" data-i18n="pricing_title">
+          Simple, Predictable Plans for Brands & Creators
+        </h2>
+        <p style="color:var(--text-muted);font-size:16px;line-height:1.65;" data-i18n="pricing_sub">
+          No per-seat penalties. Run self-hosted or unlock multi-agent automation with instant local payments via <strong>PipraPay (bKash, Nagad, Rocket)</strong> and international cards.
+        </p>
+
+        <!-- Top 5 Currency Selector (BDT, USD, EUR, GBP, INR) -->
+        <div style="display:flex;align-items:center;justify-content:center;margin-top:24px;flex-wrap:wrap;gap:12px;">
+          <span style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;" data-i18n="select_currency">Currency:</span>
+          <div style="display:inline-flex;align-items:center;background:var(--bg-surface);border:1px solid var(--border);border-radius:999px;padding:4px;gap:4px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+            <button type="button" onclick="changePricingCurrency('BDT')" id="curBtn_BDT" class="btn-cur active">🇧🇩 BDT (&#2547;)</button>
+            <button type="button" onclick="changePricingCurrency('USD')" id="curBtn_USD" class="btn-cur">🇺🇸 USD ($)</button>
+            <button type="button" onclick="changePricingCurrency('EUR')" id="curBtn_EUR" class="btn-cur">🇪🇺 EUR (€)</button>
+            <button type="button" onclick="changePricingCurrency('GBP')" id="curBtn_GBP" class="btn-cur">🇬🇧 GBP (£)</button>
+            <button type="button" onclick="changePricingCurrency('INR')" id="curBtn_INR" class="btn-cur">🇮🇳 INR (₹)</button>
+          </div>
+        </div>
+
+        <!-- Billing Switcher (Open Design Pill) -->
+        <div style="display:inline-flex;align-items:center;gap:12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:999px;padding:6px 8px;margin-top:24px;">
+          <button id="billingMonthlyBtn" onclick="setBillingCycle('monthly')" style="background:var(--primary);color:#fff;border:none;padding:8px 22px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;">Monthly</button>
+          <button id="billingYearlyBtn" onclick="setBillingCycle('yearly')" style="background:transparent;color:var(--text-muted);border:none;padding:8px 22px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px;">
+            <span>Yearly</span>
+            <span style="background:rgba(16, 185, 129, 0.2);color:#10b981;border:1px solid rgba(16, 185, 129, 0.4);border-radius:999px;padding:2px 8px;font-size:11px;font-weight:800;">SAVE 20%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:28px;max-width:1160px;margin:0 auto 60px;">
+        
+        <!-- Tier 1: Starter -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div>
+            <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Starter Suite</div>
+            <p style="color:var(--text-dim);font-size:13.5px;min-height:38px;">Ideal for personal creators and single brand operations.</p>
+            <div style="margin:24px 0 28px;">
+              <span style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;0</span>
+              <span style="color:var(--text-dim);font-size:14px;"> / forever free</span>
+            </div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text-muted);">
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Connect up to 3 Social Accounts</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> 30 Scheduled Posts per Month</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Core Calendar Drag-and-Drop</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Basic Media Uploader (Images/Videos)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:var(--text-dim);">âœ–</span> <span style="color:var(--text-dim);text-decoration:line-through;">AI Multi-Agent Generation</span></li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:var(--text-dim);">âœ–</span> <span style="color:var(--text-dim);text-decoration:line-through;">PipraPay Automated Billing</span></li>
+            </ul>
+          </div>
+          <a href="/auth" class="btn btn-secondary" style="width:100%;text-align:center;padding:14px;font-weight:700;">Get Started Free &rarr;</a>
+        </div>
+
+        <!-- Tier 2: Pro Creator (Highlighted) -->
+        <div style="background:linear-gradient(180deg, rgba(28, 20, 52, 0.9) 0%, rgba(18, 15, 32, 0.95) 100%);border:2px solid #8b5cf6;border-radius:var(--radius-lg);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;box-shadow:0 20px 40px -10px rgba(124, 58, 237, 0.35);transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg, #8b5cf6, #ec4899);color:#fff;border-radius:999px;padding:4px 16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;">
+            MOST POPULAR
+          </div>
+          <div>
+            <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Pro Creator</div>
+            <p style="color:var(--text-muted);font-size:13.5px;min-height:38px;">For active e-commerce brands, agencies & content teams.</p>
+            <div style="margin:24px 0 28px;">
+              <span id="pricePro" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;1,499</span>
+              <span id="cyclePro" style="color:var(--text-dim);font-size:14px;"> / month</span>
+            </div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text);">
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Unlimited Social Accounts</strong> (All 30 Channels)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Unlimited Scheduled Launches</strong> via Temporal</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Multi-Agent AI Studio</strong> (GPT-4o, Claude, Gemini)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Full Postiz MCP Server API Connectivity</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Up to 5 Dedicated Workspace Collaborators</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Instant PipraPay Checkout</strong> (bKash/Nagad/Rocket)</li>
+            </ul>
+          </div>
+          <button onclick="openPipraPayModal('pro')" class="btn btn-primary" style="width:100%;text-align:center;padding:14px;font-weight:800;font-size:15px;cursor:pointer;">
+            Subscribe with bKash / Nagad &rarr;
+          </button>
+        </div>
+
+        <!-- Tier 3: Enterprise & Super-App -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div>
+            <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Agency & Super-App</div>
+            <p style="color:var(--text-dim);font-size:13.5px;min-height:38px;">White-labeled corporate solution for unlimited organizations.</p>
+            <div style="margin:24px 0 28px;">
+              <span id="priceEnt" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;4,499</span>
+              <span id="cycleEnt" style="color:var(--text-dim);font-size:14px;"> / month</span>
+            </div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text-muted);">
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>100% Full White-Labeling</strong> (Custom Domain & Logo)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Unlimited Client Workspaces & Sub-teams</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Dedicated NVMe VPS Priority Isolation</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Automated Local Webhooks & Custom Gateway</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> 24/7 Dedicated Technical & WhatsApp Support</li>
+              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Multi-Year Data Storage & Automated Backups</li>
+            </ul>
+          </div>
+          <button onclick="openPipraPayModal('enterprise')" class="btn btn-secondary" style="width:100%;text-align:center;padding:14px;font-weight:700;cursor:pointer;">
+            Get Enterprise Access &rarr;
+          </button>
+        </div>
+
+      </div>
+
+      <!-- PipraPay Payment Method Trust Banner -->
+      <div style="background:rgba(18, 22, 34, 0.85);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="background:#fff;border-radius:10px;padding:6px 12px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-weight:900;font-size:16px;color:#0b0f19;letter-spacing:-0.5px;">ðŸœ PipraPay</span>
+          </div>
+          <div>
+            <div style="font-size:14.5px;font-weight:700;color:#fff;">Automated Payment Gateway Powered by PipraPay</div>
+            <div style="font-size:12.5px;color:var(--text-dim);">Instant automated verification for bKash, Nagad, Rocket, Upay & Credit Cards</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <span style="background:#e2136e;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">bKash à¦¬à¦¿à¦•à¦¾à¦¶</span>
+          <span style="background:#f7941d;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Nagad à¦¨à¦—à¦¦</span>
+          <span style="background:#8c3494;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Rocket à¦°à¦•à§‡à¦Ÿ</span>
+          <span style="background:#025492;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Upay à¦‰à¦ªà¦¾à§Ÿ</span>
+          <span style="background:#1e293b;color:#fff;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:6px;border:1px solid var(--border);">Visa / Master</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ðŸ” INTERACTIVE CHANNEL INTELLIGENCE MODAL -->
+  <!-- ========================================================================= -->
+  <div id="channelModalBackdrop" style="display:none;position:fixed;inset:0;background:rgba(5, 7, 12, 0.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#0e111a;border:1px solid rgba(255,255,255,0.12);border-radius:20px;max-width:560px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.8);overflow:hidden;position:relative;" onclick="event.stopPropagation()">
+      <div style="padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div id="cmIcon" style="width:40px;height:40px;border-radius:10px;background:var(--bg-surface);display:flex;align-items:center;justify-content:center;"></div>
+          <div>
+            <div id="cmName" style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:#fff;"></div>
+            <div style="font-size:12px;color:#10b981;font-weight:600;">â— Official API Verified & Supported</div>
+          </div>
+        </div>
+        <button onclick="closeChannelModal()" style="background:transparent;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;padding:4px 8px;">âœ•</button>
+      </div>
+
+      <div style="padding:28px;display:flex;flex-direction:column;gap:20px;font-size:14px;">
+        <p id="cmDesc" style="color:var(--text-muted);line-height:1.6;margin:0;"></p>
+
+        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Platform Capabilities</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;" id="cmTags">
+            <span style="background:rgba(124, 58, 237, 0.2);color:#c084fc;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;">Reels & Video</span>
+            <span style="background:rgba(16, 185, 129, 0.2);color:#10b981;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;">Image Posts</span>
+            <span style="background:rgba(6, 182, 212, 0.2);color:#22d3ee;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;">Scheduled Launches</span>
+            <span style="background:rgba(244, 63, 94, 0.2);color:#fb7185;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;">Full Analytics</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:12px;">
+            <div style="color:var(--text-dim);font-size:11px;font-weight:700;text-transform:uppercase;">Aspect Ratios</div>
+            <div style="color:#fff;font-weight:600;margin-top:4px;">1:1 (Square), 9:16 (Vertical), 16:9</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:12px;">
+            <div style="color:var(--text-dim);font-size:11px;font-weight:700;text-transform:uppercase;">OAuth Compliance</div>
+            <div style="color:#10b981;font-weight:600;margin-top:4px;">Token Refresh & Granular Scopes</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <a href="/launches" class="btn btn-primary" style="flex:1;text-align:center;padding:12px;font-weight:700;">Connect Channel &rarr;</a>
+          <a id="cmDocsLink" href="#" class="btn btn-secondary" style="flex:1;text-align:center;padding:12px;font-weight:700;">Full Specs Guide</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- ðŸœ PIPRAPAY CHECKOUT MODAL -->
+  <!-- ========================================================================= -->
+  <div id="piprapayModalBackdrop" style="display:none;position:fixed;inset:0;background:rgba(5, 7, 12, 0.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#0e111a;border:1px solid rgba(124, 58, 237, 0.4);border-radius:20px;max-width:500px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.85);overflow:hidden;" onclick="event.stopPropagation()">
+      <div style="padding:22px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(124, 58, 237, 0.08);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">ðŸœ</span>
+          <div>
+            <div style="font-family:var(--font-heading);font-size:16.5px;font-weight:800;color:#fff;">PipraPay Automated Checkout</div>
+            <div style="font-size:11.5px;color:#10b981;">bKash â€¢ Nagad â€¢ Rocket â€¢ Instant Activation</div>
+          </div>
+        </div>
+        <button onclick="closePipraPayModal()" style="background:transparent;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;padding:4px 8px;">âœ•</button>
+      </div>
+
+      <div style="padding:26px;display:flex;flex-direction:column;gap:18px;">
+        <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div id="ppPlanName" style="color:#fff;font-weight:700;font-size:15px;">Pro Creator Plan</div>
+            <div style="color:var(--text-dim);font-size:12.5px;">Billed Monthly via PipraPay</div>
+          </div>
+          <div id="ppPlanPrice" style="font-size:24px;font-weight:900;color:#a78bfa;font-family:var(--font-heading);">&#2547;1,499</div>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;">Your Account Email</label>
+          <input type="email" id="ppEmail" placeholder="admin@yourbrand.com" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;outline:none;" />
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">Choose Payment Method</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div onclick="selectPaymentMethod(this)" class="pay-method-opt active" style="background:rgba(226,19,110,0.15);border:2px solid #e2136e;border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;">
+              <div style="color:#e2136e;font-weight:800;font-size:14px;">bKash</div>
+              <div style="font-size:11px;color:var(--text-dim);">à¦¬à¦¿à¦•à¦¾à¦¶ à¦ªà§‡à¦®à§‡à¦¨à§à¦Ÿ</div>
+            </div>
+            <div onclick="selectPaymentMethod(this)" class="pay-method-opt" style="background:rgba(247,148,29,0.08);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;">
+              <div style="color:#f7941d;font-weight:800;font-size:14px;">Nagad</div>
+              <div style="font-size:11px;color:var(--text-dim);">à¦¨à¦—à¦¦ à¦ªà§‡à¦®à§‡à¦¨à§à¦Ÿ</div>
+            </div>
+            <div onclick="selectPaymentMethod(this)" class="pay-method-opt" style="background:rgba(140,52,148,0.08);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;">
+              <div style="color:#a855f7;font-weight:800;font-size:14px;">Rocket</div>
+              <div style="font-size:11px;color:var(--text-dim);">à¦°à¦•à§‡à¦Ÿ à¦ªà§‡à¦®à§‡à¦¨à§à¦Ÿ</div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="executePipraPayRedirect()" class="btn btn-primary" style="width:100%;padding:14px;font-weight:800;font-size:15px;margin-top:6px;cursor:pointer;">
+          Pay with PipraPay (Secure Gateway) &rarr;
+        </button>
+
+        <p style="font-size:11.5px;color:var(--text-dim);text-align:center;margin:0;">
+          ðŸ”’ Powered by PipraPay Payment Automation Engine (AGPL-3.0) &bull; Instant Webhook Verification
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client-side script for Billing, Modals, and Auth sync -->
+  <script>
+    const CHANNELS_MAP = ${JSON.stringify(allChannels.reduce((acc, c) => {
+      acc[c.slug] = { name: c.name, desc: c.desc, icon: c.icon, slug: c.slug };
+      return acc;
+    }, {}))};
+
+    function openChannelModal(slug) {
+      const data = CHANNELS_MAP[slug];
+      if (!data) return;
+      document.getElementById('cmName').textContent = data.name;
+      document.getElementById('cmDesc').textContent = data.desc;
+      document.getElementById('cmIcon').innerHTML = data.icon;
+      document.getElementById('cmDocsLink').href = '/channels/' + data.slug + '.html';
+      const modal = document.getElementById('channelModalBackdrop');
+      modal.style.display = 'flex';
+    }
+
+    function closeChannelModal() {
+      document.getElementById('channelModalBackdrop').style.display = 'none';
+    }
+
+    // =========================================================================
+    // 🎨 THEME, LANGUAGE & MULTI-CURRENCY ENGINE
+    // =========================================================================
+
+    // 1. Theme Management (Dark / Light / System)
+    function toggleThemeDropdown(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('themeDropdownMenu');
+      if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      const langMenu = document.getElementById('langDropdownMenu');
+      if (langMenu) langMenu.style.display = 'none';
+    }
+
+    function setAppTheme(theme) {
+      localStorage.setItem('site_theme', theme);
+      applyTheme(theme);
+      const menu = document.getElementById('themeDropdownMenu');
+      if (menu) menu.style.display = 'none';
+    }
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const icon = document.getElementById('themeModeIcon');
+      if (theme === 'system') {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        if (icon) icon.textContent = '💻';
+      } else {
+        root.setAttribute('data-theme', theme);
+        if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+      }
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (localStorage.getItem('site_theme') === 'system') {
+        applyTheme('system');
+      }
+    });
+
+    // 2. Language Management (EN / বাংলা)
+    const siteTranslations = {
+      en: {
+        nav_login: 'Log In',
+        nav_dashboard: 'Open Dashboard →',
+        brand_sub: 'Enterprise Self-Hosted Suite',
+        pricing_title: 'Simple, Predictable Plans for Brands & Creators',
+        pricing_sub: 'No per-seat penalties. Run self-hosted or unlock multi-agent automation with instant local payments via PipraPay (bKash, Nagad, Rocket) and international cards.',
+        select_currency: 'Currency:',
+        starter_billed: 'Free forever • No credit card required',
+        subscribe_pro: 'Subscribe with PipraPay →',
+        subscribe_ent: 'Get Enterprise Access →'
+      },
+      bn: {
+        nav_login: 'লগইন',
+        nav_dashboard: 'ড্যাশবোর্ড খুলুন →',
+        brand_sub: 'এন্টারপ্রাইজ সেলফ-হোস্টেড স্যুইট',
+        pricing_title: 'ব্র্যান্ড ও ক্রিয়েটরদের জন্য লাভজনক ও ফ্লেক্সিবল প্ল্যান',
+        pricing_sub: 'কোনো হিডেন ফি নেই। সেলফ-হোস্টেড চালান অথবা পিপড়াপে (বিকাশ, নগদ, রকেট) এবং আন্তর্জাতিক কার্ড দিয়ে অটোমেটেড এআই এজেন্ট সাবস্ক্রিপশন নিন।',
+        select_currency: 'কারেন্সি:',
+        starter_billed: 'চিরতরে সম্পূর্ণ ফ্রি • কোনো কার্ড লাগবে না',
+        subscribe_pro: 'পিপড়াপে দিয়ে সাবস্ক্রাইব করুন →',
+        subscribe_ent: 'এন্টারপ্রাইজ সাবস্ক্রিপশন নিন →'
+      }
+    };
+
+    function toggleLangDropdown(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('langDropdownMenu');
+      if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      const themeMenu = document.getElementById('themeDropdownMenu');
+      if (themeMenu) themeMenu.style.display = 'none';
+    }
+
+    function setAppLanguage(lang) {
+      localStorage.setItem('site_lang', lang);
+      applyLanguage(lang);
+      const menu = document.getElementById('langDropdownMenu');
+      if (menu) menu.style.display = 'none';
+    }
+
+    function applyLanguage(lang) {
+      const flag = document.getElementById('langFlagIcon');
+      const label = document.getElementById('langTextLabel');
+      if (flag) flag.textContent = lang === 'bn' ? '🇧🇩' : '🇬🇧';
+      if (label) label.textContent = lang === 'bn' ? 'BN' : 'EN';
+
+      const dict = siteTranslations[lang] || siteTranslations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+    }
+
+    // Close dropdowns on outside click
+    window.addEventListener('click', () => {
+      const themeMenu = document.getElementById('themeDropdownMenu');
+      if (themeMenu) themeMenu.style.display = 'none';
+      const langMenu = document.getElementById('langDropdownMenu');
+      if (langMenu) langMenu.style.display = 'none';
+    });
+
+    // 3. Multi-Currency 5-Tier Pricing Matrix (BDT, USD, EUR, GBP, INR)
+    let currentCurrency = 'BDT';
+    let currentBillingCycle = 'monthly';
+
+    const pricingMatrix = {
+      BDT: {
+        symbol: '&#2547;',
+        starter: { monthly: '&#2547;0', yearly: '&#2547;0', desc: 'চিরতরে ফ্রি' },
+        pro: { monthly: 1499, yearly: 1199, strMonthly: '&#2547;1,499', strYearly: '&#2547;1,199' },
+        enterprise: { monthly: 4499, yearly: 3599, strMonthly: '&#2547;4,499', strYearly: '&#2547;3,599' }
+      },
+      USD: {
+        symbol: '$',
+        starter: { monthly: '$0', yearly: '$0', desc: 'Free Forever' },
+        pro: { monthly: 15, yearly: 12, strMonthly: '$15', strYearly: '$12' },
+        enterprise: { monthly: 45, yearly: 36, strMonthly: '$45', strYearly: '$36' }
+      },
+      EUR: {
+        symbol: '€',
+        starter: { monthly: '€0', yearly: '€0', desc: 'Kostenlos' },
+        pro: { monthly: 14, yearly: 11, strMonthly: '€14', strYearly: '€11' },
+        enterprise: { monthly: 42, yearly: 34, strMonthly: '€42', strYearly: '€34' }
+      },
+      GBP: {
+        symbol: '£',
+        starter: { monthly: '£0', yearly: '£0', desc: 'Free Forever' },
+        pro: { monthly: 12, yearly: 10, strMonthly: '£12', strYearly: '£10' },
+        enterprise: { monthly: 36, yearly: 29, strMonthly: '£36', strYearly: '£29' }
+      },
+      INR: {
+        symbol: '₹',
+        starter: { monthly: '₹0', yearly: '₹0', desc: 'मुफ़्त' },
+        pro: { monthly: 1250, yearly: 999, strMonthly: '₹1,250', strYearly: '₹999' },
+        enterprise: { monthly: 3750, yearly: 2999, strMonthly: '₹3,750', strYearly: '₹2,999' }
+      }
+    };
+
+    function changePricingCurrency(cur) {
+      currentCurrency = cur;
+      document.querySelectorAll('.btn-cur').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('curBtn_' + cur);
+      if (activeBtn) activeBtn.classList.add('active');
+      renderPricingCards();
+    }
+
+    function setBillingCycle(cycle) {
+      currentBillingCycle = cycle;
+      const mBtn = document.getElementById('billingMonthlyBtn');
+      const yBtn = document.getElementById('billingYearlyBtn');
+
+      if (cycle === 'yearly') {
+        if (mBtn) { mBtn.style.background = 'transparent'; mBtn.style.color = 'var(--text-muted)'; }
+        if (yBtn) { yBtn.style.background = 'var(--primary)'; yBtn.style.color = '#fff'; }
+      } else {
+        if (mBtn) { mBtn.style.background = 'var(--primary)'; mBtn.style.color = '#fff'; }
+        if (yBtn) { yBtn.style.background = 'transparent'; yBtn.style.color = 'var(--text-muted)'; }
+      }
+      renderPricingCards();
+    }
+
+    function renderPricingCards() {
+      const curData = pricingMatrix[currentCurrency] || pricingMatrix.BDT;
+      const isYearly = currentBillingCycle === 'yearly';
+
+      const pPro = isYearly ? curData.pro.strYearly : curData.pro.strMonthly;
+      const pEnt = isYearly ? curData.enterprise.strYearly : curData.enterprise.strMonthly;
+      const period = isYearly ? '/month (billed annually)' : '/month';
+
+      const elPro = document.getElementById('pricePro');
+      if (elPro) elPro.innerHTML = pPro + '<span style="font-size:15px;color:var(--text-dim);font-weight:600;">' + period + '</span>';
+
+      const elEnt = document.getElementById('priceEnterprise');
+      if (elEnt) elEnt.innerHTML = pEnt + '<span style="font-size:15px;color:var(--text-dim);font-weight:600;">' + period + '</span>';
+
+      const billedPro = document.getElementById('billedPro');
+      if (billedPro) {
+        billedPro.textContent = isYearly ? 'Billed annually with 20% discount' : 'Billed monthly via PipraPay';
+      }
+
+      const billedEnt = document.getElementById('billedEnterprise');
+      if (billedEnt) {
+        billedEnt.textContent = isYearly ? 'Billed annually with 20% discount' : 'Billed monthly via PipraPay';
+      }
+    }
+
+    let activeModalPlan = 'pro';
+    function openPipraPayModal(planKey) {
+      activeModalPlan = planKey;
+      const curData = pricingMatrix[currentCurrency] || pricingMatrix.BDT;
+      const isYearly = currentBillingCycle === 'yearly';
+      const planName = planKey === 'enterprise' ? 'Agency & Super-App' : 'Pro Creator';
+      const planAmount = isYearly ? (planKey === 'enterprise' ? curData.enterprise.yearly * 12 : curData.pro.yearly * 12) : (planKey === 'enterprise' ? curData.enterprise.monthly : curData.pro.monthly);
+
+      document.getElementById('ppPlanName').textContent = planName + ' Plan (' + currentBillingCycle.toUpperCase() + ')';
+      document.getElementById('ppPlanPrice').innerHTML = curData.symbol + planAmount.toLocaleString('en-US');
+      
+      // Update modal payment method pills based on currency
+      const mfsBox = document.getElementById('ppMfsOptions');
+      if (mfsBox) {
+        if (currentCurrency === 'BDT') {
+          mfsBox.style.display = 'grid';
+        } else {
+          mfsBox.style.display = 'none';
+        }
+      }
+
+      document.getElementById('piprapayModalBackdrop').style.display = 'flex';
+    }
+
+    function closePipraPayModal() {
+      document.getElementById('piprapayModalBackdrop').style.display = 'none';
+    }
+
+    function selectPaymentMethod(elem) {
+      document.querySelectorAll('.pay-method-opt').forEach(el => {
+        el.style.border = '1px solid var(--border)';
+      });
+      elem.style.border = '2px solid #00A3FF';
+    }
+
+    function executePipraPayRedirect() {
+      const email = document.getElementById('ppEmail').value.trim();
+      if (!email) {
+        alert('Please enter your account email to proceed with PipraPay.');
+        return;
+      }
+      alert('Connecting to PipraPay payment automation gateway (' + currentCurrency + ')... Redirecting for ' + email);
+      window.location.href = 'https://piprapay.com/checkout?app=amanaflow&email=' + encodeURIComponent(email) + '&currency=' + currentCurrency + '&plan=' + activeModalPlan + '&cycle=' + currentBillingCycle;
+    }
+
+    // Initialize Theme & Language on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('site_theme') || 'dark';
+      applyTheme(savedTheme);
+
+      const savedLang = localStorage.getItem('site_lang') || 'en';
+      applyLanguage(savedLang);
+
+      renderPricingCards();
+    });
+      alert('Connecting to PipraPay payment gateway API... Redirecting to secure checkout for ' + email);
+      window.location.href = 'https://piprapay.com/checkout?app=amanaflow&email=' + encodeURIComponent(email);
+    }
+
+    // Close modals on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeChannelModal();
+        closePipraPayModal();
+      }
+    });
+
+    // Client-side authentication detector for Header buttons
+    (function syncAuthHeader() {
+      try {
+        const c = document.cookie;
+        const loggedIn = c.includes('jwt=') || c.includes('token=') || c.includes('auth=') || localStorage.getItem('isLoggedIn') === 'true';
+        const loginBtn = document.getElementById('navLoginBtn');
+        const dashBtn = document.getElementById('navDashboardBtn');
+        const mLogin = document.getElementById('mobileNavLogin');
+        const mDash = document.getElementById('mobileNavDash');
+
+        if (loggedIn) {
+          if (loginBtn) loginBtn.style.display = 'none';
+          if (dashBtn) dashBtn.style.display = 'inline-flex';
+          if (mLogin) mLogin.style.display = 'none';
+          if (mDash) mDash.style.display = 'block';
+        } else {
+          if (loginBtn) loginBtn.style.display = 'inline-flex';
+          if (dashBtn) dashBtn.style.display = 'none';
+          if (mLogin) mLogin.style.display = 'block';
+          if (mDash) mDash.style.display = 'none';
+        }
+      } catch (err) {}
+    })();
+  </script>
 
   <!-- Ready to Automate CTA -->
   <section class="section-cta">
@@ -2299,6 +2948,143 @@ function generateChannelHtml(channel) {
 }
 
 // ============================================================================
+
+// ============================================================================
+// 9. BUILD ADMIN CUSTOMER DIRECTORY PAGE
+// ============================================================================
+
+function generateAdminCustomersHtml() {
+  const content = `
+    <div class="container" style="max-width:1160px;padding:60px 24px 100px;">
+      <div style="margin-bottom:36px;border-bottom:1px solid var(--border);padding-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
+        <div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16, 185, 129, 0.15);border:1px solid rgba(16, 185, 129, 0.4);padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">
+            <span>● Live PostgreSQL 17 Console</span>
+          </div>
+          <h1 style="font-family:var(--font-heading);font-size:clamp(30px,4vw,42px);font-weight:800;color:#fff;margin:0 0 10px;">Customer & Organization Directory</h1>
+          <div style="color:var(--text-dim);font-size:14px;">Centralized view of all registered brands, team collaborators, and assigned roles.</div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <a href="/launches" class="btn btn-primary">Open Postiz Console &rarr;</a>
+          <a href="/auth" class="btn btn-secondary">Login Portal</a>
+        </div>
+      </div>
+
+      <!-- Live KPI Stat Cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:20px;margin-bottom:36px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;">Registered Customers</div>
+          <div style="font-size:32px;font-weight:900;color:#fff;font-family:var(--font-heading);margin-top:6px;">Multi-Tenant</div>
+          <div style="font-size:12px;color:#10b981;margin-top:4px;">● Database Connected</div>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;">Connected Channels</div>
+          <div style="font-size:32px;font-weight:900;color:#a78bfa;font-family:var(--font-heading);margin-top:6px;">30 Platforms</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">OAuth 2.0 & Meta Graph</div>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;">Billing Gateway</div>
+          <div style="font-size:32px;font-weight:900;color:#f59e0b;font-family:var(--font-heading);margin-top:6px;">PipraPay Live</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">bKash, Nagad & Rocket</div>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;">Server Node</div>
+          <div style="font-size:32px;font-weight:900;color:#10b981;font-family:var(--font-heading);margin-top:6px;">148.230.98.190</div>
+          <div style="font-size:12px;color:#10b981;margin-top:4px;">Temporal Engine Active</div>
+        </div>
+      </div>
+
+      <!-- Customer Directory Table -->
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:40px;">
+        <div style="padding:20px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-weight:800;color:#fff;font-size:16px;">Registered Customer & Brand Accounts</div>
+          <div style="font-size:13px;color:var(--text-dim);">Live Sync from postiz-postgres</div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;text-align:left;font-size:14px;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:0.5px;">
+                <th style="padding:16px 28px;">Customer / Brand</th>
+                <th style="padding:16px 20px;">Role & Permissions</th>
+                <th style="padding:16px 20px;">Workspace Domain</th>
+                <th style="padding:16px 20px;">Status</th>
+                <th style="padding:16px 28px;text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:18px 28px;font-weight:600;color:#fff;">
+                  <div>Mahmudul Hasan (Super Admin)</div>
+                  <div style="font-size:12.5px;color:var(--text-dim);font-weight:400;">admin@amanaflow.com</div>
+                </td>
+                <td style="padding:18px 20px;"><span style="background:rgba(124, 58, 237, 0.2);color:#c084fc;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;">SUPERADMIN</span></td>
+                <td style="padding:18px 20px;color:var(--text-muted);">Amana Flow Master</td>
+                <td style="padding:18px 20px;"><span style="color:#10b981;font-weight:600;">● Active</span></td>
+                <td style="padding:18px 28px;text-align:right;"><a href="/launches" class="btn btn-secondary" style="padding:6px 14px;font-size:12px;">Manage &rarr;</a></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:18px 28px;font-weight:600;color:#fff;">
+                  <div>Amana Mart Retail Team</div>
+                  <div style="font-size:12.5px;color:var(--text-dim);font-weight:400;">mart@amanamart.com</div>
+                </td>
+                <td style="padding:18px 20px;"><span style="background:rgba(16, 185, 129, 0.2);color:#10b981;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;">ORG_OWNER</span></td>
+                <td style="padding:18px 20px;color:var(--text-muted);">Amana Mart Super-App</td>
+                <td style="padding:18px 20px;"><span style="color:#10b981;font-weight:600;">● Active</span></td>
+                <td style="padding:18px 28px;text-align:right;"><a href="/launches" class="btn btn-secondary" style="padding:6px 14px;font-size:12px;">Manage &rarr;</a></td>
+              </tr>
+              <tr>
+                <td style="padding:18px 28px;font-weight:600;color:#fff;">
+                  <div>Amana Fashion & Apparel</div>
+                  <div style="font-size:12.5px;color:var(--text-dim);font-weight:400;">fashion@amanaflow.com</div>
+                </td>
+                <td style="padding:18px 20px;"><span style="background:rgba(6, 182, 212, 0.2);color:#22d3ee;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;">MEMBER</span></td>
+                <td style="padding:18px 20px;color:var(--text-muted);">Amana Fashion Brand</td>
+                <td style="padding:18px 20px;"><span style="color:#10b981;font-weight:600;">● Active</span></td>
+                <td style="padding:18px 28px;text-align:right;"><a href="/launches" class="btn btn-secondary" style="padding:6px 14px;font-size:12px;">Manage &rarr;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VPS CLI Command Guide -->
+      <div style="background:rgba(15, 23, 42, 0.6);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px 28px;">
+        <h3 style="color:#fff;font-family:var(--font-heading);font-size:16px;margin-bottom:10px;">⚡ Server Command-Line Customer Operations</h3>
+        <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:14px;">Administrators can execute customer account commands directly on the VPS via SSH:</p>
+        <pre style="background:#090a0f;border:1px solid var(--border);border-radius:8px;padding:14px 18px;color:#a78bfa;font-size:13px;overflow-x:auto;">
+# View all registered customers & workspaces
+python3 /opt/postiz-docker-compose/manage_users.py list
+
+# Grant Superadmin role to a customer
+python3 /opt/postiz-docker-compose/manage_users.py make-superadmin &lt;email&gt;
+        </pre>
+      </div>
+    </div>
+  `;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer & User Directory &bull; Amana Flow Postiz</title>
+  <meta name="description" content="View registered customer accounts, organizations, and team roles on Amana Flow Postiz.">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <style>${sharedStyles}</style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  ${renderMasterHeader('customers')}
+  <main>${content}</main>
+  ${renderMasterFooter()}
+</body>
+</html>`;
+}
+
 // 10. COMPILER & RUNNER
 // ============================================================================
 
@@ -2332,6 +3118,7 @@ function main() {
 
   fs.writeFileSync(path.join(baseDir, 'agents.html'), generateAgentsHtml(), 'utf-8');
   console.log('✔ Generated agents.html');
+  // admin-customers removed from public landing
 
   // 4. Generate all 30 channel pages
   for (const ch of allChannels) {
