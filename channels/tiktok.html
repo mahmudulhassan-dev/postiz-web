@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok Video Scheduler & Content Posting API — Amana Flow Postiz</title>
-  <meta name="description" content="Schedule, queue, and publish high-converting TikTok videos directly to your brand channels using Amana Flow Postiz and TikTok's official Content Posting API." />
+  <title>TikTok Post Scheduler & Management — PostFlow</title>
+  <meta name="description" content="Official TikTok Content Posting API & Video Publishing. Automate, schedule, and orchestrate TikTok marketing with PostFlow by Amana Flow." />
   <link rel="canonical" href="https://post.amanaflow.com/channels/tiktok" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07090e;
-      --bg-surface: #0e131f;
-      --bg-card: rgba(19, 27, 46, 0.7);
+      --bg: #090a0f;
+      --bg-surface: #12151e;
+      --bg-card: rgba(18, 22, 34, 0.7);
       --border: rgba(255, 255, 255, 0.08);
-      --text: #f1f5f9;
+      --border-focus: rgba(139, 92, 246, 0.4);
+      --text: #f3f4f6;
       --text-muted: #94a3b8;
-      --primary: #00f2fe;
-      --accent: #fe0979;
-      --gradient: linear-gradient(135deg, #00f2fe 0%, #fe0979 100%);
+      --primary: #8b5cf6;
+      --accent: #00f2fe;
+      --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -27,138 +29,159 @@
       color: var(--text-muted);
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
+      overflow-x: hidden;
     }
     header {
       border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
+      padding: 16px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(7, 9, 14, 0.85);
+      background: rgba(9, 10, 15, 0.9);
       position: sticky;
       top: 0;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       z-index: 100;
     }
     .brand {
       color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 20px;
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    .brand span { color: #a855f7; }
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .brand span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
     .btn {
       display: inline-flex;
       align-items: center;
-      padding: 8px 18px;
+      padding: 9px 20px;
       border-radius: 999px;
       font-weight: 600;
       font-size: 14px;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-secondary { color: #fff; border: 1px solid var(--border); }
-    .btn-secondary:hover { border-color: var(--primary); }
-    .btn-primary { background: var(--gradient); color: #000; font-weight: 700; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary { color: #fff; border: 1px solid var(--border); background: rgba(255, 255, 255, 0.04); }
+    .btn-secondary:hover { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+    .btn-primary { background: var(--gradient); color: #fff; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3); }
+    .btn-primary:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236, 72, 153, 0.4); }
 
-    .container { max-width: 1000px; margin: 0 auto; padding: 50px 24px 80px; }
-    .channel-hero {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+    .container { max-width: 1020px; margin: 0 auto; padding: 60px 24px 90px; }
+    .channel-hero { text-align: center; margin-bottom: 60px; }
     .channel-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
+      gap: 10px;
+      padding: 7px 18px;
       border-radius: 999px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      color: var(--primary);
-      font-size: 13px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 13.5px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .badge-icon {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: #fff;
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 18px;
+      letter-spacing: -1.2px;
+      margin-bottom: 20px;
       line-height: 1.2;
     }
-    .hero-p {
-      font-size: 18px;
-      max-width: 680px;
-      margin: 0 auto 30px;
-    }
+    .hero-p { font-size: 18px; max-width: 720px; margin: 0 auto 34px; color: var(--text-muted); }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
-      margin: 40px 0;
+      margin: 44px 0;
     }
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 28px;
+      padding: 30px;
+      transition: all 0.2s;
+    }
+    .card:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-3px);
     }
     .card h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: #fff;
-      font-size: 20px;
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+    .card p { font-size: 14.5px; margin-bottom: 0; line-height: 1.6; }
+
+    .compliance-box {
+      background: rgba(18, 22, 34, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 40px 0;
+    }
+    .compliance-box h4 {
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .card p { font-size: 15px; margin-bottom: 14px; }
-    .scopes-list {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 14px 0;
-      font-family: monospace;
-      font-size: 13.5px;
-      color: #38bdf8;
-    }
-    .reviewer-notice {
-      background: rgba(254, 9, 121, 0.08);
-      border: 1px solid rgba(254, 9, 121, 0.3);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 40px 0;
-    }
-    .reviewer-notice h4 {
-      color: #fff;
-      font-size: 17px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+
     footer {
       border-top: 1px solid var(--border);
-      padding: 30px 24px;
+      padding: 40px 24px;
       text-align: center;
-      font-size: 13px;
+      font-size: 13.5px;
       color: #64748b;
+      background: #06070a;
     }
-    footer a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+    footer a { color: var(--text-muted); text-decoration: none; margin: 0 12px; }
     footer a:hover { color: #fff; }
   </style>
 </head>
 <body>
   <header>
-    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <a href="/home" class="brand">
+      
+<svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="50%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="10" fill="url(#pf-grad)" />
+  <path d="M11 9H19.5C23.0899 9 26 11.9101 26 15.5C26 19.0899 23.0899 22 19.5 22H16V27H11V9Z" fill="white" />
+  <path d="M16 13.5H19.5C20.6046 13.5 21.5 14.3954 21.5 15.5C21.5 16.6046 20.6046 17.5 19.5 17.5H16V13.5Z" fill="url(#pf-grad)" />
+  <circle cx="25" cy="25" r="3" fill="#00f2fe" />
+</svg>
+
+      Post<span>Flow</span>
+    </a>
     <div class="nav-actions">
       <a href="/home" class="btn btn-secondary">&larr; Back to Home</a>
       <a href="/auth" class="btn btn-primary">Connect TikTok &rarr;</a>
@@ -168,67 +191,60 @@
   <div class="container">
     <div class="channel-hero">
       <div class="channel-badge">
-        <span>●</span> Official TikTok Content Posting API Integration
+        <span class="badge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#000"><rect width="24" height="24" rx="6" fill="#000"/><path d="M16.6 5.82s.51.5 1.45.54a5.3 5.3 0 003.95-1.57V8a8.2 8.2 0 01-5.4-2.18v8.68a5.5 5.5 0 11-4.7-5.44v3.3a2.3 2.3 0 101.4 2.14V2.5h3.3v3.32z" fill="#00f2fe"/><path d="M15.4 4.62s.51.5 1.45.54a5.3 5.3 0 003.95-1.57V6.8a8.2 8.2 0 01-5.4-2.18v8.68a5.5 5.5 0 11-4.7-5.44v3.3a2.3 2.3 0 101.4 2.14V1.3h3.3v3.32z" fill="#fe0979"/></svg></span>
+        Official TikTok Content Posting API
       </div>
-      <h1>Automate & Schedule TikTok Video Publishing</h1>
-      <p class="hero-p">
-        Publish TikTok videos directly from your Amana Flow visual content calendar. Seamless queueing, automated privacy toggles, and direct video uploads.
-      </p>
-      <div style="display:flex;gap:14px;justify-content:center;">
-        <a href="/auth" class="btn btn-primary" style="padding:12px 28px;font-size:15px;">Launch Dashboard & Connect</a>
-        <a href="/data-deletion" class="btn btn-secondary" style="padding:12px 24px;font-size:15px;">Data Deletion Policy</a>
+      <h1>Official TikTok Content Posting API & Video Publishing</h1>
+      <p class="hero-p">Publish high-converting TikTok videos directly from your content calendar. Verified permissions for user.info.basic and video.publish.</p>
+      <div class="hero-actions">
+        <a href="/auth" class="btn btn-primary" style="padding:14px 32px;font-size:15px;">Launch PostFlow & Connect</a>
+        <a href="/data-deletion" class="btn btn-secondary" style="padding:14px 26px;font-size:15px;">Data Deletion Policy</a>
       </div>
     </div>
 
-    <!-- Reviewer Technical Compliance Section -->
-    <div class="reviewer-notice">
-      <h4>🛡️ Information for TikTok Developer App Reviewers</h4>
-      <p style="font-size:14px;color:#cbd5e1;margin-bottom:10px;">
-        Amana Flow Postiz is a self-hosted social media management tool used by Amana Flow and associated brands (Amana Mart, Amana Suite, Amana Academy) to schedule, curate, and distribute verified video marketing content directly to our official brand TikTok accounts.
-      </p>
-      <div class="scopes-list">
-        <strong>Requested Permissions & Scopes:</strong><br />
-        • <code>user.info.basic</code>: Identifies the authorized TikTok creator/business profile and retrieves the display name & avatar for our dashboard.<br />
-        • <code>video.publish</code> & <code>video.upload</code>: Uploads and schedules creator-approved MP4/MOV videos at predetermined queue times.
-      </div>
-      <p style="font-size:13.5px;color:#94a3b8;">
-        <strong>Data Retention & Security:</strong> We do not sell or transfer TikTok user data. Access tokens are stored encrypted in our private PostgreSQL database hosted on a secure Virtual Private Server. Videos are deleted from staging immediately after delivery. Users can revoke access anytime via our <a href="/data-deletion" style="color:#00f2fe;">Data Deletion Instructions</a> or TikTok's app security settings.
-      </p>
-    </div>
-
+    <!-- Features Grid -->
     <div class="grid-2">
+      
       <div class="card">
-        <h3>🚀 Direct Video Publishing</h3>
-        <p>Upload high-definition short videos (1080x1920) up to 500MB directly to TikTok without manual mobile app handoffs.</p>
-        <p>Support for custom captions, platform-specific hashtags, and thumbnail selection.</p>
+        <h3>Direct Video Publishing</h3>
+        <p>Upload vertical 1080x1920 MP4/MOV videos up to 500MB directly to TikTok.</p>
       </div>
+      
+      <div class="card">
+        <h3>Privacy & Interaction Settings</h3>
+        <p>Set Public, Friends, or Private visibility and configure Duet/Stitch permissions.</p>
+      </div>
+      
+      <div class="card">
+        <h3>Automated Queue Execution</h3>
+        <p>Temporal engine uploads and schedules video assets reliably at exact hours.</p>
+      </div>
+      
+      <div class="card">
+        <h3>Developer Review Compliant</h3>
+        <p>Adheres strictly to TikTok Developer Terms with secure token encryption.</p>
+      </div>
+      
+    </div>
 
-      <div class="card">
-        <h3>⏰ Automated Scheduling</h3>
-        <p>Set custom publishing dates and times on our visual calendar. Our Temporal distributed execution engine ensures your video publishes at the exact optimal hour.</p>
-        <p>Reliable queue execution with zero dropped uploads.</p>
-      </div>
-
-      <div class="card">
-        <h3>🔒 Creator Privacy Controls</h3>
-        <p>Full control over privacy settings for every upload: Public, Friends, or Private drafts before publishing.</p>
-        <p>Configure duet, stitch, and comment permissions directly from the Postiz compose window.</p>
-      </div>
-
-      <div class="card">
-        <h3>🏢 Multi-Account Support</h3>
-        <p>Manage multiple TikTok creator or business accounts across different Amana Flow business units with isolated credentials.</p>
-        <p>Switch seamlessly between brand channels without logging out.</p>
-      </div>
+    <!-- Security & Reviewer Compliance Notice -->
+    <div class="compliance-box">
+      <h4>🛡️ Developer Policy & Data Security Compliance</h4>
+      <p style="font-size:14px;color:#cbd5e1;margin-bottom:12px;">
+        PostFlow connects to <strong>TikTok</strong> strictly via official developer APIs with explicit user authorization. All authentication tokens are encrypted at rest using industry-grade AES-256 encryption on our private PostgreSQL cluster (VPS 148.230.98.190).
+      </p>
+      <p style="font-size:13.5px;color:#94a3b8;margin-bottom:0;">
+        We do not sell, transfer, or monetize user data. Access can be immediately revoked at any time via our <a href="/data-deletion" style="color:#8b5cf6;">User Data Deletion Instructions</a> or directly within your TikTok account security settings.
+      </p>
     </div>
   </div>
 
   <footer>
-    &copy; 2026 Amana Flow. All Rights Reserved. &bull;
+    &copy; 2026 PostFlow by Amana Flow. All Rights Reserved. &bull;
     <a href="/terms">Terms of Service</a> &bull;
     <a href="/privacy">Privacy Policy</a> &bull;
     <a href="/data-deletion">Data Deletion Instructions</a> &bull;
-    <a href="https://amanaflow.com">Amana Flow Hub</a>
+    <a href="https://amanaflow.com" target="_blank">Amana Flow Hub</a>
   </footer>
 </body>
 </html>

@@ -43,11 +43,19 @@
     .brand {
       color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 20px;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .brand span { color: var(--primary); }
+    .brand span {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .back-btn {
       color: var(--text-muted);
       text-decoration: none;
@@ -134,7 +142,20 @@
 </head>
 <body>
   <div class="header-bar">
-    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <a href="/home" class="brand">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="10" fill="url(#pf-priv-grad)" />
+        <defs>
+          <linearGradient id="pf-priv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="50%" stop-color="#ec4899" />
+            <stop offset="100%" stop-color="#06b6d4" />
+          </linearGradient>
+        </defs>
+        <path d="M11 9H19.5C23.0899 9 26 11.9101 26 15.5C26 19.0899 23.0899 22 19.5 22H16V27H11V9Z" fill="white" />
+      </svg>
+      Post<span>Flow</span>
+    </a>
     <a href="/home" class="back-btn">&larr; Return to Home</a>
   </div>
 
@@ -149,12 +170,12 @@
     </div>
 
     <p>
-      At <strong>Amana Flow Postiz</strong> ("Amana Flow," "we," "us," or "our"), accessible via <strong>https://post.amanaflow.com</strong>, we are committed to upholding the highest standards of user privacy, digital transparency, and data security. This comprehensive Privacy Policy describes how our self-hosted social media management platform collects, uses, encrypts, and deletes information when you interact with our services, connected social channels, and APIs.
+      At <strong>PostFlow</strong> ("Amana Flow," "we," "us," or "our"), accessible via <strong>https://post.amanaflow.com</strong>, we are committed to upholding the highest standards of user privacy, digital transparency, and data security. This comprehensive Privacy Policy describes how our self-hosted social media management platform collects, uses, encrypts, and deletes information when you interact with our services, connected social channels, and APIs.
     </p>
 
     <h2>1. Overview & Self-Hosted Architecture</h2>
     <p>
-      Amana Flow Postiz is deployed as an enterprise, self-hosted social orchestration service on our private Virtual Private Server (VPS) infrastructure. Unlike multi-tenant third-party SaaS tools that aggregate and monetize user metrics, your authentication credentials, media assets, and scheduling histories are stored in our private, isolated PostgreSQL 17 database and local volumes.
+      PostFlow is deployed as an enterprise, self-hosted social orchestration service on our private Virtual Private Server (VPS) infrastructure. Unlike multi-tenant third-party SaaS tools that aggregate and monetize user metrics, your authentication credentials, media assets, and scheduling histories are stored in our private, isolated PostgreSQL 17 database and local volumes.
     </p>
     <p>
       <strong>We do not sell, rent, lease, trade, or monetize your personal data or social media tokens with third-party data brokers, ad networks, or external commercial entities under any circumstances.</strong>

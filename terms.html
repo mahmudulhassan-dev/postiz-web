@@ -40,11 +40,18 @@
     .brand {
       color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 20px;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .brand span { color: var(--primary); }
+    .brand span {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     .back-btn {
       color: var(--text-muted);
       text-decoration: none;
@@ -106,7 +113,20 @@
 </head>
 <body>
   <div class="header-bar">
-    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <a href="/home" class="brand">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="10" fill="url(#pf-terms-grad)" />
+        <defs>
+          <linearGradient id="pf-terms-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8b5cf6" />
+            <stop offset="50%" stop-color="#ec4899" />
+            <stop offset="100%" stop-color="#06b6d4" />
+          </linearGradient>
+        </defs>
+        <path d="M11 9H19.5C23.0899 9 26 11.9101 26 15.5C26 19.0899 23.0899 22 19.5 22H16V27H11V9Z" fill="white" />
+      </svg>
+      Post<span>Flow</span>
+    </a>
     <a href="/home" class="back-btn">&larr; Return to Home</a>
   </div>
 
@@ -115,7 +135,7 @@
     <div class="last-updated">Effective Date: October 01, 2026 | Last Updated: October 01, 2026</div>
 
     <p>
-      Welcome to <strong>Amana Flow Postiz</strong> ("Platform," "we," "us," or "our"), accessible at <strong>https://post.amanaflow.com</strong>. By creating an account, accessing, or using this social media management and scheduling application, you agree to comply with and be bound by the following Terms of Service.
+      Welcome to <strong>PostFlow</strong> ("Platform," "we," "us," or "our"), operated by Amana Flow and accessible at <strong>https://post.amanaflow.com</strong>. By creating an account, accessing, or using this social media management and scheduling application, you agree to comply with and be bound by the following Terms of Service.
     </p>
 
     <h2>1. The Service Overview</h2>
