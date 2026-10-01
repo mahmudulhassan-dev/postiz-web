@@ -1,28 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-// ============================================================================
-// 1. BRAND ASSETS & OFFICIAL POSTIZ VECTOR LOGO
-// ============================================================================
-
-// Authentic Postiz Squircle Logo (as seen in official Postiz UI top-left)
+// Official Amana Flow Master Monogram Brand Logo
 const postizLogoSvg = `
-<svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="afBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00A3FF" />
-      <stop offset="100%" stop-color="#00FF9D" />
-    </linearGradient>
-    <linearGradient id="afBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F172A" />
-      <stop offset="100%" stop-color="#0B0F19" />
-    </linearGradient>
-  </defs>
-  <rect width="40" height="40" rx="10" fill="url(#afBgGrad)" stroke="url(#afBrandGrad)" stroke-width="1.5" />
-  <path d="M10 28.5L18.2 9.5H21.8L30 28.5H25.2L20 16.2L14.8 28.5H10Z" fill="url(#afBrandGrad)" />
-  <path d="M14 22C17.5 19.8 22.5 19.8 26 22" stroke="#00FF9D" stroke-width="2.5" stroke-linecap="round" />
-  <circle cx="20" cy="9.5" r="2" fill="#00FF9D" />
-</svg>
+<img src="/assets/logo.png" alt="Amana Flow" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,163,255,0.45));display:block;" />
 `;
 
 // Amana Flow Icon Badge
@@ -971,54 +952,30 @@ function renderMasterHeader(activePage = '') {
   <header class="master-header">
     <div class="container nav-inner">
       <a href="/" class="brand" title="Amana Flow Postiz">
-        <div class="brand-logo-wrap">
-          ${postizLogoSvg}
+        <div class="brand-logo-wrap" style="background:transparent;border:none;box-shadow:none;padding:0;">
+          <img src="/assets/logo.png" alt="Amana Flow" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,163,255,0.45));" />
         </div>
         <div class="brand-text-wrap">
           <div class="brand-title-row">
             <span class="brand-name">Amana Flow</span>
             <span class="brand-badge-postiz">POSTIZ</span>
           </div>
-          <span class="brand-sub">Sovereign Social Media Scheduling & Multi-Agent AI</span>
+          <span class="brand-sub">Sovereign Social Media & AI Orchestration</span>
         </div>
       </a>
 
-      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing) -->
+      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing - Clean Flat Links) -->
       <nav class="nav-menu">
         <ul class="nav-list">
-          <!-- 1. Features -->
           <li class="nav-item">
             <a href="/#features" class="nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
           </li>
-
-          <!-- 2. Channels Mega Menu -->
           <li class="nav-item">
-            <a class="nav-link ${activePage === 'channels' ? 'active' : ''}" href="/#channels">
-              Channels
-              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </a>
-            <div class="dropdown-postiz" style="width: 660px;">
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Social & Video</div>
-                ${col1Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
-              </div>
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Community & Media</div>
-                ${col2Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
-              </div>
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Professional & CMS</div>
-                ${col3Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
-              </div>
-            </div>
+            <a href="/#channels" class="nav-link ${activePage === 'channels' ? 'active' : ''}">Channels</a>
           </li>
-
-          <!-- 3. Agents Studio -->
           <li class="nav-item">
             <a href="/agents.html" class="nav-link ${activePage === 'agents' ? 'active' : ''}">Agents</a>
           </li>
-
-          <!-- 4. Pricing & Plans -->
           <li class="nav-item">
             <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
           </li>
@@ -1032,7 +989,7 @@ function renderMasterHeader(activePage = '') {
           <button id="themeModeBtn" onclick="toggleThemeDropdown(event)" class="btn-theme-toggle" title="Switch Theme" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;transition:all 0.2s;">
             <span id="themeModeIcon" style="font-size:16px;">🌙</span>
           </button>
-          <div id="themeDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
+          <div id="themeDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 35px rgba(0,0,0,0.5);min-width:150px;padding:6px;z-index:999999;">
             <div onclick="setAppTheme('dark')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🌙</span> Dark Mode</div>
             <div onclick="setAppTheme('light')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>☀️</span> Light Mode</div>
             <div onclick="setAppTheme('system')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>💻</span> System Mode</div>
@@ -1065,9 +1022,9 @@ function renderMasterHeader(activePage = '') {
           </div>
         </div>
 
-        <!-- Direct Login Button (Pointing to /auth/login) -->
+        <!-- Direct Login / Dashboard Button -->
         <a href="/auth/login" class="btn btn-secondary" id="navLoginBtn" data-i18n="nav_login">Log In</a>
-        <a href="/launches" class="btn btn-primary" id="navDashboardBtn" style="display:none;" data-i18n="nav_dashboard">Open Dashboard &rarr;</a>
+        <a href="/launches" class="btn btn-primary" id="navDashboardBtn" style="display:none;" data-i18n="nav_dashboard">Dashboard &rarr;</a>
         <button class="mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -1075,12 +1032,12 @@ function renderMasterHeader(activePage = '') {
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
+  <!-- Mobile Drawer Menu (Clean UTF-8 & No Mojibake) -->
   <div class="mobile-drawer">
-    <a href="/#features" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>⚡ Features & Studio</span> &rarr;</a>
-    <a href="/#channels" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>🌐 30+ Social Channels</span> &rarr;</a>
-    <a href="/agents.html" class="mobile-nav-link"><span>🤖 AI Agent Guides & MCP</span> &rarr;</a>
-    <a href="/#pricing" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>💎 Pricing & Plans</span> &rarr;</a>
+    <a href="/#features" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>Features & Capabilities</span> &rarr;</a>
+    <a href="/#channels" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>30+ Social Networks</span> &rarr;</a>
+    <a href="/agents.html" class="mobile-nav-link"><span>AI Agent Studio & MCP</span> &rarr;</a>
+    <a href="/#pricing" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>Pricing & Plans</span> &rarr;</a>
     
     <!-- Mobile Language Selector Row -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--bg-surface);border-radius:10px;margin-top:12px;border:1px solid var(--border);">
@@ -1104,12 +1061,12 @@ function renderMasterHeader(activePage = '') {
       </select>
     </div>
 
-    <div style="display:flex;gap:10px;margin-top:16px;">
-      <a href="/auth/login" class="btn btn-secondary" id="mobileNavLogin" style="flex:1;">Log In</a>
-      <a href="/launches" class="btn btn-primary" id="mobileNavDash" style="flex:1;display:none;">Dashboard</a>
+    <div style="display:flex;gap:12px;margin-top:20px;">
+      <a href="/auth/login" class="btn btn-secondary" style="flex:1;text-align:center;">Log In</a>
+      <a href="/launches" class="btn btn-primary" style="flex:1;text-align:center;">Dashboard</a>
     </div>
   </div>
-`;
+  `;
 }
 
 function renderMasterFooter() {
@@ -1258,37 +1215,38 @@ function generateIndexHtml() {
     }
 
     /* ==========================================================
-       AUTHENTIC POSTIZ CALENDAR MOCKUP (Matching Real User UI)
+       AUTHENTIC POSTIZ CALENDAR MOCKUP (Amana Flow Precision UI)
        ========================================================== */
     .mockup-wrapper {
-      background: #0f121d;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-lg), 0 0 60px -15px var(--primary-glow);
+      max-width: 1060px;
+      margin: 0 auto 60px;
+      background: #090b12;
+      border: 1px solid rgba(0, 163, 255, 0.28);
+      border-radius: 16px;
+      box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.85), 0 0 35px -8px rgba(0, 163, 255, 0.25);
       overflow: hidden;
-      margin-bottom: 90px;
       text-align: left;
     }
 
     .mockup-window-header {
-      background: #090b12;
-      padding: 12px 18px;
+      background: #06080d;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      font-size: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 11.5px;
       color: var(--text-dim);
     }
 
     .mockup-window-dots {
       display: flex;
-      gap: 7px;
+      gap: 6px;
     }
 
     .mockup-dot {
-      width: 11px;
-      height: 11px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
     }
     .dot-red { background: #ef4444; }
@@ -1298,52 +1256,72 @@ function generateIndexHtml() {
     /* Mockup Layout: 3 Columns (Narrow Nav + Channels Sidebar + Calendar Main) */
     .mockup-app-layout {
       display: grid;
-      grid-template-columns: 56px 260px 1fr;
-      min-height: 580px;
-      background: #090a0f;
+      grid-template-columns: 52px 230px 1fr;
+      height: 500px;
+      max-height: 500px;
+      background: #090b12;
+      overflow: hidden;
     }
 
     /* 1. Narrow Leftmost Icon Bar */
     .app-icon-bar {
-      background: #07080d;
-      border-right: 1px solid var(--border);
+      background: #05070a;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px 0;
-      gap: 20px;
+      padding: 10px 0;
+      gap: 16px;
+      user-select: none;
     }
 
     .app-icon-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       color: var(--text-dim);
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 600;
       cursor: pointer;
-      transition: color 0.15s;
+      transition: all 0.15s;
       text-decoration: none;
+      position: relative;
+      width: 100%;
+      padding: 4px 0;
     }
 
     .app-icon-item.active, .app-icon-item:hover {
-      color: #a78bfa;
+      color: #00FF9D;
+    }
+
+    .app-icon-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 20px;
+      border-radius: 0 3px 3px 0;
+      background: linear-gradient(180deg, #00A3FF, #00FF9D);
+      box-shadow: 0 0 10px #00FF9D;
     }
 
     .app-icon-item svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     /* 2. Channels Panel */
     .app-channels-panel {
-      background: #0d0f18;
-      border-right: 1px solid var(--border);
-      padding: 18px 16px;
+      background: #080a10;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 14px 12px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
+      overflow: hidden;
     }
 
     .channels-panel-header {
@@ -1352,60 +1330,74 @@ function generateIndexHtml() {
       justify-content: space-between;
       color: #fff;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 13px;
     }
 
     .channels-action-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
     }
 
     .btn-add-channel {
       flex: 1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      font-size: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      color: #cbd5e1;
+      font-size: 11px;
       font-weight: 600;
-      padding: 7px 10px;
+      padding: 6px 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-add-channel:hover {
+      background: rgba(0, 163, 255, 0.1);
+      border-color: rgba(0, 163, 255, 0.3);
+      color: #00A3FF;
     }
 
     .btn-create-post {
-      background: #7c3aed;
-      color: #fff;
+      background: linear-gradient(135deg, #00A3FF, #00FF9D);
+      color: #0B0F19;
       border: none;
-      border-radius: var(--radius-sm);
-      font-weight: 700;
-      font-size: 13px;
-      padding: 9px 14px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+      box-shadow: 0 3px 12px rgba(0, 163, 255, 0.35);
+      transition: all 0.15s;
+    }
+
+    .btn-create-post:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
     }
 
     .channel-list-scroll {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       overflow-y: auto;
-      max-height: 420px;
+      flex: 1;
+      padding-right: 2px;
     }
 
     .real-channel-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 7px 10px;
-      border-radius: var(--radius-sm);
+      padding: 6px 8px;
+      border-radius: 6px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid transparent;
       cursor: pointer;
@@ -1413,205 +1405,262 @@ function generateIndexHtml() {
     }
 
     .real-channel-item:hover, .real-channel-item.active {
-      background: rgba(124, 58, 237, 0.12);
-      border-color: rgba(124, 58, 237, 0.3);
+      background: rgba(0, 163, 255, 0.08);
+      border-color: rgba(0, 163, 255, 0.25);
     }
 
     .real-channel-left {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
+      min-width: 0;
     }
 
     .channel-avatar {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: #fff;
       position: relative;
+      flex-shrink: 0;
     }
 
-    .channel-avatar-badge {
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #1877f2;
+    .real-channel-info {
       display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .channel-avatar-badge svg {
-      width: 8px;
-      height: 8px;
-      fill: #fff;
+      flex-direction: column;
+      min-width: 0;
     }
 
     .real-channel-name {
-      font-size: 12.5px;
+      font-size: 11.5px;
       font-weight: 600;
       color: #e2e8f0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 140px;
+      max-width: 125px;
+      line-height: 1.2;
+    }
+
+    .real-channel-sub {
+      font-size: 9.5px;
+      color: var(--text-dim);
+      line-height: 1.2;
     }
 
     /* 3. Calendar Main View */
     .app-calendar-main {
       display: flex;
       flex-direction: column;
-      background: #090a0f;
+      background: #090b12;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .calendar-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      background: #0d0f18;
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: #080a10;
     }
 
     .cal-title-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .cal-main-heading {
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 700;
       color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .cal-date-nav {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      font-size: 12px;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 3px 8px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 11px;
       font-weight: 600;
-      color: #cbd5e1;
+      color: #94a3b8;
     }
 
     .cal-view-selector {
       display: flex;
       align-items: center;
-      gap: 3px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 3px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .cal-view-btn {
-      padding: 4px 12px;
-      font-size: 12px;
+      padding: 3px 9px;
+      font-size: 11px;
       font-weight: 600;
       border-radius: 4px;
       color: var(--text-dim);
       cursor: pointer;
+      transition: all 0.15s;
     }
 
     .cal-view-btn.active {
-      background: #7c3aed;
-      color: #fff;
+      background: linear-gradient(135deg, rgba(0, 163, 255, 0.2), rgba(0, 255, 157, 0.2));
+      border: 1px solid rgba(0, 255, 157, 0.4);
+      color: #00FF9D;
     }
 
-    /* Week Columns Grid */
+    /* Week Columns Grid (7 Equal Days) */
     .week-columns-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      border-bottom: 1px solid var(--border);
-      background: #0b0d14;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background: #07090e;
     }
 
     .week-day-header {
-      padding: 10px 8px;
+      padding: 8px 4px;
       text-align: center;
-      border-right: 1px solid var(--border);
-      font-size: 11.5px;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 10.5px;
+    }
+
+    .week-day-header:last-child {
+      border-right: none;
     }
 
     .week-day-header.today {
-      background: rgba(124, 58, 237, 0.1);
-      color: #c084fc;
-      font-weight: 700;
+      background: rgba(0, 163, 255, 0.08);
+      border-bottom: 2px solid #00FF9D;
     }
 
     .week-day-name {
       color: var(--text-dim);
-      font-size: 10.5px;
+      font-size: 9.5px;
       text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .week-day-header.today .week-day-name {
+      color: #00FF9D;
     }
 
     .week-day-date {
       color: #fff;
-      font-weight: 600;
-      margin-top: 2px;
+      font-weight: 700;
+      font-size: 11.5px;
+      margin-top: 1px;
     }
 
-    /* Calendar Events Body */
+    /* Calendar Events Body Grid */
     .cal-time-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      padding: 14px 0;
-      min-height: 380px;
-      position: relative;
+      padding: 8px 0;
+      height: 400px;
+      overflow-y: auto;
+      background: #090b12;
     }
 
     .cal-col {
-      border-right: 1px dashed rgba(255, 255, 255, 0.04);
-      padding: 8px 6px;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 6px 4px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
+    }
+
+    .cal-col:last-child {
+      border-right: none;
     }
 
     .cal-col.today-col {
-      background: rgba(124, 58, 237, 0.03);
+      background: rgba(0, 163, 255, 0.03);
     }
 
     .cal-post-card {
-      background: #141824;
-      border: 1px solid rgba(124, 58, 237, 0.35);
+      background: #0f131f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
       overflow: hidden;
-      font-size: 11px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      font-size: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+
+    .cal-post-card:hover {
+      border-color: rgba(0, 163, 255, 0.4);
+      transform: translateY(-1px);
     }
 
     .cal-post-top {
-      background: #7c3aed;
-      height: 4px;
+      height: 3px;
       width: 100%;
     }
 
     .cal-post-inner {
-      padding: 7px 8px;
+      padding: 6px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cal-post-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cal-platform-tag {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 9px;
+      font-weight: 700;
     }
 
     .cal-post-title {
       font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-      line-height: 1.35;
+      color: #f1f5f9;
+      line-height: 1.3;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      font-size: 10px;
+    }
+
+    .cal-post-thumb-box {
+      width: 100%;
+      height: 38px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--text-dim);
+      margin-top: 2px;
+      gap: 4px;
     }
 
     .cal-post-meta {
@@ -1619,7 +1668,41 @@ function generateIndexHtml() {
       align-items: center;
       justify-content: space-between;
       color: var(--text-dim);
-      font-size: 9.5px;
+      font-size: 9px;
+      margin-top: 2px;
+    }
+
+    .status-pill {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 1.5px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-pill.published {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-pill.scheduled {
+      background: rgba(0, 163, 255, 0.15);
+      color: #00a3ff;
+      border: 1px solid rgba(0, 163, 255, 0.3);
+    }
+
+    .status-pill.queued {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-pill.live {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
     /* Channels Grid Section */
@@ -1848,7 +1931,7 @@ function generateIndexHtml() {
         <a href="#channels" class="btn btn-secondary btn-lg">Explore 30+ Channels</a>
       </div>
 
-      <!-- Live Authentic Calendar Mockup (Matching Screenshot) -->
+      <!-- Live Authentic Calendar Mockup (Amana Flow Precision UI) -->
       <div class="mockup-wrapper">
         <div class="mockup-window-header">
           <div class="mockup-window-dots">
@@ -1856,14 +1939,28 @@ function generateIndexHtml() {
             <span class="mockup-dot dot-yellow"></span>
             <span class="mockup-dot dot-green"></span>
           </div>
-          <div>Postiz Orchestrator &bull; VPS Node 148.230.98.190 &bull; Temporal 1.28 Active</div>
-          <div style="color:#10b981;font-weight:700;">● Online</div>
+          <div style="font-weight:600;display:flex;align-items:center;gap:6px;">
+            <span>Amana Flow Postiz</span>
+            <span style="opacity:0.4;">&bull;</span>
+            <span style="color:#94a3b8;">VPS Node 148.230.98.190</span>
+            <span style="opacity:0.4;">&bull;</span>
+            <span style="color:#00A3FF;">Temporal 1.28 Active</span>
+          </div>
+          <div style="color:#00FF9D;font-weight:700;display:flex;align-items:center;gap:4px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#00FF9D;box-shadow:0 0 8px #00FF9D;display:inline-block;"></span>
+            Online
+          </div>
         </div>
 
         <div class="mockup-app-layout">
-          <!-- 1. Leftmost Icon Bar (Interactive Switcher) -->
+          <!-- 1. Leftmost Icon Bar with Official AF Monogram at Top -->
           <div class="app-icon-bar">
-            <div class="app-icon-item active" onclick="switchMockupTab('calendar', this)" id="mockTab_calendar" title="Content Launches Calendar">
+            <!-- Official Brand Logo Monogram -->
+            <div style="padding:4px 0 10px;display:flex;justify-content:center;width:100%;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:4px;" title="Amana Flow Social Orchestrator">
+              <img src="/assets/logo.png" alt="Amana Flow" style="width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,163,255,0.45));cursor:pointer;" onclick="switchMockupTab('calendar', document.getElementById('mockTab_calendar'))" />
+            </div>
+
+            <div class="app-icon-item active" onclick="switchMockupTab('calendar', this)" id="mockTab_calendar" title="Calendar Launches">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               <span>Calendar</span>
             </div>
@@ -1881,255 +1978,337 @@ function generateIndexHtml() {
             </div>
             <div class="app-icon-item" onclick="switchMockupTab('plugs', this)" id="mockTab_plugs" title="OAuth2 Connected Channels">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
-              <span>Plugs</span>
+              <span>Channels</span>
             </div>
-            <div class="app-icon-item" onclick="switchMockupTab('settings', this)" id="mockTab_settings" title="Workspace & Team Governance">
+            <div class="app-icon-item" onclick="switchMockupTab('settings', this)" id="mockTab_settings" title="Workspace & Brand Customization">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
               <span>Settings</span>
             </div>
           </div>
 
-          <!-- Dynamic Mockup View Panes -->
-          <div class="mockup-content-area" style="flex:1;display:flex;min-width:0;position:relative;overflow:hidden;background:#0d111a;">
+          <!-- Dynamic Mockup View Panes Container -->
+          <div class="mockup-content-area" style="flex:1;display:flex;min-width:0;position:relative;overflow:hidden;background:#090b12;">
             
             <!-- PANE 1: CALENDAR VIEW (Active Default) -->
-            <div id="mockView_calendar" class="mockup-view-pane active" style="width:100%;height:100%;">
+            <div id="mockView_calendar" class="mockup-view-pane active" style="width:100%;height:100%;display:flex;">
+              
+              <!-- Left: Connected Channels Panel -->
               <div class="app-channels-panel">
-            <div class="channels-panel-header">
-              <span>Channels</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </div>
-            
-            <div class="channels-action-row">
-              <button class="btn-add-channel">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Add Channel
-              </button>
-              <button class="btn-add-channel" style="flex:0 0 34px;padding:0;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-              </button>
-            </div>
+                <div class="channels-panel-header">
+                  <span>Channels</span>
+                  <span style="font-size:10px;background:rgba(0,255,157,0.12);color:#00FF9D;border:1px solid rgba(0,255,157,0.25);padding:1px 6px;border-radius:999px;font-weight:700;">6 Connected</span>
+                </div>
+                
+                <div class="channels-action-row">
+                  <button class="btn-add-channel">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Add Channel
+                  </button>
+                  <button class="btn-add-channel" style="flex:0 0 30px;padding:0;" title="Refresh Integrations">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  </button>
+                </div>
 
-            <button class="btn-create-post">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Create Post
-            </button>
+                <button class="btn-create-post">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Schedule Post
+                </button>
 
-            <!-- Real Brand Channels from screenshot -->
-            <div class="channel-list-scroll">
-              <div class="real-channel-item active">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#84cc16;">
-                    A
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                <!-- Real Connected Brand Channels with Authentic Logos -->
+                <div class="channel-list-scroll">
+                  <!-- YouTube -->
+                  <div class="real-channel-item active">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:#FF0000;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Flow Studio</div>
+                        <div class="real-channel-sub">YouTube &bull; 14.8K Subs</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Amana Suite</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#06b6d4;">
-                    A
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                  <!-- Facebook Page -->
+                  <div class="real-channel-item">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:#1877F2;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Mart Official</div>
+                        <div class="real-channel-sub">Facebook &bull; 85K Fans</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Amana Mart Latifpur</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#0284c7;">
-                    A
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                  <!-- TikTok -->
+                  <div class="real-channel-item">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:#000000;border:1px solid rgba(255,255,255,0.15);">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#00FF9D"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Mart Deals</div>
+                        <div class="real-channel-sub">TikTok &bull; 42K Followers</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Amana Mart</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#e11d48;">
-                    A
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                  <!-- Instagram -->
+                  <div class="real-channel-item">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Fashion</div>
+                        <div class="real-channel-sub">Instagram &bull; 28K Fans</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Amana Fashion</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#3b82f6;">
-                    M
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                  <!-- LinkedIn -->
+                  <div class="real-channel-item">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:#0A66C2;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Flow Tech</div>
+                        <div class="real-channel-sub">LinkedIn &bull; 9.2K Subs</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Mahmudul Hasan</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#2563eb;">
-                    A
-                    <div class="channel-avatar-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+                  <!-- X (Twitter) -->
+                  <div class="real-channel-item">
+                    <div class="real-channel-left">
+                      <div class="channel-avatar" style="background:#000000;border:1px solid rgba(255,255,255,0.2);">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      </div>
+                      <div class="real-channel-info">
+                        <div class="real-channel-name">Amana Mart Alert</div>
+                        <div class="real-channel-sub">X &bull; 11K Followers</div>
+                      </div>
+                    </div>
+                    <span style="color:#00FF9D;font-size:10px;">●</span>
                   </div>
-                  <div class="real-channel-name">Amana Express</div>
                 </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
               </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);">
-                    A
+              <!-- Right: Rich 7-Day Social Calendar -->
+              <div class="app-calendar-main">
+                <!-- Top Header Bar -->
+                <div class="calendar-top-bar">
+                  <div class="cal-title-left">
+                    <div class="cal-main-heading">
+                      <span>📅 Launches Calendar</span>
+                    </div>
+                    <div class="cal-date-nav">
+                      <span style="cursor:pointer;">&larr;</span>
+                      <span>09/28/2026 - 10/04/2026</span>
+                      <span style="cursor:pointer;">&rarr;</span>
+                      <span style="color:#00FF9D;cursor:pointer;font-weight:700;margin-left:4px;">Today</span>
+                    </div>
                   </div>
-                  <div class="real-channel-name">Amana Mart (Instagram)</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
 
-              <div class="real-channel-item">
-                <div class="real-channel-left">
-                  <div class="channel-avatar" style="background:#0a66c2;">
-                    AF
-                  </div>
-                  <div class="real-channel-name">Amana Flow (LinkedIn)</div>
-                </div>
-                <span style="color:var(--text-dim);font-size:12px;">&bull;&bull;&bull;</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. Calendar View -->
-          <div class="app-calendar-main">
-            <!-- Top Controls -->
-            <div class="calendar-top-bar">
-              <div class="cal-title-left">
-                <div class="cal-main-heading">Calendar</div>
-                <div class="cal-date-nav">
-                  <span>&larr;</span>
-                  <span>09/28/2026 - 10/04/2026</span>
-                  <span>&rarr;</span>
-                  <span style="color:#a78bfa;cursor:pointer;">Today</span>
-                </div>
-              </div>
-
-              <div class="cal-view-selector">
-                <div class="cal-view-btn">Day</div>
-                <div class="cal-view-btn active">Week</div>
-                <div class="cal-view-btn">Month</div>
-              </div>
-            </div>
-
-            <!-- Week Header Columns -->
-            <div class="week-columns-grid">
-              <div class="week-day-header">
-                <div class="week-day-name">Mon</div>
-                <div class="week-day-date">09/28</div>
-              </div>
-              <div class="week-day-header">
-                <div class="week-day-name">Tue</div>
-                <div class="week-day-date">09/29</div>
-              </div>
-              <div class="week-day-header">
-                <div class="week-day-name">Wed</div>
-                <div class="week-day-date">09/30</div>
-              </div>
-              <div class="week-day-header">
-                <div class="week-day-name">Thu</div>
-                <div class="week-day-date">10/01</div>
-              </div>
-              <div class="week-day-header today">
-                <div class="week-day-name" style="color:#c084fc;">Fri &bull; Today</div>
-                <div class="week-day-date">10/02</div>
-              </div>
-              <div class="week-day-header">
-                <div class="week-day-name">Sat</div>
-                <div class="week-day-date">10/03</div>
-              </div>
-              <div class="week-day-header">
-                <div class="week-day-name">Sun</div>
-                <div class="week-day-date">10/04</div>
-              </div>
-            </div>
-
-            <!-- Time Grid with Real Scheduled Posts -->
-            <div class="cal-time-grid">
-              <div class="cal-col"></div>
-              <div class="cal-col"></div>
-              <div class="cal-col"></div>
-
-              <!-- Thursday Column -->
-              <div class="cal-col">
-                <div class="cal-post-card">
-                  <div class="cal-post-top"></div>
-                  <div class="cal-post-inner">
-                    <div class="cal-post-title">Welcome to the new era of automated publishing</div>
-                    <div class="cal-post-meta">
-                      <span>06:00 AM</span>
-                      <span style="color:#1877f2;">Facebook</span>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="font-size:10.5px;color:var(--text-dim);background:rgba(255,255,255,0.04);padding:3px 8px;border-radius:4px;border:1px solid rgba(255,255,255,0.06);">All 6 Channels</div>
+                    <div class="cal-view-selector">
+                      <div class="cal-view-btn">Day</div>
+                      <div class="cal-view-btn active">Week</div>
+                      <div class="cal-view-btn">Month</div>
                     </div>
                   </div>
                 </div>
 
-                <div class="cal-post-card" style="margin-top:10px;">
-                  <div class="cal-post-top" style="background:#0a66c2;"></div>
-                  <div class="cal-post-inner">
-                    <div class="cal-post-title">Welcome to the new era of automated publishing</div>
-                    <div class="cal-post-meta">
-                      <span>07:00 AM</span>
-                      <span style="color:#0a66c2;">LinkedIn</span>
-                    </div>
+                <!-- 7-Day Week Columns Header -->
+                <div class="week-columns-grid">
+                  <div class="week-day-header">
+                    <div class="week-day-name">Mon</div>
+                    <div class="week-day-date">09/28</div>
+                  </div>
+                  <div class="week-day-header">
+                    <div class="week-day-name">Tue</div>
+                    <div class="week-day-date">09/29</div>
+                  </div>
+                  <div class="week-day-header">
+                    <div class="week-day-name">Wed</div>
+                    <div class="week-day-date">09/30</div>
+                  </div>
+                  <div class="week-day-header">
+                    <div class="week-day-name">Thu</div>
+                    <div class="week-day-date">10/01</div>
+                  </div>
+                  <div class="week-day-header today">
+                    <div class="week-day-name">Fri &bull; TODAY</div>
+                    <div class="week-day-date" style="color:#00FF9D;">10/02</div>
+                  </div>
+                  <div class="week-day-header">
+                    <div class="week-day-name">Sat</div>
+                    <div class="week-day-date">10/03</div>
+                  </div>
+                  <div class="week-day-header">
+                    <div class="week-day-name">Sun</div>
+                    <div class="week-day-date">10/04</div>
                   </div>
                 </div>
 
-                <div class="cal-post-card" style="margin-top:20px;">
-                  <div class="cal-post-top" style="background:#10b981;"></div>
-                  <div class="cal-post-inner">
-                    <div class="cal-post-title">✨ আধুনিক ডিজিটাল মার্কেটিং এবং কন্টেন্ট অটোমেশন কৌশল</div>
-                    <div class="cal-post-meta">
-                      <span>10:00 AM</span>
-                      <span style="color:#10b981;">Amana Flow</span>
+                <!-- 7-Day Grid Filled with Realistic Scheduled Posts -->
+                <div class="cal-time-grid">
+                  <!-- Mon 09/28 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:#FF0000;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#FF0000;">▶ Shorts</span>
+                          <span class="status-pill published">Published</span>
+                        </div>
+                        <div class="cal-post-title">AmanaMart Express: 60-Min Speed Test in Dhaka 🚀</div>
+                        <div class="cal-post-thumb-box">▶ 0:45 Video</div>
+                        <div class="cal-post-meta">
+                          <span>11:00 AM</span>
+                          <span style="color:#10b981;">👁 4.2k</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="cal-post-card">
-                  <div class="cal-post-top" style="background:#ec4899;"></div>
-                  <div class="cal-post-inner">
-                    <div class="cal-post-title">🚀 জীবন সহজ করার এক্সক্লুসিভ টিপস ও ট্রিকস</div>
-                    <div class="cal-post-meta">
-                      <span>10:30 AM</span>
-                      <span style="color:#ec4899;">Instagram</span>
+                  <!-- Tue 09/29 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:#1877F2;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#1877F2;">📘 Page</span>
+                          <span class="status-pill published">Published</span>
+                        </div>
+                        <div class="cal-post-title">সাপ্তাহিক তাজা বাজার! টাটকা মাছ ও সবজিতে ১৫% বিশেষ ছাড় 🛒</div>
+                        <div class="cal-post-meta">
+                          <span>02:30 PM</span>
+                          <span style="color:#1877F2;">👍 1.8k</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Wed 09/30 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:linear-gradient(90deg,#f09433,#dc2743,#bc1888);"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#dc2743;">📸 Carousel</span>
+                          <span class="status-pill published">Published</span>
+                        </div>
+                        <div class="cal-post-title">Festive Collection: Premium Panjabi & Handcrafted Sarees ✨</div>
+                        <div class="cal-post-thumb-box">▤ 4 Slides</div>
+                        <div class="cal-post-meta">
+                          <span>05:00 PM</span>
+                          <span style="color:#dc2743;">❤️ 3.1k</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Thu 10/01 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:#00FF9D;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#00FF9D;">🎵 TikTok</span>
+                          <span class="status-pill published">Published</span>
+                        </div>
+                        <div class="cal-post-title">Unboxing top gadgets delivered in 30 mins in Dhanmondi ⚡</div>
+                        <div class="cal-post-thumb-box">🎵 Trending Audio</div>
+                        <div class="cal-post-meta">
+                          <span>07:15 PM</span>
+                          <span style="color:#00FF9D;">👁 18.5k</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Fri 10/02 (TODAY - Highlighted) -->
+                  <div class="cal-col today-col">
+                    <!-- Post 1 (Today Live) -->
+                    <div class="cal-post-card" style="border-color:rgba(0,255,157,0.4);background:#0d141e;">
+                      <div class="cal-post-top" style="background:linear-gradient(90deg, #00A3FF, #00FF9D);"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#00FF9D;">🔴 FB Live</span>
+                          <span class="status-pill live">Published</span>
+                        </div>
+                        <div class="cal-post-title">লাইভ ফ্রাইডে মেগা সেল: গ্যাজেট ও অ্যাপ্লায়েন্সে ৫০% ক্যাশব্যাক! 🔥</div>
+                        <div class="cal-post-meta">
+                          <span>02:00 PM</span>
+                          <span style="color:#00FF9D;">🔥 12.4k</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Post 2 (Today Scheduled) -->
+                    <div class="cal-post-card" style="border-color:rgba(0,163,255,0.4);">
+                      <div class="cal-post-top" style="background:#00A3FF;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#00A3FF;">💼 LinkedIn</span>
+                          <span class="status-pill scheduled">Scheduled</span>
+                        </div>
+                        <div class="cal-post-title">Scaling Sovereign Social Orchestration Across South Asia 🌐</div>
+                        <div class="cal-post-meta">
+                          <span>06:30 PM</span>
+                          <span style="color:#00A3FF;">Auto-Post</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sat 10/03 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:#ffffff;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#ffffff;">𝕏 Thread</span>
+                          <span class="status-pill scheduled">Scheduled</span>
+                        </div>
+                        <div class="cal-post-title">Why decentralized multi-channel automation beats legacy SaaS 🧵</div>
+                        <div class="cal-post-meta">
+                          <span>10:00 AM</span>
+                          <span style="color:#94a3b8;">1/5 Posts</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sun 10/04 -->
+                  <div class="cal-col">
+                    <div class="cal-post-card">
+                      <div class="cal-post-top" style="background:#EC4899;"></div>
+                      <div class="cal-post-inner">
+                        <div class="cal-post-header-row">
+                          <span class="cal-platform-tag" style="color:#EC4899;">📸 Reel</span>
+                          <span class="status-pill queued">In Queue</span>
+                        </div>
+                        <div class="cal-post-title">Weekend Flash Deals: Grocery & Organic Honey Restocked 🍯</div>
+                        <div class="cal-post-meta">
+                          <span>04:00 PM</span>
+                          <span style="color:#f59e0b;">AI Ready</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <!-- Friday (Today) Column -->
-              <div class="cal-col today-col">
-                <div class="cal-post-card" style="border-color:#10b981;">
-                  <div class="cal-post-top" style="background:#10b981;"></div>
-                  <div class="cal-post-inner">
-                    <div class="cal-post-title">🌟 ফ্রাইডে মেগা সেল ও সাপ্তাহিক ধামাকা অফার</div>
-                    <div class="cal-post-meta">
-                      <span>02:00 PM</span>
-                      <span style="color:#10b981;">Amana Mart</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cal-col"></div>
-              <div class="cal-col"></div>
-            </div>
-          </div>
-        
             </div>
 
             <!-- PANE 2: AI AGENT STUDIO -->
