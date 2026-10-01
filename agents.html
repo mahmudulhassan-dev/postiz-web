@@ -521,6 +521,128 @@
     .footer-bottom { flex-direction: column; text-align: center; }
   }
 
+
+  /* Interactive Mockup Tabs & Panes */
+    .app-icon-item {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .app-icon-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .app-icon-item.active {
+      background: rgba(0, 163, 255, 0.15);
+      border-color: rgba(0, 163, 255, 0.4);
+      color: #00a3ff;
+      box-shadow: 0 0 16px rgba(0, 163, 255, 0.2);
+    }
+    .mockup-view-pane {
+      display: none;
+      animation: mockFadeIn 0.25s ease-out forwards;
+    }
+    .mockup-view-pane.active {
+      display: flex;
+    }
+    @keyframes mockFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Channel Cards Modern Styling */
+    .channel-cat-pill {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-dim);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .channel-card-arrow {
+      color: var(--text-dim);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+    }
+    .channel-card:hover .channel-card-arrow {
+      color: #00a3ff;
+      background: rgba(0, 163, 255, 0.12);
+      border-color: rgba(0, 163, 255, 0.3);
+      transform: translateX(3px);
+    }
+
+    /* Modern Pricing Controls */
+    .pricing-controls-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 28px 0 40px;
+    }
+    .billing-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .billing-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .billing-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+    }
+    .save-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-left: 6px;
+    }
+    .cur-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cur-dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .cur-dropdown-item.active {
+      background: rgba(0, 163, 255, 0.12);
+      border: 1px solid rgba(0, 163, 255, 0.25);
+    }
+
   </style>
 </head>
 <body>
@@ -1067,127 +1189,6 @@
   <span style="width:5px;height:5px;border-radius:50%;background:#10b981;"></span>
   AMANA FLOW
 </span>
-
-    /* Interactive Mockup Tabs & Panes */
-    .app-icon-item {
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .app-icon-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-    }
-    .app-icon-item.active {
-      background: rgba(0, 163, 255, 0.15);
-      border-color: rgba(0, 163, 255, 0.4);
-      color: #00a3ff;
-      box-shadow: 0 0 16px rgba(0, 163, 255, 0.2);
-    }
-    .mockup-view-pane {
-      display: none;
-      animation: mockFadeIn 0.25s ease-out forwards;
-    }
-    .mockup-view-pane.active {
-      display: flex;
-    }
-    @keyframes mockFadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Channel Cards Modern Styling */
-    .channel-cat-pill {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-dim);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .channel-card-arrow {
-      color: var(--text-dim);
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      flex-shrink: 0;
-    }
-    .channel-card:hover .channel-card-arrow {
-      color: #00a3ff;
-      background: rgba(0, 163, 255, 0.12);
-      border-color: rgba(0, 163, 255, 0.3);
-      transform: translateX(3px);
-    }
-
-    /* Modern Pricing Controls */
-    .pricing-controls-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin: 28px 0 40px;
-    }
-    .billing-pill {
-      display: inline-flex;
-      align-items: center;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 4px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .billing-btn {
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      padding: 8px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .billing-btn.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
-    }
-    .save-badge {
-      background: rgba(16, 185, 129, 0.2);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 11px;
-      font-weight: 800;
-      margin-left: 6px;
-    }
-    .cur-dropdown-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .cur-dropdown-item:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .cur-dropdown-item.active {
-      background: rgba(0, 163, 255, 0.12);
-      border: 1px solid rgba(0, 163, 255, 0.25);
-    }
 
           <span style="font-size:11px;color:var(--text-dim);">&bull; Temporal 1.28 Active</span>
         </div>
