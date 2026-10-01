@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slack Scheduling & Management — Amana Flow Postiz</title>
-  <meta name="description" content="Official Slack post scheduler and automation on Amana Flow Postiz." />
-  <link rel="canonical" href="https://post.amanaflow.com/channels/slack" />
+  <title>Documentation Hub — Amana Flow Postiz</title>
+  <meta name="description" content="Technical documentation and self-hosting guides for Amana Flow Postiz." />
+  <link rel="canonical" href="https://post.amanaflow.com/docs" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -505,12 +505,12 @@
 
           <!-- 2. Documentation Hub -->
           <li class="nav-item">
-            <a href="/docs.html" class="nav-link ">Dev Docs</a>
+            <a href="/docs.html" class="nav-link active">Dev Docs</a>
           </li>
 
           <!-- 3. Channels Mega Menu -->
           <li class="nav-item">
-            <a class="nav-link active" href="/home#channels">
+            <a class="nav-link " href="/home#channels">
               Channels
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </a>
@@ -577,56 +577,75 @@
   </div>
   
   
-    <div class="container" style="max-width:960px;padding:60px 24px 100px;">
-      <!-- Hero -->
-      <div style="text-align:center;margin-bottom:50px;">
-        <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 18px;border-radius:var(--radius-full);background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#fff;font-size:13px;font-weight:600;margin-bottom:20px;">
-          <span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#e01e5a"/></svg></span>
-          <span>Official Slack Integration</span>
+    <div class="container" style="max-width:1040px;padding:60px 24px 100px;">
+      <div style="margin-bottom:40px;border-bottom:1px solid var(--border);padding-bottom:24px;">
+        <span style="font-size:12px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;">Postiz Sovereign Architecture</span>
+        <h1 style="font-family:var(--font-heading);font-size:clamp(32px,4vw,46px);font-weight:800;color:#fff;margin:8px 0 10px;">Documentation Hub</h1>
+        <p style="color:var(--text-muted);font-size:16px;">Comprehensive guide to configuring, orchestrating, and automating social channels on private VPS infrastructure.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;margin-bottom:50px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">🚀 Quickstart Guide</h3>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">How to access the dashboard, connect brand channels via OAuth, configure default posting time slots, and schedule your first multi-platform launch.</p>
+          <a href="#quickstart" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px;">Read Quickstart &rarr;</a>
         </div>
 
-        <h1 style="font-family:var(--font-heading);color:#fff;font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-1.2px;margin-bottom:18px;">
-          Slack Automation & Scheduling
-        </h1>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">🔑 Provider API Keys</h3>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Configuration guide for Meta (Facebook & Instagram), TikTok Content Posting API, Google / YouTube Data v3, and LinkedIn Developer App IDs.</p>
+          <a href="#api-keys" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px;">Configure Keys &rarr;</a>
+        </div>
 
-        <p style="font-size:17px;max-width:700px;margin:0 auto 30px;color:var(--text-muted);line-height:1.65;">
-          Internal team notifications, campaign broadcast channels. Seamlessly connect your Slack profile, automate post publishing, and schedule campaigns from Amana Flow Postiz.
-        </p>
-
-        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-          <a href="/launches" class="btn btn-primary btn-lg">Connect Slack &rarr;</a>
-          <a href="/docs.html" class="btn btn-secondary btn-lg">Integration Guide</a>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
+          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">🤖 AI Agents & MCP</h3>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Connect Cursor, Claude Code, ChatGPT, and n8n directly to your Postiz workspace via Model Context Protocol (MCP) server endpoints.</p>
+          <a href="/agents.html" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px;">Explore Agent Setup &rarr;</a>
         </div>
       </div>
 
-      <!-- Feature Grid -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;margin:50px 0;">
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
-          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">Native OAuth2 Security</h3>
-          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Granular permission scopes ensure your Slack password is never stored or seen by our servers. Access tokens are encrypted in dedicated PostgreSQL storage.</p>
-        </div>
-
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
-          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">Media Optimization</h3>
-          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Automated video transcode handling, aspect ratio formatting, thumbnail generation, and compliance checks according to Slack developer requirements.</p>
-        </div>
-
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
-          <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">Precision Temporal Queue</h3>
-          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Posts are queued via Temporal workflows ensuring exactly-once publication without duplicates, rate limit violations, or network dropouts.</p>
+      <!-- Section: Quickstart -->
+      <div id="quickstart" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;margin-bottom:40px;">
+        <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">1. Workspace Access & First Launch</h2>
+        <div style="color:var(--text-muted);font-size:15px;line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+          <p>Access your private workspace by visiting <a href="/launches" style="color:#a78bfa;font-weight:600;">https://post.amanaflow.com/launches</a>. After authenticating with your administrator account, you will land on the interactive Calendar view.</p>
+          <p><strong>Step 1: Connect Brand Channels:</strong> Click on <em>Add Channel</em> in the left panel. Select the target platform (e.g. Facebook, Instagram, YouTube, TikTok). You will be redirected to the platform's official OAuth authorization screen. Approve permissions to authorize your VPS container.</p>
+          <p><strong>Step 2: Create a Post:</strong> Click the purple <em>Create Post</em> button. Write your copy, add media assets (videos up to 500MB, high-res photos), choose which channels to broadcast to, and pick an exact publishing timestamp.</p>
+          <p><strong>Step 3: Verification:</strong> The Temporal engine will track the execution queue and dispatches the post to all platforms at the requested minute.</p>
         </div>
       </div>
 
-      <!-- Compliance Box -->
-      <div id="compliance" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:30px;margin-top:40px;">
-        <h4 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:12px;">🛡️ Developer App Review & Policy Compliance</h4>
-        <p style="color:var(--text-muted);font-size:14px;line-height:1.65;margin-bottom:16px;">
-          Amana Flow Postiz strictly adheres to official Slack Developer Policies and Terms of Service. We do not engage in automated scraping, inauthentic engagements, or non-consensual posting. User data can be purged at any moment via our self-service deletion tools.
-        </p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="/terms.html" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;">View Terms &rarr;</a>
-          <a href="/privacy.html" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;">View Privacy Policy &rarr;</a>
-          <a href="/data-deletion.html" style="color:#ef4444;font-size:13px;font-weight:600;text-decoration:none;">Data Deletion Guide &rarr;</a>
+      <!-- Section: API Keys -->
+      <div id="api-keys" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;margin-bottom:40px;">
+        <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">2. Provider API Credentials Reference</h2>
+        <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:18px;">Below are the configured environment variable references maintained in <code>docker-compose.yaml</code> on the VPS:</p>
+        
+        <div style="background:#06080d;border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;font-family:monospace;font-size:13px;color:#a78bfa;overflow-x:auto;line-height:1.6;">
+# Facebook / Meta Graph API<br/>
+FACEBOOK_APP_ID: '1881259305819713'<br/>
+FACEBOOK_APP_SECRET: '****************'<br/><br/>
+# TikTok Content Posting API & Login Kit<br/>
+TIKTOK_CLIENT_ID: 'aw2rokuo8juy0ilv'<br/>
+TIKTOK_CLIENT_SECRET: '****************'<br/><br/>
+# Google / YouTube Data API v3 & Business Profiles<br/>
+YOUTUBE_CLIENT_ID: '372048527056-659nnd8lc8a1l1fop2cce6f6d8i13ibo...'<br/>
+YOUTUBE_CLIENT_SECRET: 'GOCSPX-****************'<br/><br/>
+# LinkedIn API<br/>
+LINKEDIN_CLIENT_ID: '864fpdxe4q9xjq'<br/>
+LINKEDIN_CLIENT_SECRET: '****************'
+        </div>
+      </div>
+
+      <!-- Section: Self-Hosting & VPS Architecture -->
+      <div id="self-hosting" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;">
+        <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">3. Self-Hosted VPS Deployment & Isolation</h2>
+        <div style="color:var(--text-muted);font-size:15px;line-height:1.7;display:flex;flex-direction:column;gap:12px;">
+          <p>Amana Flow Postiz is deployed using a decoupled architecture on Ubuntu VPS (<code>148.230.98.190</code>):</p>
+          <ul style="margin:6px 0 0 20px;display:flex;flex-direction:column;gap:8px;">
+            <li><strong>Presentation & Compliance Webroot:</strong> <code>/www/wwwroot/post.amanaflow.com/</code> served directly by Nginx for sub-millisecond response speeds.</li>
+            <li><strong>Core Docker Stack:</strong> <code>/opt/postiz-docker-compose/</code> running Postiz App (:4007), PostgreSQL 17 (:5432), Redis 7.2 (:6379), and Temporal (:7233).</li>
+            <li><strong>Reverse Proxy:</strong> Nginx routes <code>/home</code>, <code>/terms</code>, <code>/privacy</code>, <code>/docs</code>, and <code>/channels/*</code> to static files, while reverse-proxying <code>/auth</code>, <code>/launches</code>, <code>/api</code>, and <code>/.well-known/oauth-protected-resource</code> to Postiz.</li>
+          </ul>
         </div>
       </div>
     </div>
