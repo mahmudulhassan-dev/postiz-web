@@ -1140,7 +1140,7 @@ const indexHtml = `<!DOCTYPE html>
 
           <!-- 4. Architecture / Specs -->
           <li class="nav-item">
-            <a href="#architecture" class="nav-link">Self-Hosted</a>
+            <a href="#architecture" class="nav-link">Platform</a>
           </li>
 
           <!-- 5. Legal Links -->

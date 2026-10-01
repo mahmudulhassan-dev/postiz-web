@@ -72,7 +72,7 @@ const col3Channels = [
   { name: 'Twitch', slug: 'twitch', cat: 'video community', color: '#9146ff', desc: 'Go-live announcements and schedule integration', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#9146ff"><path d="M2.149 0L.537 4.119v16.836h5.731V24h3.224l3.045-3.045h4.657l6.269-6.269V0H2.149zm19.164 13.612l-3.582 3.582H12l-3.045 3.045v-3.045H4.119V2.149h17.194v11.463zm-3.582-7.343v6.269h-2.149V6.269h2.149zm-5.731 0v6.269H9.851V6.269h2.149z"/></svg>` },
   { name: 'Warpcast', slug: 'warpcast', cat: 'social', color: '#472a84', desc: 'Farcaster protocol cast scheduling & decentralized frames', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#472a84"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 14h-2.5l-2.5-4-2.5 4H7l3.75-6L7 4h2.5l2.5 4 2.5-4H17l-3.75 6L17 16z"/></svg>` },
   { name: 'MeWe', slug: 'mewe', cat: 'social', color: '#008287', desc: 'Privacy-focused social networking feeds & group posts', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#008287"/><path d="M5 8l4 6 3-4 3 4 4-6v8h-3v-4l-4 5-4-5v4H5V8z" fill="#fff"/></svg>` },
-  { name: 'WordPress', slug: 'wordpress', cat: 'cms', color: '#21759b', desc: 'Self-hosted and WP.com automated blog post publishing via REST API', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#21759b"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.2a10.8 10.8 0 1 1 0 21.6 10.8 10.8 0 0 1 0-21.6zM2.87 12c0 3.73 2.29 6.94 5.58 8.3L3.84 8.27A10.8 10.8 0 0 0 2.87 12zm15.18-.54c0-1.8-.65-3.04-1.2-4.01-.74-1.25-1.44-2.31-1.44-3.56 0-1.39 1.06-2.69 2.56-2.69.11 0 .22.01.32.03A10.74 10.74 0 0 0 12 1.2c-3.8 0-7.14 1.96-9.08 4.93l6.57 17.96 1.9-5.74-2.73-7.5c.81-.03 1.58-.1 1.58-.1.74-.07.82-1.15.08-1.15 0 0-2.22.18-3.66.18-1.37 0-3.6-.18-3.6-.18-.74 0-.66 1.08.08 1.15 0 0 .74.07 1.5.11l2.25 6.18-3.18 9.54A10.74 10.74 0 0 0 12 22.8c3.27 0 6.22-1.45 8.24-3.76l-5.69-16.5c1.9.15 3.5 1.57 3.5 4.92z"/></svg>` },
+  { name: 'WordPress', slug: 'wordpress', cat: 'cms', color: '#21759b', desc: 'WordPress standalone & WP.com automated blog publishing via REST API', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#21759b"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.2a10.8 10.8 0 1 1 0 21.6 10.8 10.8 0 0 1 0-21.6zM2.87 12c0 3.73 2.29 6.94 5.58 8.3L3.84 8.27A10.8 10.8 0 0 0 2.87 12zm15.18-.54c0-1.8-.65-3.04-1.2-4.01-.74-1.25-1.44-2.31-1.44-3.56 0-1.39 1.06-2.69 2.56-2.69.11 0 .22.01.32.03A10.74 10.74 0 0 0 12 1.2c-3.8 0-7.14 1.96-9.08 4.93l6.57 17.96 1.9-5.74-2.73-7.5c.81-.03 1.58-.1 1.58-.1.74-.07.82-1.15.08-1.15 0 0-2.22.18-3.66.18-1.37 0-3.6-.18-3.6-.18-.74 0-.66 1.08.08 1.15 0 0 .74.07 1.5.11l2.25 6.18-3.18 9.54A10.74 10.74 0 0 0 12 22.8c3.27 0 6.22-1.45 8.24-3.76l-5.69-16.5c1.9.15 3.5 1.57 3.5 4.92z"/></svg>` },
   { name: 'Dev.to', slug: 'devto', cat: 'cms', color: '#ffffff', desc: 'Forem technical publishing with automated tags & canonical links', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><rect width="24" height="24" rx="3" fill="#000"/><path d="M7.5 15.5h-2V8.5h2c1.7 0 2.5 1.1 2.5 3.5s-.8 3.5-2.5 3.5zm-.8-1.2h.8c1 0 1.3-.7 1.3-2.3 0-1.6-.3-2.3-1.3-2.3h-.8v4.6zm5.8 1.2h-3V8.5h3v1.2h-1.8v1.4h1.6v1.2h-1.6v1.8h1.8v1.4zm3.8 0l-1.5-7h1.3l.9 4.6.9-4.6h1.3l-1.5 7h-1.4z"/></svg>` }
 ];
 
@@ -645,7 +645,7 @@ function renderMasterHeader(activePage = '') {
         </div>
         <div>
           <div class="brand-text">Amana Flow <span class="brand-postiz">Postiz</span></div>
-          <div class="brand-sub"><span class="brand-sub-dot"></span>Enterprise Self-Hosted Suite</div>
+          <div class="brand-sub"><span class="brand-sub-dot"></span>Unified Social Media Suite</div>
         </div>
       </a>
 
@@ -701,9 +701,9 @@ function renderMasterHeader(activePage = '') {
             </div>
           </li>
 
-          <!-- 4. Architecture / Specs -->
+          <!-- Platform Specs -->
           <li class="nav-item">
-            <a href="/#architecture" class="nav-link">Self-Hosted</a>
+            <a href="/#architecture" class="nav-link">Platform</a>
           </li>
 
           <!-- 4. Pricing & Plans -->
@@ -789,7 +789,7 @@ function renderMasterFooter() {
             </div>
           </a>
           <p class="footer-brand-desc">
-            Enterprise-grade private social media orchestration, automated publishing, and AI agent integration suite self-hosted on sovereign dedicated VPS infrastructure.
+            Enterprise-grade social media orchestration, automated publishing, and AI agent integration suite powered by dedicated high-performance cloud infrastructure.
           </p>
           <div class="footer-server-status">
             <span style="width:6px;height:6px;border-radius:50%;background:#10b981;"></span>
@@ -819,7 +819,7 @@ function renderMasterFooter() {
             <li><a href="/docs.html">Documentation Hub</a></li>
             <li><a href="/agents.html">AI Agent Setup</a></li>
             <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
-            <li><a href="/#architecture">Architecture Specs</a></li>
+            <li><a href="/#architecture">Platform Infrastructure</a></li>
             <li><a href="/auth">Auth Portal</a></li>
             <li><a href="/launches">Workspace Dashboard</a></li>
           </ul>
@@ -1497,7 +1497,7 @@ function generateIndexHtml() {
     <div class="container">
       <div class="badge-pill">
         <span class="badge-pill-dot"></span>
-        Enterprise Self-Hosted Social Media Orchestration Engine
+        Enterprise Unified Social Media Orchestration Engine
       </div>
       
       <h1 class="hero-title">
@@ -1880,7 +1880,7 @@ function generateIndexHtml() {
           Simple, Predictable Plans for Brands & Creators
         </h2>
         <p style="color:var(--text-muted);font-size:16px;line-height:1.65;" data-i18n="pricing_sub">
-          No per-seat penalties. Run self-hosted or unlock multi-agent automation with instant local payments via <strong>PipraPay (bKash, Nagad, Rocket)</strong> and international cards.
+          No per-seat penalties. Unlock enterprise multi-agent automation with instant local payments via <strong>PipraPay (bKash, Nagad, Rocket)</strong> and international cards.
         </p>
 
         <!-- Top 5 Currency Selector (BDT, USD, EUR, GBP, INR) -->
@@ -2176,9 +2176,9 @@ function generateIndexHtml() {
       en: {
         nav_login: 'Log In',
         nav_dashboard: 'Open Dashboard →',
-        brand_sub: 'Enterprise Self-Hosted Suite',
+        brand_sub: 'Enterprise Unified Suite',
         pricing_title: 'Simple, Predictable Plans for Brands & Creators',
-        pricing_sub: 'No per-seat penalties. Run self-hosted or unlock multi-agent automation with instant local payments via PipraPay (bKash, Nagad, Rocket) and international cards.',
+        pricing_sub: 'No per-seat penalties. Unlock enterprise multi-agent automation with instant local payments via PipraPay (bKash, Nagad, Rocket) and international cards.',
         select_currency: 'Currency:',
         starter_billed: 'Free forever • No credit card required',
         subscribe_pro: 'Subscribe with PipraPay →',
@@ -2449,7 +2449,7 @@ function generateTermsHtml() {
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">1. Service Overview & Dedicated VPS Architecture</h2>
-          <p>Amana Flow Postiz is a sovereign self-hosted social media management, calendar scheduling, content orchestration, and analytics platform powered by open-source Postiz architecture. The Service allows authorized users to plan, draft, generate, and schedule posts across multiple connected social networks (including TikTok, Facebook, Instagram, YouTube, LinkedIn, Threads, X, Pinterest, and others) via official APIs.</p>
+          <p>Amana Flow Postiz is an enterprise social media management, calendar scheduling, content orchestration, and analytics platform powered by open-source Postiz architecture. The Service allows authorized users to plan, draft, generate, and schedule posts across multiple connected social networks (including TikTok, Facebook, Instagram, YouTube, LinkedIn, Threads, X, Pinterest, and others) via official APIs.</p>
         </div>
 
         <div>
@@ -2535,7 +2535,7 @@ function generatePrivacyHtml() {
       </div>
 
       <div style="color:var(--text-muted);font-size:15px;line-height:1.75;display:flex;flex-direction:column;gap:30px;">
-        <p>Amana Flow ("we," "our," or "us") operates <strong>Amana Flow Postiz</strong> (<a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>). This Privacy Policy explains our practices regarding the collection, use, disclosure, and protection of personal data and OAuth credentials when you use our self-hosted social media management suite.</p>
+        <p>Amana Flow ("we," "our," or "us") operates <strong>Amana Flow Postiz</strong> (<a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>). This Privacy Policy explains our practices regarding the collection, use, disclosure, and protection of personal data and OAuth credentials when you use our enterprise social media management suite.</p>
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">1. Information We Collect</h2>
@@ -2739,7 +2739,7 @@ LINKEDIN_CLIENT_SECRET: '****************'
 
       <!-- Section: Self-Hosting & VPS Architecture -->
       <div id="self-hosting" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;">
-        <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">3. Self-Hosted VPS Deployment & Isolation</h2>
+        <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">3. Cloud Infrastructure & Security Isolation</h2>
         <div style="color:var(--text-muted);font-size:15px;line-height:1.7;display:flex;flex-direction:column;gap:12px;">
           <p>Amana Flow Postiz is deployed using a decoupled architecture on Ubuntu VPS (<code>148.230.98.190</code>):</p>
           <ul style="margin:6px 0 0 20px;display:flex;flex-direction:column;gap:8px;">
