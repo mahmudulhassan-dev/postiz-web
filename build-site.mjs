@@ -31,54 +31,384 @@ const amanaFlowBadge = `
   <span style="width:5px;height:5px;border-radius:50%;background:#10b981;"></span>
   AMANA FLOW
 </span>
+
+    /* Interactive Mockup Tabs & Panes */
+    .app-icon-item {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .app-icon-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .app-icon-item.active {
+      background: rgba(0, 163, 255, 0.15);
+      border-color: rgba(0, 163, 255, 0.4);
+      color: #00a3ff;
+      box-shadow: 0 0 16px rgba(0, 163, 255, 0.2);
+    }
+    .mockup-view-pane {
+      display: none;
+      animation: mockFadeIn 0.25s ease-out forwards;
+    }
+    .mockup-view-pane.active {
+      display: flex;
+    }
+    @keyframes mockFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Channel Cards Modern Styling */
+    .channel-cat-pill {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-dim);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .channel-card-arrow {
+      color: var(--text-dim);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+    }
+    .channel-card:hover .channel-card-arrow {
+      color: #00a3ff;
+      background: rgba(0, 163, 255, 0.12);
+      border-color: rgba(0, 163, 255, 0.3);
+      transform: translateX(3px);
+    }
+
+    /* Modern Pricing Controls */
+    .pricing-controls-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 28px 0 40px;
+    }
+    .billing-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .billing-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .billing-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+    }
+    .save-badge {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-left: 6px;
+    }
+    .cur-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cur-dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .cur-dropdown-item.active {
+      background: rgba(0, 163, 255, 0.12);
+      border: 1px solid rgba(0, 163, 255, 0.25);
+    }
 `;
 
 // ============================================================================
-// 2. CHANNELS DATA (30 Platforms with authentic SVGs and Categories)
+// 2. CHANNELS DATA (30 Platforms with authentic official brand vector SVGs and Categories)
 // ============================================================================
 
 const col1Channels = [
-  { name: 'Facebook', slug: 'facebook', cat: 'social video', color: '#1877f2', desc: 'Pages & Groups automatic scheduling, Reels and Stories distribution', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>` },
-  { name: 'LinkedIn', slug: 'linkedin', cat: 'pro', color: '#0a66c2', desc: 'B2B company pages, employee advocacy & executive articles', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#0a66c2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>` },
-  { name: 'TikTok', slug: 'tiktok', cat: 'video', color: '#00f2fe', desc: 'Direct video posting API, trending hashtags, caption customization', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#000"/><path d="M16.6 5.82s.51.5 1.45.54a5.3 5.3 0 003.95-1.57V8a8.2 8.2 0 01-5.4-2.18v8.68a5.5 5.5 0 11-4.7-5.44v3.3a2.3 2.3 0 101.4 2.14V2.5h3.3v3.32z" fill="#00f2fe"/><path d="M15.4 4.62s.51.5 1.45.54a5.3 5.3 0 003.95-1.57V6.8a8.2 8.2 0 01-5.4-2.18v8.68a5.5 5.5 0 11-4.7-5.44v3.3a2.3 2.3 0 101.4 2.14V1.3h3.3v3.32z" fill="#fe0979"/></svg>` },
-  { name: 'Reddit', slug: 'reddit', cat: 'community', color: '#ff4500', desc: 'Subreddit marketing, scheduled discussion threads & flair management', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff4500"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.56 12 8 12.56 8 13.25c0 .688.56 1.25 1.25 1.25.688 0 1.25-.562 1.25-1.25 0-.69-.562-1.25-1.25-1.25zm5.5 0c-.688 0-1.25.56-1.25 1.25 0 .688.562 1.25 1.25 1.25.69 0 1.25-.562 1.25-1.25 0-.69-.56-1.25-1.25-1.25zm-5.465 4.14a.5.5 0 0 0-.085.701c.732.898 2.02 1.233 2.8 1.233.78 0 2.068-.335 2.8-1.233a.5.5 0 1 0-.776-.63c-.527.648-1.48.913-2.024.913-.544 0-1.497-.265-2.024-.913a.5.5 0 0 0-.69-.071z"/></svg>` },
-  { name: 'Slack', slug: 'slack', cat: 'community', color: '#e01e5a', desc: 'Internal team notifications, campaign broadcast channels', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#e01e5a"/></svg>` },
-  { name: 'Mastodon', slug: 'mastodon', cat: 'social', color: '#6364ff', desc: 'Decentralized Fediverse microblogging across sovereign instances', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#6364ff"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C16.42.096 14.156 0 12.001 0c-2.155 0-4.42.096-5.963.309-2.687.394-4.954 2.426-5.304 5.004C.358 8.083.25 11.235.25 14.07c.05 3.18.32 6.353 1.942 9.07 1.637 2.743 4.665 3.398 7.42 3.58 2.062.137 4.126.069 6.182-.206a8.55 8.55 0 0 0 2.227-.663v-2.287c-.77.29-1.574.49-2.392.597-2.072.274-4.225.297-6.262-.229-1.258-.32-1.92-1.246-2.046-2.493a10.966 10.966 0 0 1-.035-1.12c1.722.423 3.504.64 5.294.646 1.708-.006 3.415-.205 5.074-.593 2.92-.684 5.48-2.73 5.76-5.748.33-3.56.24-7.14-.14-10.72zM17.41 15.012h-2.502v-6.38c0-1.39-.58-2.096-1.74-2.096-1.282 0-1.923.827-1.923 2.48v3.58h-2.49v-3.58c0-1.653-.641-2.48-1.923-2.48-1.16 0-1.74.706-1.74 2.096v6.38H2.59V8.293c0-1.39.355-2.494 1.066-3.313.73-.819 1.688-1.238 2.873-1.238 1.374 0 2.417.528 3.13 1.583L10.999 7.4l1.34-2.075c.713-1.055 1.756-1.583 3.13-1.583 1.185 0 2.143.419 2.873 1.238.711.819 1.066 1.923 1.066 3.313v6.72z"/></svg>` },
-  { name: 'Skool', slug: 'skool', cat: 'community', color: '#f59e0b', desc: 'Private community post scheduling and educational announcements', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#18181b"/><path d="M12 4L3 9l9 5 9-5-9-5zm-7 8.5v4.2c0 2.2 3.1 4 7 4s7-1.8 7-4v-4.2l-7 3.9-7-3.9z" fill="#f59e0b"/></svg>` },
-  { name: 'VK', slug: 'vk', cat: 'social', color: '#0077ff', desc: 'VKontakte wall posts, rich media attachments and community feeds', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#0077ff"><path d="M15.684 0H8.316C2.992 0 0 2.992 0 8.316v7.368C0 21.008 2.992 24 8.316 24h7.368C21.008 24 24 21.008 24 15.684V8.316C24 2.992 21.008 0 15.684 0zm4.515 17.185h-1.892c-.716 0-.935-.57-2.222-1.868-1.121-1.09-1.618-1.233-1.892-1.233-.385 0-.495.11-.495.637v1.737c0 .45-.143.725-1.342.725-1.98 0-4.18-1.2-5.73-3.43-2.35-3.32-3.003-5.81-3.003-6.32 0-.23.09-.45.54-.45h1.892c.407 0 .56.187.715.626 1.012 2.924 2.705 5.485 3.409 5.485.264 0 .385-.12.385-.79V9.897c-.077-1.419-.825-1.54-.825-2.046 0-.242.209-.484.54-.484h2.98c.374 0 .506.198.506.638v3.443c0 .374.165.506.275.506.23 0 .418-.132.847-.561 1.309-1.474 2.244-3.74 2.244-3.74.12-.253.33-.484.737-.484h1.892c.572 0 .693.286.572.693-.242.99-2.32 3.86-2.42 4.026-.22.33-.297.473 0 .869.21.286.913.891 1.386 1.452.88.99 1.55 1.826 1.738 2.398.176.572-.11.858-.682.858z"/></svg>` },
-  { name: 'Nostr', slug: 'nostr', cat: 'cms', color: '#8b5cf6', desc: 'Cryptographically signed decentralized notes & censorship-resistant feeds', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#8b5cf6"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 14.5h-2v-5h2v5zm0-7h-2V7.5h2V9.5z"/></svg>` },
-  { name: 'Medium', slug: 'medium', cat: 'cms', color: '#ffffff', desc: 'Long-form editorial articles, canonical SEO syndication', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>` }
+  { 
+    name: 'Facebook', 
+    slug: 'facebook', 
+    cat: 'social video', 
+    color: '#1877f2', 
+    desc: 'Pages & Groups automatic scheduling, Reels and Stories distribution', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path d="M15.5 12h-2.5v8h-3.3v-8h-1.6V9.4h1.6V7.5c0-2.2 1.3-3.5 3.4-3.5 1 0 1.9.1 2.1.1v2.5h-1.4c-1.1 0-1.3.5-1.3 1.3v1.5h2.7l-.4 2.6z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'LinkedIn', 
+    slug: 'linkedin', 
+    cat: 'pro', 
+    color: '#0a66c2', 
+    desc: 'B2B company pages, employee advocacy & executive articles', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0A66C2"/><path d="M7.8 17.5H5.4V9.8h2.4v7.7zM6.6 8.7c-.8 0-1.4-.6-1.4-1.4 0-.8.6-1.4 1.4-1.4.8 0 1.4.6 1.4 1.4 0 .8-.6 1.4-1.4 1.4zm11.9 8.8h-2.4v-4.1c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.4-.1.7v4.2H10.8s.03-7 0-7.7h2.4v1.1c.3-.5 1-1.3 2.3-1.3 1.7 0 2.9 1.1 2.9 3.5v4.4z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'TikTok', 
+    slug: 'tiktok', 
+    cat: 'video', 
+    color: '#00f2fe', 
+    desc: 'Direct video posting API, trending hashtags, caption customization', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M16.6 6.8c1 .8 2.2 1.2 3.4 1.2v2.5c-1.3 0-2.5-.4-3.4-1.1v6.2c0 3-2.4 5.4-5.4 5.4-3 0-5.4-2.4-5.4-5.4s2.4-5.4 5.4-5.4c.5 0 1 .1 1.5.2v2.7c-.5-.2-1-.3-1.5-.3-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8V3.5h2.6c0 1.3.7 2.5 1.8 3.3z" fill="#00F2FE"/><path d="M15.8 6c1 .8 2.2 1.2 3.4 1.2v2.5c-1.3 0-2.5-.4-3.4-1.1v6.2c0 3-2.4 5.4-5.4 5.4-3 0-5.4-2.4-5.4-5.4s2.4-5.4 5.4-5.4c.5 0 1 .1 1.5.2v2.7c-.5-.2-1-.3-1.5-.3-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8V2.7h2.6c0 1.3.7 2.5 1.8 3.3z" fill="#FE2C55" style="mix-blend-mode:screen;"/><path d="M16.2 6.4c1 .8 2.2 1.2 3.4 1.2v2.5c-1.3 0-2.5-.4-3.4-1.1v6.2c0 3-2.4 5.4-5.4 5.4-3 0-5.4-2.4-5.4-5.4s2.4-5.4 5.4-5.4c.5 0 1 .1 1.5.2v2.7c-.5-.2-1-.3-1.5-.3-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8 2.8-1.2 2.8-2.8V3.1h2.6c0 1.3.7 2.5 1.8 3.3z" fill="#fff" style="mix-blend-mode:screen;"/></svg>` 
+  },
+  { 
+    name: 'Reddit', 
+    slug: 'reddit', 
+    cat: 'community', 
+    color: '#ff4500', 
+    desc: 'Subreddit marketing, scheduled discussion threads & flair management', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#FF4500"/><path d="M18.5 12c0-.7-.6-1.3-1.3-1.3-.4 0-.7.2-.9.4-1.1-.8-2.7-1.3-4.4-1.4l.8-3.6 2.5.5c.1.6.6 1 1.2 1 .7 0 1.3-.6 1.3-1.3s-.6-1.3-1.3-1.3c-.5 0-1 .3-1.2.8l-2.8-.6c-.2 0-.3.1-.4.3l-.9 4.2c-1.8.1-3.4.6-4.5 1.4-.2-.3-.6-.5-1-.5-.7 0-1.3.6-1.3 1.3 0 .5.3.9.7 1.1-.1.3-.1.6-.1.9 0 2.5 2.8 4.5 6.3 4.5s6.3-2 6.3-4.5c0-.3 0-.6-.1-.9.5-.2.8-.6.8-1.1zm-8.8.8c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9zm4.6 3.2c-.7.7-2 .7-2.7 0-.1-.1-.1-.3 0-.4.1-.1.3-.1.4 0 .5.5 1.4.5 1.9 0 .1-.1.3-.1.4 0 .1.1.1.3 0 .4zm-.2-2.3c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Slack', 
+    slug: 'slack', 
+    cat: 'community', 
+    color: '#e01e5a', 
+    desc: 'Internal team notifications, campaign broadcast channels', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1A1D21"/><path d="M6 14.5a1.5 1.5 0 1 1-1.5-1.5H6v1.5zm.8 0a1.5 1.5 0 0 1 3 0v3.8a1.5 1.5 0 1 1-3 0v-3.8z" fill="#E01E5A"/><path d="M9.5 6a1.5 1.5 0 1 1 1.5-1.5V6H9.5zm0 .8a1.5 1.5 0 0 1 0 3H5.8a1.5 1.5 0 1 1 0-3h3.7z" fill="#36C5F0"/><path d="M18 9.5a1.5 1.5 0 1 1 1.5 1.5H18V9.5zm-.8 0a1.5 1.5 0 0 1-3 0V5.8a1.5 1.5 0 1 1 3 0v3.7z" fill="#2EB67D"/><path d="M14.5 18a1.5 1.5 0 1 1-1.5 1.5V18h1.5zm0-.8a1.5 1.5 0 0 1 0-3h3.8a1.5 1.5 0 1 1 0 3h-3.8z" fill="#ECB22E"/></svg>` 
+  },
+  { 
+    name: 'Mastodon', 
+    slug: 'mastodon', 
+    cat: 'social', 
+    color: '#6364ff', 
+    desc: 'Decentralized Fediverse microblogging across sovereign instances', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#6364FF"/><path d="M18.8 7.2c-.3-2.1-2.1-3.7-4.3-4-1.7-.2-3.5-.2-5.2 0-2.2.3-4 1.9-4.3 4C4.7 9.4 4.6 12 4.6 14.3c.1 2.6 1.3 5.1 3.5 6.1 1.7.8 3.5.7 5.2.4v-1.8c-1.7.3-3.4.3-5-.2-1-.3-1.6-1-1.7-2 1.4.3 2.8.5 4.3.5 1.4 0 2.8-.2 4.1-.5 2.4-.6 4.4-2.2 4.7-4.7.3-2.9.2-5.8-.1-8.7zm-2.8 7.8h-2V9.9c0-1.1-.5-1.7-1.4-1.7-1 0-1.5.7-1.5 2v2.9h-2V10.2c0-1.3-.5-2-1.5-2-.9 0-1.4.6-1.4 1.7V15H4.2V9.6c0-1.1.3-2 .9-2.7.6-.7 1.4-1 2.3-1 1.1 0 2 .4 2.5 1.3l.9 1.5.9-1.5c.6-.9 1.4-1.3 2.5-1.3 1 0 1.7.3 2.3 1 .6.7.9 1.6.9 2.7v5.4z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Skool', 
+    slug: 'skool', 
+    cat: 'community', 
+    color: '#f59e0b', 
+    desc: 'Private community post scheduling and educational announcements', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#18181B"/><path d="M12 4.5l-7.5 4 7.5 4 7.5-4-7.5-4zm-5.5 6.8v3.5c0 1.8 2.5 3.2 5.5 3.2s5.5-1.4 5.5-3.2v-3.5l-5.5 3-5.5-3z" fill="#F59E0B"/><path d="M19.5 9.5v5h-1v-4.5l1-.5z" fill="#F59E0B"/></svg>` 
+  },
+  { 
+    name: 'VK', 
+    slug: 'vk', 
+    cat: 'social', 
+    color: '#0077ff', 
+    desc: 'VKontakte wall posts, rich media attachments and community feeds', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0077FF"/><path d="M13.2 16.5h1.5s.5-.1.7-.3c.2-.3.2-.8.2-.8s-.1-2 .9-2.3c1-.3 2.2 1.9 3.5 2.7.9.6 1.7.5 1.7.5l3.5-.1s1.8-.1 1-.1.5-1.5-.7-2.7c-1-1-2.4-2.3-2.6-2.5-.2-.3-.2-.5 0-.7.1-.3 2.1-3 2.3-4.1.1-.6-.2-1-.9-1h-3.3c-.4 0-.6.2-.8.6-.1.1-.6 1.6-1.5 3-1.7 2.9-2.4 3.1-2.7 2.9-.6-.4-.5-1.7-.5-2.6v-4c0-.9-.3-1.3-.9-1.4-.2 0-.4 0-.7.1-.6.2-.8.5-.8.5s-.6.7-.6 1.7c0 .4 0 1 .1 1.7.1.8.2 1.3-.2 1.4-.3.1-.7-.2-1.4-1.3-1-1.6-1.7-3.4-1.8-3.6-.1-.3-.4-.5-.8-.5H5.4c-.5 0-.7.2-.7.5 0 .2.3 1.3 1.9 3.5 2.1 3 4.5 5.8 8.6 5.8z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Nostr', 
+    slug: 'nostr', 
+    cat: 'cms', 
+    color: '#8b5cf6', 
+    desc: 'Cryptographically signed decentralized notes & censorship-resistant feeds', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#8B5CF6"/><path d="M15.5 8c-.8-1.2-2-1.8-3.5-1.8s-2.7.6-3.5 1.8c-.8 1.2-.9 2.8-.2 4.1l2.7 4.9c.4.7 1.4.7 1.8 0l2.7-4.9c.9-1.3.8-2.9 0-4.1zm-3.5 4.5c-1 0-1.8-.8-1.8-1.8s.8-1.8 1.8-1.8 1.8.8 1.8 1.8-.8 1.8-1.8 1.8z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Medium', 
+    slug: 'medium', 
+    cat: 'cms', 
+    color: '#ffffff', 
+    desc: 'Long-form editorial articles, canonical SEO syndication', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><circle cx="7" cy="12" r="4.5" fill="#fff"/><ellipse cx="14.5" cy="12" rx="2.4" ry="4.5" fill="#fff"/><ellipse cx="19" cy="12" rx="0.9" ry="4.3" fill="#fff"/></svg>` 
+  }
 ];
 
 const col2Channels = [
-  { name: 'Instagram', slug: 'instagram', cat: 'social video', color: '#d800b9', desc: 'Feed photos, Carousels, and Instagram Reels scheduled automatically', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><defs><linearGradient id="ig-nav-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffd600"/><stop offset="25%" stop-color="#ff0100"/><stop offset="50%" stop-color="#d800b9"/><stop offset="100%" stop-color="#7000ff"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig-nav-grad)"/><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.6a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z" fill="#fff"/></svg>` },
-  { name: 'Bluesky', slug: 'bluesky', cat: 'social', color: '#0284c7', desc: 'AT Protocol microblogging with automated media embeds', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#0284c7"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.874-1.113 7.823-4.308.949 3.195 2.81 9.498 7.823 4.308 4.557-5.073 1.082-6.498-2.83-7.078-.139-.016-.277-.034-.415-.056.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.479 0-.689-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg>` },
-  { name: 'YouTube', slug: 'youtube', cat: 'video', color: '#ff0000', desc: 'YouTube Shorts, long-form 4K videos, automated thumbnails & SEO tags', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>` },
-  { name: 'Telegram', slug: 'telegram', cat: 'community', color: '#229ed9', desc: 'Instant broadcast channels, rich media formatting, interactive buttons', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#229ed9"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>` },
-  { name: 'Pinterest', slug: 'pinterest', cat: 'pro', color: '#bd081c', desc: 'High-res image pins, board targeting, rich outbound referral links', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#bd081c"><path d="M12 0a12 12 0 0 0-4.37 23.18c-.07-.94-.13-2.39.03-3.42l1.1-4.7s-.28-.56-.28-1.39c0-1.3.75-2.28 1.7-2.28.8 0 1.18.6 1.18 1.32 0 .8-.52 2-.78 3.11-.22.94.47 1.71 1.4 1.71 1.68 0 2.97-1.77 2.97-4.33 0-2.26-1.63-3.85-3.95-3.85-2.69 0-4.27 2.02-4.27 4.1 0 .81.31 1.68.7 2.16a.35.35 0 0 1 .08.34c-.09.37-.29 1.19-.33 1.35-.05.22-.17.27-.4.16-1.49-.69-2.42-2.87-2.42-4.62 0-3.77 2.74-7.23 7.9-7.23 4.14 0 7.36 2.95 7.36 6.9 0 4.12-2.6 7.43-6.2 7.43-1.21 0-2.35-.63-2.74-1.38l-.75 2.85c-.27 1.04-1 2.34-1.49 3.13A12 12 0 1 0 12 0z"/></svg>` },
-  { name: 'Whop', slug: 'whop', cat: 'community', color: '#ff6200', desc: 'Membership announcement updates and digital product feeds', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff6200"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>` },
-  { name: 'Kick', slug: 'kick', cat: 'video community', color: '#53fc18', desc: 'Stream announcements and community updates', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#000"/><path d="M5 4h4v6.5l5.5-6.5H19l-6.8 8 7 8h-4.7L9 13.5V20H5V4z" fill="#53fc18"/></svg>` },
-  { name: 'Lemmy', slug: 'lemmy', cat: 'community', color: '#00bc8c', desc: 'Federated Reddit-alternative community posting', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#00bc8c"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 3a7 7 0 110 14 7 7 0 010-14zm-2 3a1 1 0 00-1 1v4a1 1 0 002 0V9a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v4a1 1 0 002 0V9a1 1 0 00-1-1z"/></svg>` },
-  { name: 'Listmonk', slug: 'listmonk', cat: 'cms', color: '#0052cc', desc: 'High-speed newsletter campaign broadcasting & email lists', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#0052cc"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>` },
-  { name: 'Hashnode', slug: 'hashnode', cat: 'cms', color: '#2962ff', desc: 'Developer blog syndication with Markdown & code highlighting', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#2962ff"><path d="M22.351 8.019l-6.37-6.37a2.828 2.828 0 00-4 0l-6.37 6.37a2.828 2.828 0 000 4l6.37 6.37a2.828 2.828 0 004 0l6.37-6.37a2.828 2.828 0 000-4zm-8.351 5.981a2 2 0 110-4 2 2 0 010 4z"/></svg>` }
+  { 
+    name: 'Instagram', 
+    slug: 'instagram', 
+    cat: 'social video', 
+    color: '#d800b9', 
+    desc: 'Feed photos, Carousels, and Instagram Reels scheduled automatically', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><defs><linearGradient id="ig-grad-c2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffd600"/><stop offset="25%" stop-color="#ff0100"/><stop offset="50%" stop-color="#d800b9"/><stop offset="100%" stop-color="#7000ff"/></linearGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig-grad-c2)"/><rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="15.8" cy="8.2" r="0.9" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Bluesky', 
+    slug: 'bluesky', 
+    cat: 'social', 
+    color: '#0284c7', 
+    desc: 'AT Protocol microblogging with automated media embeds', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1185FE"/><path d="M12 11.2c-1.1-2.1-4-6.1-6.8-8-2.6-1.8-3.6-1.5-4.3-1.2C.1 2.3 0 3.5 0 4.2c0 .7.4 5.7.6 6.5.8 2.7 3.7 3.7 6.4 3.4.1 0 .3 0 .4-.1-.1 0-.3 0-.4.1-3.9.6-7.4 2-2.8 7.1 5 5.2 6.9-1.1 7.8-4.3.9 3.2 2.8 9.5 7.8 4.3 4.6-5.1 1.1-6.5-2.8-7.1-.1 0-.3 0-.4-.1.1 0 .3 0 .4.1 2.7.3 5.6-.7 6.4-3.4.2-.8.6-5.8.6-6.5 0-.7-.1-1.9-.9-2.2-.7-.3-1.7-.6-4.3 1.2-2.8 1.9-5.7 5.9-6.8 8z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'YouTube', 
+    slug: 'youtube', 
+    cat: 'video', 
+    color: '#ff0000', 
+    desc: 'YouTube Shorts, long-form 4K videos, automated thumbnails & SEO tags', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M18.8 8.2c-.2-.8-.8-1.4-1.6-1.6C15.8 6.2 12 6.2 12 6.2s-3.8 0-5.2.4c-.8.2-1.4.8-1.6 1.6-.4 1.4-.4 4.3-.4 4.3s0 2.9.4 4.3c.2.8.8 1.4 1.6 1.6 1.4.4 5.2.4 5.2.4s3.8 0 5.2-.4c.8-.2 1.4-.8 1.6-1.6.4-1.4.4-4.3.4-4.3s0-2.9-.4-4.3z" fill="#fff"/><polygon points="10.5,14.5 14.5,12.5 10.5,10.5" fill="#FF0000"/></svg>` 
+  },
+  { 
+    name: 'Telegram', 
+    slug: 'telegram', 
+    cat: 'community', 
+    color: '#229ed9', 
+    desc: 'Instant broadcast channels, rich media formatting, interactive buttons', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#24A1DE"/><path d="M5.5 11.8l11.4-4.7c.5-.2 1 .1.8.8l-2 9.5c-.1.7-.5.8-1.1.5l-3-2.2-1.5 1.4c-.2.2-.3.3-.6.3l.2-3.1 5.7-5.1c.2-.2-.1-.3-.4-.1l-7 4.4-3-1c-.6-.2-.6-.6.1-.9z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Pinterest', 
+    slug: 'pinterest', 
+    cat: 'pro', 
+    color: '#bd081c', 
+    desc: 'High-res image pins, board targeting, rich outbound referral links', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#BD081C"/><path d="M12 4.5c-4.1 0-7.5 3.4-7.5 7.5 0 3.2 2 5.9 4.9 7-.1-.6-.1-1.5.02-2.1l1.1-4.7s-.3-.6-.3-1.4c0-1.3.8-2.3 1.7-2.3.8 0 1.2.6 1.2 1.3 0 .8-.5 2-.8 3.1-.2 1 .5 1.7 1.4 1.7 1.7 0 3-1.8 3-4.4 0-2.3-1.6-3.9-4-3.9-2.7 0-4.3 2-4.3 4.1 0 .8.3 1.7.7 2.2.1.1.1.2.1.3-.1.3-.3 1.1-.3 1.3 0 .2-.1.3-.3.2-1.4-.7-2.3-2.8-2.3-4.5 0-3.7 2.7-7.1 7.8-7.1 4.1 0 7.3 2.9 7.3 6.8 0 4.1-2.6 7.3-6.1 7.3-1.2 0-2.3-.6-2.7-1.4l-.7 2.8c-.3 1-.9 2.3-1.4 3.1 1.1.3 2.2.5 3.4.5 4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Whop', 
+    slug: 'whop', 
+    cat: 'community', 
+    color: '#ff6200', 
+    desc: 'Membership announcement updates and digital product feeds', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF6200"/><path d="M12 4.5L4 8.5l8 4 8-4-8-4zm-8 7.5l8 4 8-4M4 16l8 4 8-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` 
+  },
+  { 
+    name: 'Kick', 
+    slug: 'kick', 
+    cat: 'video community', 
+    color: '#53fc18', 
+    desc: 'Stream announcements and community updates', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M6 5h3.5v5.5l4.5-5.5h4.5l-5.5 6.5 6 7.5h-4.5L9.5 13.5V19H6V5z" fill="#53FC18"/></svg>` 
+  },
+  { 
+    name: 'Lemmy', 
+    slug: 'lemmy', 
+    cat: 'community', 
+    color: '#00bc8c', 
+    desc: 'Federated Reddit-alternative community posting', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#00BC8C"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="#fff" stroke-width="2"/><rect x="10" y="9" width="1.5" height="6" rx="0.75" fill="#fff"/><rect x="12.5" y="9" width="1.5" height="6" rx="0.75" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Listmonk', 
+    slug: 'listmonk', 
+    cat: 'cms', 
+    color: '#0052cc', 
+    desc: 'High-speed newsletter campaign broadcasting & email lists', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0052CC"/><path d="M5 7h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2zm0 2l7 4.5L19 9H5zm14 8V11l-7 4.5L5 11v6h14z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Hashnode', 
+    slug: 'hashnode', 
+    cat: 'cms', 
+    color: '#2962ff', 
+    desc: 'Developer blog syndication with Markdown & code highlighting', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#2962FF"/><path d="M19.5 8.5l-5-5a2.1 2.1 0 0 0-3 0l-5 5a2.1 2.1 0 0 0 0 3l5 5a2.1 2.1 0 0 0 3 0l5-5a2.1 2.1 0 0 0 0-3zm-6.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" fill="#fff"/></svg>` 
+  }
 ];
 
 const col3Channels = [
-  { name: 'Threads', slug: 'threads', cat: 'social', color: '#ffffff', desc: 'Direct Meta Threads publishing with image attachments & text limits', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12.001 2c-5.523 0-10 4.477-10 10s4.477 10 10 10c2.58 0 4.938-.977 6.732-2.583l-1.42-1.42C15.89 19.345 14.04 20 12.001 20a8 8 0 118-8c0 .874-.15 1.713-.42 2.493l1.895.632C21.84 14.062 22 13.05 22 12c0-5.523-4.477-10-10-10zm2.7 7.7a3.5 3.5 0 00-4.95 0l-.7.7a3.5 3.5 0 000 4.95l.7.7a3.5 3.5 0 004.95 0l.7-.7a3.5 3.5 0 000-4.95l-.7-.7z"/></svg>` },
-  { name: 'X', slug: 'x', cat: 'social', color: '#ffffff', desc: 'Automated threads, media cards, poll scheduling via official API', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>` },
-  { name: 'Google Business', slug: 'google-my-business', cat: 'pro', color: '#22c55e', desc: 'Local business updates, promotional offers and event announcements', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>` },
-  { name: 'Discord', slug: 'discord', cat: 'community', color: '#5865f2', desc: 'Automated community webhook broadcasts, embed previews', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#5865f2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>` },
-  { name: 'Dribbble', slug: 'dribbble', cat: 'pro', color: '#ea4c89', desc: 'Design portfolio showcase, shot publishing with tags', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ea4c89"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm7.88 5.62a10.03 10.03 0 0 1 2.45 6.33c-.35-.07-2.74-.53-5.37.19-.07-.16-.14-.32-.21-.49a21.6 21.6 0 0 0-1.84-3.66c3.21-1.24 4.8-2.28 4.97-2.37zm-7.9 1.76c.64 1.25 1.22 2.5 1.72 3.73-3.13 1-6.72.95-7.39.95a10.04 10.04 0 0 1 5.67-4.68zm-7.6 6.32c.32 0 3.32.03 6.33-.87.23.47.45.95.66 1.44-4.8 1.46-6.63 4.28-6.78 4.52a9.97 9.97 0 0 1-.21-5.09zm2.46 6.64c.2-.28 1.83-2.6 6.43-4.14.7 1.86 1.19 3.82 1.43 4.97-2.67 1.1-5.7.83-7.86-.83zm9.64-.17c-.22-1.04-.69-2.88-1.34-4.64 2.46-.75 4.62-.27 4.97-.18a10.02 10.02 0 0 1-3.63 4.82zM17.8 13.9c-.3-.08-2.14-.5-4.43.2a19.78 19.78 0 0 1-1.63-3.55c.08-.03.16-.06.24-.09 2.92-.93 5.34.1 5.82.34z"/></svg>` },
-  { name: 'Twitch', slug: 'twitch', cat: 'video community', color: '#9146ff', desc: 'Go-live announcements and schedule integration', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#9146ff"><path d="M2.149 0L.537 4.119v16.836h5.731V24h3.224l3.045-3.045h4.657l6.269-6.269V0H2.149zm19.164 13.612l-3.582 3.582H12l-3.045 3.045v-3.045H4.119V2.149h17.194v11.463zm-3.582-7.343v6.269h-2.149V6.269h2.149zm-5.731 0v6.269H9.851V6.269h2.149z"/></svg>` },
-  { name: 'Warpcast', slug: 'warpcast', cat: 'social', color: '#472a84', desc: 'Farcaster protocol cast scheduling & decentralized frames', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#472a84"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 14h-2.5l-2.5-4-2.5 4H7l3.75-6L7 4h2.5l2.5 4 2.5-4H17l-3.75 6L17 16z"/></svg>` },
-  { name: 'MeWe', slug: 'mewe', cat: 'social', color: '#008287', desc: 'Privacy-focused social networking feeds & group posts', icon: `<svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#008287"/><path d="M5 8l4 6 3-4 3 4 4-6v8h-3v-4l-4 5-4-5v4H5V8z" fill="#fff"/></svg>` },
-  { name: 'WordPress', slug: 'wordpress', cat: 'cms', color: '#21759b', desc: 'WordPress standalone & WP.com automated blog publishing via REST API', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#21759b"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 1.2a10.8 10.8 0 1 1 0 21.6 10.8 10.8 0 0 1 0-21.6zM2.87 12c0 3.73 2.29 6.94 5.58 8.3L3.84 8.27A10.8 10.8 0 0 0 2.87 12zm15.18-.54c0-1.8-.65-3.04-1.2-4.01-.74-1.25-1.44-2.31-1.44-3.56 0-1.39 1.06-2.69 2.56-2.69.11 0 .22.01.32.03A10.74 10.74 0 0 0 12 1.2c-3.8 0-7.14 1.96-9.08 4.93l6.57 17.96 1.9-5.74-2.73-7.5c.81-.03 1.58-.1 1.58-.1.74-.07.82-1.15.08-1.15 0 0-2.22.18-3.66.18-1.37 0-3.6-.18-3.6-.18-.74 0-.66 1.08.08 1.15 0 0 .74.07 1.5.11l2.25 6.18-3.18 9.54A10.74 10.74 0 0 0 12 22.8c3.27 0 6.22-1.45 8.24-3.76l-5.69-16.5c1.9.15 3.5 1.57 3.5 4.92z"/></svg>` },
-  { name: 'Dev.to', slug: 'devto', cat: 'cms', color: '#ffffff', desc: 'Forem technical publishing with automated tags & canonical links', icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><rect width="24" height="24" rx="3" fill="#000"/><path d="M7.5 15.5h-2V8.5h2c1.7 0 2.5 1.1 2.5 3.5s-.8 3.5-2.5 3.5zm-.8-1.2h.8c1 0 1.3-.7 1.3-2.3 0-1.6-.3-2.3-1.3-2.3h-.8v4.6zm5.8 1.2h-3V8.5h3v1.2h-1.8v1.4h1.6v1.2h-1.6v1.8h1.8v1.4zm3.8 0l-1.5-7h1.3l.9 4.6.9-4.6h1.3l-1.5 7h-1.4z"/></svg>` }
+  { 
+    name: 'Threads', 
+    slug: 'threads', 
+    cat: 'social', 
+    color: '#ffffff', 
+    desc: 'Direct Meta Threads publishing with image attachments & text limits', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M12 4.5c-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5c2.4 0 4.5-1.1 5.9-2.9l-1.6-1.2c-1 1.3-2.6 2.1-4.3 2.1-3 0-5.5-2.5-5.5-5.5S9 6.5 12 6.5c2.8 0 5.1 2.1 5.4 4.8h-5.4v2h7.4c-.1 4.5-3.3 8.2-7.4 8.2-4.1 0-7.5-3.4-7.5-7.5s3.4-7.5 7.5-7.5c2.5 0 4.8 1.2 6.2 3.1l1.6-1.2C17.8 5.9 15 4.5 12 4.5z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'X', 
+    slug: 'x', 
+    cat: 'social', 
+    color: '#ffffff', 
+    desc: 'Automated threads, media cards, poll scheduling via official API', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M17.3 5.5h2.1l-4.6 5.3 5.4 7.2h-4.2l-3.3-4.3-3.8 4.3H6.8l4.9-5.6-5.2-6.9h4.3l3 4 3.5-4zm-.7 11.2h1.2L9.4 6.7H8.1l8.5 10z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Google Business', 
+    slug: 'google-my-business', 
+    cat: 'pro', 
+    color: '#22c55e', 
+    desc: 'Local business updates, promotional offers and event announcements', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#fff"/><path d="M6 18.5V11l6-4.5 6 4.5v7.5H6z" fill="#4285F4"/><path d="M6 11l6-4.5 6 4.5h-12z" fill="#1967D2"/><path d="M8 11.5v7h3v-4.5h2v4.5h3v-7L12 8.5 8 11.5z" fill="#fff"/><rect x="5.5" y="9.5" width="13" height="2.5" rx="0.5" fill="#34A853"/><path d="M5.5 12h2.5v1.5H5.5z" fill="#EA4335"/><path d="M8 12h2.5v1.5H8z" fill="#FBBC04"/><path d="M10.5 12h2.5v1.5h-2.5z" fill="#4285F4"/><path d="M13 12h2.5v1.5H13z" fill="#34A853"/><path d="M15.5 12h3v1.5h-3z" fill="#EA4335"/></svg>` 
+  },
+  { 
+    name: 'Discord', 
+    slug: 'discord', 
+    cat: 'community', 
+    color: '#5865f2', 
+    desc: 'Automated community webhook broadcasts, embed previews', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#5865F2"/><path d="M17.8 7.3c-1.1-.5-2.2-.8-3.4-1 0 0-.1.2-.2.4 1.3.4 1.9.9 2.5 1.5-1.1-.5-2.2-.8-3.4-1-.5-.1-1-.1-1.5-.1-.5 0-1 0-1.5.1-1.2.2-2.3.5-3.4 1 .6-.6 1.2-1.1 2.5-1.5-.1-.2-.2-.4-.2-.4-1.2.2-2.3.5-3.4 1C4.3 9.8 3.8 12.3 4 14.7c1.3 1 2.6 1.6 3.9 1.6.3-.4.6-.9.8-1.3-.5-.2-.9-.4-1.3-.7.1-.1.2-.1.3-.2 2.5 1.2 5.3 1.2 7.8 0 .1.1.2.1.3.2-.4.3-.8.5-1.3.7.2.4.5.9.8 1.3 1.3 0 2.6-.6 3.9-1.6.3-2.8-.5-5.3-1.4-7.4zM9.5 13.5c-.7 0-1.3-.6-1.3-1.4s.6-1.4 1.3-1.4 1.3.6 1.3 1.4-.6 1.4-1.3 1.4zm5 0c-.7 0-1.3-.6-1.3-1.4s.6-1.4 1.3-1.4 1.3.6 1.3 1.4-.6 1.4-1.3 1.4z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Dribbble', 
+    slug: 'dribbble', 
+    cat: 'pro', 
+    color: '#ea4c89', 
+    desc: 'Design portfolio showcase, shot publishing with tags', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#EA4C89"/><path d="M12 3.5a8.5 8.5 0 0 0-8.5 8.5 8.5 8.5 0 0 0 8.5 8.5 8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 12 3.5zm6.5 4.8c.8 1 1.3 2.2 1.4 3.5-1-.2-2.8-.2-4.8.4-.2-.5-.4-1-.7-1.5 2.5-1.1 3.8-2 4.1-2.4zm-5.6 1.3c.3.5.5 1 .7 1.5-2.6.8-5.3.8-5.8.8.6-1.1 2.7-2 5.1-2.3zM4.7 12c0-.3 0-.6.1-.9.6 0 3.7.1 6.6-.7.2.4.4.9.5 1.3-3.6 1.1-5.1 3.5-5.2 3.7-1.2-1-2-2.3-2-3.4zm3.1 4.9c.2-.3 1.6-2.2 5.2-3.3.6 1.5 1 3.1 1.2 4-2 .8-4.4.6-6.4-.7zm8.4.8c-.2-.8-.6-2.3-1.1-3.7 1.9-.6 3.6-.2 3.9-.1-.3 1.6-1.3 3-2.8 3.8zm1.5-4.8c-.4-.1-1.8-.4-3.6.1-1.4-1.4-2.8-2.6-3.8-3.4 2.2-.4 4.5 1.1 7.4 3.3z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Twitch', 
+    slug: 'twitch', 
+    cat: 'video community', 
+    color: '#9146ff', 
+    desc: 'Go-live announcements and schedule integration', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#9146FF"/><path d="M5 4.5L4 7v11h3.5V20.5l2.5-2.5h3l5-5V4.5H5zm11 8l-2.5 2.5h-3L8 17.5V15H6.5V6H16v6.5z" fill="#fff"/><rect x="13.5" y="8" width="1.5" height="4" fill="#9146FF"/><rect x="9.5" y="8" width="1.5" height="4" fill="#9146FF"/></svg>` 
+  },
+  { 
+    name: 'Warpcast', 
+    slug: 'warpcast', 
+    cat: 'social', 
+    color: '#472a84', 
+    desc: 'Farcaster protocol cast scheduling & decentralized frames', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#472A84"/><path d="M12 4.5c-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5c2.4 0 4.5-1.1 5.9-2.9l-1.6-1.2c-1 1.3-2.6 2.1-4.3 2.1-3 0-5.5-2.5-5.5-5.5S9 6.5 12 6.5c2.8 0 5.1 2.1 5.4 4.8h-5.4v2h7.4c-.1 4.5-3.3 8.2-7.4 8.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.5" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'MeWe', 
+    slug: 'mewe', 
+    cat: 'social', 
+    color: '#008287', 
+    desc: 'Privacy-focused social networking feeds & group posts', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#008287"/><path d="M6 8l4 6 3-4 3 4 4-6v8h-2.5v-4l-3.5 4.5-3.5-4.5v4H6V8z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'WordPress', 
+    slug: 'wordpress', 
+    cat: 'cms', 
+    color: '#21759b', 
+    desc: 'WordPress standalone & WP.com automated blog publishing via REST API', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#21759B"/><path d="M3.5 12c0 3.6 2.2 6.6 5.3 7.9L5.4 9.1C4.2 9.9 3.5 10.9 3.5 12zm14.5-.5c0-1.7-.6-2.9-1.1-3.8-.7-1.2-1.4-2.2-1.4-3.4 0-1.3 1-2.5 2.4-2.5.1 0 .2 0 .3 0C16.5 2.7 14.3 2 12 2c-3.6 0-6.8 1.9-8.7 4.7l6.3 17.2 1.8-5.5-2.6-7.2c.8 0 1.5-.1 1.5-.1.7-.1.8-1.1.1-1.1 0 0-2.1.2-3.5.2-1.3 0-3.4-.2-3.4-.2-.7 0-.6 1 .1 1.1 0 0 .7.1 1.4.1l2.2 5.9-3 9.1c3.1-.1 5.9-1.5 7.8-3.7l-5.4-15.8c1.8.1 3.3 1.5 3.3 4.7zm-5.5 2.1l-2.4 7c.8.3 1.6.4 2.4.4.7 0 1.4-.1 2.1-.3l-2.1-7.1zM20.5 12c0-1.7-.3-3.3-.9-4.8l-3.8 11.2c2.9-1.4 4.7-4.2 4.7-6.4z" fill="#fff"/></svg>` 
+  },
+  { 
+    name: 'Dev.to', 
+    slug: 'devto', 
+    cat: 'cms', 
+    color: '#ffffff', 
+    desc: 'Forem technical publishing with automated tags & canonical links', 
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M7 16h-2V8h2c1.7 0 2.5 1.1 2.5 3.5S8.7 16 7 16zm-.8-1.2h.8c1 0 1.3-.7 1.3-2.3 0-1.6-.3-2.3-1.3-2.3h-.8v4.6zm5.8 1.2h-3V8h3v1.2h-1.8v1.4h1.6v1.2h-1.6v1.8h1.8v1.4zm3.8 0l-1.5-7h1.3l.9 4.6.9-4.6h1.3l-1.5 7h-1.4z" fill="#fff"/></svg>` 
+  }
 ];
 
 const allChannels = [...col1Channels, ...col2Channels, ...col3Channels];
 
-// ============================================================================
 // 3. AI AGENTS DATA (With authentic SVGs)
 // ============================================================================
 
@@ -643,81 +973,58 @@ function renderMasterHeader(activePage = '') {
         <div class="brand-logo-wrap">
           ${postizLogoSvg}
         </div>
-        <div>
-          <div class="brand-text">Amana Flow <span class="brand-postiz">Postiz</span></div>
-          <div class="brand-sub"><span class="brand-sub-dot"></span>Unified Social Media Suite</div>
+        <div class="brand-text-wrap">
+          <div class="brand-title-row">
+            <span class="brand-name">Amana Flow</span>
+            <span class="brand-badge-postiz">POSTIZ</span>
+          </div>
+          <span class="brand-sub">Sovereign Social Media Scheduling & Multi-Agent AI</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Menu -->
-      <nav>
-        <ul class="nav-menu">
-          <!-- 1. AI Agents Mega Menu -->
+      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing) -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <!-- 1. Features -->
           <li class="nav-item">
-            <a class="nav-link ${activePage === 'agents' ? 'active' : ''}" href="/agents.html">
-              AI Agents
-              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </a>
-            <div class="dropdown-postiz" style="width: 620px;">
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Core Agents</div>
-                ${col1Agents.map(a => `<a href="/agents.html#${a.slug}" class="dropdown-item"><span class="dropdown-item-icon">${a.icon}</span> ${a.name}</a>`).join('')}
-              </div>
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Reasoning & IDE</div>
-                ${col2Agents.map(a => `<a href="/agents.html#${a.slug}" class="dropdown-item"><span class="dropdown-item-icon">${a.icon}</span> ${a.name}</a>`).join('')}
-              </div>
-              <div class="dropdown-col">
-                <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Automation & MCP</div>
-                ${col3Agents.map(a => `<a href="/agents.html#${a.slug}" class="dropdown-item"><span class="dropdown-item-icon">${a.icon}</span> ${a.name}</a>`).join('')}
-              </div>
-            </div>
+            <a href="/#features" class="nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
           </li>
 
-          <!-- 2. Documentation Hub -->
-          <li class="nav-item">
-            <a href="/docs.html" class="nav-link ${activePage === 'docs' ? 'active' : ''}">Dev Docs</a>
-          </li>
-
-          <!-- 3. Channels Mega Menu -->
+          <!-- 2. Channels Mega Menu -->
           <li class="nav-item">
             <a class="nav-link ${activePage === 'channels' ? 'active' : ''}" href="/#channels">
               Channels
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </a>
-            <div class="dropdown-postiz" style="width: 640px;">
+            <div class="dropdown-postiz" style="width: 660px;">
               <div class="dropdown-col">
                 <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Social & Video</div>
-                ${col1Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon">${c.icon}</span> ${c.name}</a>`).join('')}
+                ${col1Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
               </div>
               <div class="dropdown-col">
                 <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Community & Media</div>
-                ${col2Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon">${c.icon}</span> ${c.name}</a>`).join('')}
+                ${col2Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
               </div>
               <div class="dropdown-col">
                 <div style="font-size:11px;font-weight:700;color:var(--text-dim);padding:4px 10px;text-transform:uppercase;">Professional & CMS</div>
-                ${col3Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon">${c.icon}</span> ${c.name}</a>`).join('')}
+                ${col3Channels.map(c => `<a href="/channels/${c.slug}.html" class="dropdown-item"><span class="dropdown-item-icon" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${c.icon}</span> ${c.name}</a>`).join('')}
               </div>
             </div>
           </li>
 
-          <!-- Platform Specs -->
+          <!-- 3. Agents Studio -->
           <li class="nav-item">
-            <a href="/#architecture" class="nav-link">Platform</a>
+            <a href="/agents.html" class="nav-link ${activePage === 'agents' ? 'active' : ''}">Agents</a>
           </li>
 
           <!-- 4. Pricing & Plans -->
           <li class="nav-item">
             <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
           </li>
-
-          <!-- 5. Customer Directory -->
-          <li class="nav-item">
-                      </li>
         </ul>
       </nav>
 
-      <!-- Action Buttons with Dynamic Auth Detection -->
+      <!-- Action Buttons with Dynamic Auth Detection & All 15 Languages -->
       <div class="nav-actions">
         <!-- Theme Mode Switcher (Dark / Light / System) -->
         <div style="position:relative;display:inline-block;">
@@ -731,19 +1038,34 @@ function renderMasterHeader(activePage = '') {
           </div>
         </div>
 
-        <!-- Language Switcher (EN / বাংলা) -->
+        <!-- 15-Language Switcher (Matching Postiz Backend) -->
         <div style="position:relative;display:inline-block;">
           <button id="langToggleBtn" onclick="toggleLangDropdown(event)" class="btn-lang-toggle" title="Switch Language" style="display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;">
             <span id="langFlagIcon">🇬🇧</span> <span id="langTextLabel">EN</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div id="langDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,0.5);min-width:145px;padding:6px;z-index:99999;">
-            <div onclick="setAppLanguage('en')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇬🇧</span> English</div>
-            <div onclick="setAppLanguage('bn')" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇧🇩</span> বাংলা (BN)</div>
+          <div id="langDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 15px 40px rgba(0,0,0,0.6);min-width:210px;max-height:360px;overflow-y:auto;padding:6px;z-index:999999;">
+            <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;padding:6px 10px;letter-spacing:0.5px;">Supported Languages (15)</div>
+            <div onclick="setAppLanguage('en')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇬🇧 English</span><span style="font-size:11px;color:var(--text-dim);">EN</span></div>
+            <div onclick="setAppLanguage('bn')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇧🇩 বাংলা</span><span style="font-size:11px;color:var(--text-dim);">BN</span></div>
+            <div onclick="setAppLanguage('es')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇪🇸 Español</span><span style="font-size:11px;color:var(--text-dim);">ES</span></div>
+            <div onclick="setAppLanguage('fr')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇫🇷 Français</span><span style="font-size:11px;color:var(--text-dim);">FR</span></div>
+            <div onclick="setAppLanguage('de')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇩🇪 Deutsch</span><span style="font-size:11px;color:var(--text-dim);">DE</span></div>
+            <div onclick="setAppLanguage('it')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇮🇹 Italiano</span><span style="font-size:11px;color:var(--text-dim);">IT</span></div>
+            <div onclick="setAppLanguage('pt')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇵🇹 Português</span><span style="font-size:11px;color:var(--text-dim);">PT</span></div>
+            <div onclick="setAppLanguage('ru')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇷🇺 Русский</span><span style="font-size:11px;color:var(--text-dim);">RU</span></div>
+            <div onclick="setAppLanguage('zh')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇨🇳 中文</span><span style="font-size:11px;color:var(--text-dim);">ZH</span></div>
+            <div onclick="setAppLanguage('ja')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇯🇵 日本語</span><span style="font-size:11px;color:var(--text-dim);">JA</span></div>
+            <div onclick="setAppLanguage('ko')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇰🇷 한국어</span><span style="font-size:11px;color:var(--text-dim);">KO</span></div>
+            <div onclick="setAppLanguage('ar')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇸🇦 العربية</span><span style="font-size:11px;color:var(--text-dim);">AR</span></div>
+            <div onclick="setAppLanguage('tr')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇹🇷 Türkçe</span><span style="font-size:11px;color:var(--text-dim);">TR</span></div>
+            <div onclick="setAppLanguage('vi')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇻🇳 Tiếng Việt</span><span style="font-size:11px;color:var(--text-dim);">VI</span></div>
+            <div onclick="setAppLanguage('he')" class="lang-opt" style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);font-weight:600;"><span>🇮🇱 עברית</span><span style="font-size:11px;color:var(--text-dim);">HE</span></div>
           </div>
         </div>
 
-        <a href="/auth" class="btn btn-secondary" id="navLoginBtn" data-i18n="nav_login">Log In</a>
+        <!-- Direct Login Button (Pointing to /auth/login) -->
+        <a href="/auth/login" class="btn btn-secondary" id="navLoginBtn" data-i18n="nav_login">Log In</a>
         <a href="/launches" class="btn btn-primary" id="navDashboardBtn" style="display:none;" data-i18n="nav_dashboard">Open Dashboard &rarr;</a>
         <button class="mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -754,109 +1076,120 @@ function renderMasterHeader(activePage = '') {
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer">
-    <a href="/" class="mobile-nav-link"><span>🏠 Home Showcase</span> &rarr;</a>
-    <a href="/docs.html" class="mobile-nav-link"><span>📖 Developer Docs</span> &rarr;</a>
+    <a href="/#features" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>⚡ Features & Studio</span> &rarr;</a>
+    <a href="/#channels" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>🌐 30+ Social Channels</span> &rarr;</a>
     <a href="/agents.html" class="mobile-nav-link"><span>🤖 AI Agent Guides & MCP</span> &rarr;</a>
-    <a href="/channels/facebook.html" class="mobile-nav-link"><span>📘 Facebook & Meta Graph</span> &rarr;</a>
-    <a href="/channels/tiktok.html" class="mobile-nav-link"><span>🎵 TikTok Video API</span> &rarr;</a>
-    <a href="/channels/youtube.html" class="mobile-nav-link"><span>▶️ YouTube Shorts & Data v3</span> &rarr;</a>
-    <a href="/channels/instagram.html" class="mobile-nav-link"><span>📸 Instagram Reels & Feed</span> &rarr;</a>
-    <a href="/channels/linkedin.html" class="mobile-nav-link"><span>💼 LinkedIn Company Pages</span> &rarr;</a>
-    <a href="/#channels" class="mobile-nav-link"><span>🌐 View All 30+ Channels</span> &rarr;</a>
-    <a href="/#pricing" class="mobile-nav-link"><span>💎 Pricing & Plans</span> &rarr;</a>
-        <div style="display:flex;gap:10px;margin-top:16px;">
-      <a href="/auth" class="btn btn-secondary" id="mobileNavLogin" style="flex:1;">Log In</a>
+    <a href="/#pricing" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>💎 Pricing & Plans</span> &rarr;</a>
+    
+    <!-- Mobile Language Selector Row -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--bg-surface);border-radius:10px;margin-top:12px;border:1px solid var(--border);">
+      <span style="font-size:13px;font-weight:700;color:var(--text);">Select Language</span>
+      <select onchange="setAppLanguage(this.value)" style="background:transparent;color:var(--text);border:none;font-size:13px;font-weight:700;cursor:pointer;">
+        <option value="en">🇬🇧 English</option>
+        <option value="bn">🇧🇩 বাংলা (BN)</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+        <option value="ar">🇸🇦 العربية</option>
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="vi">🇻🇳 Tiếng Việt</option>
+        <option value="he">🇮🇱 עברית</option>
+      </select>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <a href="/auth/login" class="btn btn-secondary" id="mobileNavLogin" style="flex:1;">Log In</a>
       <a href="/launches" class="btn btn-primary" id="mobileNavDash" style="flex:1;display:none;">Dashboard</a>
     </div>
   </div>
-  `;
+`;
 }
 
 function renderMasterFooter() {
   return `
-  <!-- Master Global Footer -->
+  <!-- Master Global Navigation Footer -->
   <footer class="master-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- Brand Summary -->
-        <div>
-          <a href="/" class="brand">
-            <div class="brand-logo-wrap">
-              ${postizLogoSvg}
-            </div>
-            <div>
-              <div class="brand-text">Amana Flow <span class="brand-postiz">Postiz</span></div>
-            </div>
-          </a>
-          <p class="footer-brand-desc">
-            Enterprise-grade social media orchestration, automated publishing, and AI agent integration suite powered by dedicated high-performance cloud infrastructure.
-          </p>
-          <div class="footer-server-status">
-            <span style="width:6px;height:6px;border-radius:50%;background:#10b981;"></span>
-            VPS Node: 148.230.98.190 &bull; Temporal Active
+    <div class="container footer-grid">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <a href="/" class="brand" style="margin-bottom:14px;display:inline-flex;">
+          <div class="brand-logo-wrap">
+            ${postizLogoSvg}
           </div>
-        </div>
-
-        <!-- Channels Column -->
-        <div>
-          <div class="footer-col-title">Channels</div>
-          <ul class="footer-links">
-            <li><a href="/channels/facebook.html">Facebook Pages</a></li>
-            <li><a href="/channels/instagram.html">Instagram Reels</a></li>
-            <li><a href="/channels/tiktok.html">TikTok Video Posting</a></li>
-            <li><a href="/channels/youtube.html">YouTube & Shorts</a></li>
-            <li><a href="/channels/linkedin.html">LinkedIn B2B</a></li>
-            <li><a href="/channels/threads.html">Threads</a></li>
-            <li><a href="/channels/x.html">X (Twitter)</a></li>
-            <li><a href="/#channels">View All 30 Channels &rarr;</a></li>
-          </ul>
-        </div>
-
-        <!-- Platform & Docs Column -->
-        <div>
-          <div class="footer-col-title">Platform</div>
-          <ul class="footer-links">
-            <li><a href="/docs.html">Documentation Hub</a></li>
-            <li><a href="/agents.html">AI Agent Setup</a></li>
-            <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
-            <li><a href="/#architecture">Platform Infrastructure</a></li>
-            <li><a href="/auth">Auth Portal</a></li>
-            <li><a href="/launches">Workspace Dashboard</a></li>
-          </ul>
-        </div>
-
-        <!-- Legal & Compliance Column -->
-        <div>
-          <div class="footer-col-title">Legal & Trust</div>
-          <ul class="footer-links">
-            <li><a href="/terms.html">Terms of Service</a></li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/data-deletion.html">User Data Deletion</a></li>
-            <li><a href="/channels/tiktok.html#compliance">TikTok API Review</a></li>
-            <li><a href="/channels/facebook.html#compliance">Meta App Review</a></li>
-            <li><a href="/channels/youtube.html#compliance">Google Security</a></li>
-          </ul>
+          <div class="brand-text-wrap">
+            <span class="brand-name" style="font-size:18px;">Amana Flow</span>
+            <span class="brand-sub">Sovereign Social Automation</span>
+          </div>
+        </a>
+        <p class="footer-brand-desc">
+          Official enterprise social media management, auto-scheduling, and AI multi-agent orchestration suite for Amana Mart & sovereign brands. Hosted on private dedicated NVMe infrastructure.
+        </p>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:16px;">
+          ${amanaFlowBadge}
+          <span style="font-size:11px;color:var(--text-dim);">&bull; Temporal 1.28 Active</span>
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="footer-bottom">
-        <div>&copy; 2026 Amana Flow. All Rights Reserved. Powered by sovereign Postiz architecture.</div>
-        <div class="footer-legal-links">
-          <a href="/terms.html">Terms</a>
-          <a href="/privacy.html">Privacy</a>
-          <a href="/data-deletion.html">Data Deletion</a>
-          <a href="https://amanaflow.com" target="_blank" rel="noopener">amanaflow.com</a>
-        </div>
+      <!-- Channels Column -->
+      <div class="footer-col">
+        <div class="footer-col-title">Channels</div>
+        <ul class="footer-links">
+          <li><a href="/channels/facebook.html">Facebook Pages</a></li>
+          <li><a href="/channels/instagram.html">Instagram Reels</a></li>
+          <li><a href="/channels/tiktok.html">TikTok Video Posting</a></li>
+          <li><a href="/channels/youtube.html">YouTube & Shorts</a></li>
+          <li><a href="/channels/linkedin.html">LinkedIn B2B</a></li>
+          <li><a href="/channels/threads.html">Threads</a></li>
+          <li><a href="/channels/x.html">X (Twitter)</a></li>
+          <li><a href="/#channels">View All 30 Channels &rarr;</a></li>
+        </ul>
+      </div>
+
+      <!-- Developer & Resources Column (Housing Developer Docs & MCP) -->
+      <div class="footer-col">
+        <div class="footer-col-title">Developers & AI</div>
+        <ul class="footer-links">
+          <li><a href="/docs.html">Developer Docs & REST API</a></li>
+          <li><a href="/agents.html">AI Agents Studio</a></li>
+          <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
+          <li><a href="/#architecture">VPS Node Specs</a></li>
+          <li><a href="/auth/login">Login Portal</a></li>
+        </ul>
+      </div>
+
+      <!-- Compliance & Legal Column -->
+      <div class="footer-col">
+        <div class="footer-col-title">Trust & Security</div>
+        <ul class="footer-links">
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/data-deletion.html">User Data Deletion</a></li>
+          <li><a href="/channels/tiktok.html#compliance">TikTok API Review</a></li>
+          <li><a href="/channels/facebook.html#compliance">Meta App Review</a></li>
+          <li><a href="/channels/youtube.html#compliance">Google Security</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="container footer-bottom">
+      <div>&copy; ${new Date().getFullYear()} Amana Flow Postiz. All rights reserved. Operating under official platform partner developer policies.</div>
+      <div style="display:flex;gap:20px;align-items:center;">
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/data-deletion.html">Data Deletion</a>
+        <a href="/docs.html">API Docs</a>
       </div>
     </div>
   </footer>
-  `;
+`;
 }
-
-// ============================================================================
-// 6. BUILD INDEX.HTML (HOMEPAGE WITH AUTHENTIC CALENDAR MOCKUP)
-// ============================================================================
 
 function generateIndexHtml() {
   const indexCustomStyles = `
@@ -1493,7 +1826,7 @@ function generateIndexHtml() {
   ${renderMasterHeader('home')}
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section id="features" class="hero">
     <div class="container">
       <div class="badge-pill">
         <span class="badge-pill-dot"></span>
@@ -1527,36 +1860,40 @@ function generateIndexHtml() {
         </div>
 
         <div class="mockup-app-layout">
-          <!-- 1. Leftmost Icon Bar -->
+          <!-- 1. Leftmost Icon Bar (Interactive Switcher) -->
           <div class="app-icon-bar">
-            <div class="app-icon-item active">
+            <div class="app-icon-item active" onclick="switchMockupTab('calendar', this)" id="mockTab_calendar" title="Content Launches Calendar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               <span>Calendar</span>
             </div>
-            <div class="app-icon-item">
+            <div class="app-icon-item" onclick="switchMockupTab('agent', this)" id="mockTab_agent" title="Autonomous AI Agent & Copilot">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="4" y="10" width="16" height="12" rx="4"/></svg>
               <span>Agent</span>
             </div>
-            <div class="app-icon-item">
+            <div class="app-icon-item" onclick="switchMockupTab('analytics', this)" id="mockTab_analytics" title="Cross-Platform Analytics">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
               <span>Analytics</span>
             </div>
-            <div class="app-icon-item">
+            <div class="app-icon-item" onclick="switchMockupTab('media', this)" id="mockTab_media" title="Cloud Digital Media Hub">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               <span>Media</span>
             </div>
-            <div class="app-icon-item">
+            <div class="app-icon-item" onclick="switchMockupTab('plugs', this)" id="mockTab_plugs" title="OAuth2 Connected Channels">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
               <span>Plugs</span>
             </div>
-            <div class="app-icon-item">
+            <div class="app-icon-item" onclick="switchMockupTab('settings', this)" id="mockTab_settings" title="Workspace & Team Governance">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
               <span>Settings</span>
             </div>
           </div>
 
-          <!-- 2. Channels Panel (Real Brand Accounts) -->
-          <div class="app-channels-panel">
+          <!-- Dynamic Mockup View Panes -->
+          <div class="mockup-content-area" style="flex:1;display:flex;min-width:0;position:relative;overflow:hidden;background:#0d111a;">
+            
+            <!-- PANE 1: CALENDAR VIEW (Active Default) -->
+            <div id="mockView_calendar" class="mockup-view-pane active" style="width:100%;height:100%;">
+              <div class="app-channels-panel">
             <div class="channels-panel-header">
               <span>Channels</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1791,7 +2128,323 @@ function generateIndexHtml() {
               <div class="cal-col"></div>
             </div>
           </div>
-        </div>
+        
+            </div>
+
+            <!-- PANE 2: AI AGENT STUDIO -->
+            <div id="mockView_agent" class="mockup-view-pane" style="width:100%;height:100%;padding:22px;overflow-y:auto;flex-direction:column;gap:18px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:14px;">
+                <div>
+                  <div style="font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+                    <span>🤖 Autonomous Multi-Agent AI Studio</span>
+                    <span style="font-size:11px;background:rgba(0,163,255,0.15);color:#00a3ff;border:1px solid rgba(0,163,255,0.3);padding:2px 8px;border-radius:999px;">GPT-4o &bull; Claude &bull; Gemini</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Compose once. Agent automatically crafts tailored copy for all 30 platforms.</div>
+                </div>
+                <div style="display:flex;gap:6px;">
+                  <button style="background:rgba(0,163,255,0.2);color:#00a3ff;border:1px solid rgba(0,163,255,0.4);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;">Claude 3.5 Sonnet</button>
+                  <button style="background:rgba(255,255,255,0.05);color:var(--text-muted);border:1px solid var(--border);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;">GPT-4o</button>
+                  <button style="background:rgba(255,255,255,0.05);color:var(--text-muted);border:1px solid var(--border);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;">Gemini 2.0</button>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:20px;">
+                <!-- Left: Prompt Generator -->
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;">
+                  <div style="font-size:13px;font-weight:700;color:var(--text);">Campaign Objective / Prompt</div>
+                  <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;color:#fff;line-height:1.5;">
+                    "Amana Mart-এর আসন্ন মেগা অফার ও এক্সক্লুসিভ ফ্যাশন কালেকশনের জন্য হাই-কনভার্টিং ভাইরাল ক্যাম্পেইন তৈরি করো। Facebook, TikTok, X এবং LinkedIn-এর জন্য আলাদা উপযোগী কপি ও ট্যাগলাইন রেডি করো।"
+                  </div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <span style="font-size:11px;background:rgba(255,255,255,0.06);padding:3px 8px;border-radius:6px;color:var(--text-dim);">⚡ Viral Hook</span>
+                    <span style="font-size:11px;background:rgba(255,255,255,0.06);padding:3px 8px;border-radius:6px;color:var(--text-dim);">🎯 Conversion Focus</span>
+                    <span style="font-size:11px;background:rgba(255,255,255,0.06);padding:3px 8px;border-radius:6px;color:var(--text-dim);">🇧🇩 Culturally Authentic বাংলা</span>
+                  </div>
+                  <button style="background:linear-gradient(135deg, #00A3FF, #00FF9D);color:#0B0F19;border:none;padding:10px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;margin-top:auto;">
+                    Generate Multi-Platform Copy 🪄
+                  </button>
+                </div>
+
+                <!-- Right: Platform Adaptation Preview -->
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <!-- FB Preview -->
+                  <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#1877F2;">
+                        <circle cx="6" cy="6" r="6" fill="#1877F2"/> 📘 Facebook Page Adaptation
+                      </div>
+                      <span style="font-size:11px;color:#10b981;font-weight:700;">Ready &bull; 92% Match</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--text);line-height:1.4;">
+                      🌙 ঈদ ও উৎসবের সেরা ফ্যাশনে সাজুন আমানা মার্ট-এর সাথে! ✨ প্রিমিয়াম কোয়ালিটি পাঞ্জাবি ও লাইফস্টাইল কালেকশনে চলছে অবিশ্বাস্য ছাড়। আজই অর্ডার করুন: amanamart.com #AmanaMart #FestiveFashion
+                    </div>
+                  </div>
+
+                  <!-- X Preview -->
+                  <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#fff;">
+                        🖤 X (Twitter) Thread Post
+                      </div>
+                      <span style="font-size:11px;color:var(--text-dim);">142 / 280 chars</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--text);line-height:1.4;">
+                      🔥 Fast, sovereign, delivered in 60 mins. The new festive collection is officially live across all Dhaka hubs. Tap below to claim yours ⬇️ #DhakaDeals
+                    </div>
+                  </div>
+
+                  <!-- LinkedIn Preview -->
+                  <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                      <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#0A66C2;">
+                        💼 LinkedIn Corporate
+                      </div>
+                      <span style="font-size:11px;color:#10b981;font-weight:700;">Executive Tone</span>
+                    </div>
+                    <div style="font-size:12px;color:var(--text);line-height:1.4;">
+                      Scaling multi-channel delivery across South Asian retail: How Amana Mart achieved 99.8% on-time logistics SLA powered by automated Temporal scheduling workflows.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 3: ANALYTICS DASHBOARD -->
+            <div id="mockView_analytics" class="mockup-view-pane" style="width:100%;height:100%;padding:22px;overflow-y:auto;flex-direction:column;gap:18px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:14px;">
+                <div>
+                  <div style="font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+                    <span>📊 Cross-Platform Real-Time Analytics</span>
+                    <span style="font-size:11px;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);padding:2px 8px;border-radius:999px;">Live Sync</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Aggregated metrics across Facebook, TikTok, YouTube, Instagram & LinkedIn.</div>
+                </div>
+                <div style="font-size:12px;color:var(--text-dim);background:var(--bg-surface);padding:6px 12px;border-radius:8px;border:1px solid var(--border);">Last 30 Days</div>
+              </div>
+
+              <!-- 4 KPI Cards -->
+              <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;">
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;font-weight:700;">Total Reach</div>
+                  <div style="font-size:24px;font-weight:900;color:#fff;margin:4px 0;">2,842,910</div>
+                  <div style="font-size:11.5px;color:#10b981;font-weight:700;">↑ +28.4% vs last mo</div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;font-weight:700;">Engagements</div>
+                  <div style="font-size:24px;font-weight:900;color:#fff;margin:4px 0;">184,320</div>
+                  <div style="font-size:11.5px;color:#10b981;font-weight:700;">↑ +34.1% vs last mo</div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;font-weight:700;">Launch Success</div>
+                  <div style="font-size:24px;font-weight:900;color:#fff;margin:4px 0;">99.98%</div>
+                  <div style="font-size:11.5px;color:#10b981;font-weight:700;">0 dropped launches</div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;font-weight:700;">Active Channels</div>
+                  <div style="font-size:24px;font-weight:900;color:#fff;margin:4px 0;">30 / 30</div>
+                  <div style="font-size:11.5px;color:#00a3ff;font-weight:700;">All tokens healthy</div>
+                </div>
+              </div>
+
+              <!-- SVG Area Chart -->
+              <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                  <div style="font-size:13px;font-weight:700;color:#fff;">Weekly Audience Impression Curves</div>
+                  <div style="display:flex;gap:12px;font-size:11px;color:var(--text-dim);">
+                    <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#00A3FF;"></span> Facebook (42%)</span>
+                    <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#00FF9D;"></span> TikTok (30%)</span>
+                    <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#FF0000;"></span> YouTube (18%)</span>
+                  </div>
+                </div>
+                <svg width="100%" height="130" viewBox="0 0 600 130" preserveAspectRatio="none" style="overflow:visible;">
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#00A3FF" stop-opacity="0.35"/>
+                      <stop offset="100%" stop-color="#00A3FF" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,110 Q80,70 150,90 T300,45 T450,60 T600,20 L600,130 L0,130 Z" fill="url(#chartGrad)"/>
+                  <path d="M0,110 Q80,70 150,90 T300,45 T450,60 T600,20" fill="none" stroke="#00A3FF" stroke-width="2.5"/>
+                  <path d="M0,120 Q80,95 150,85 T300,70 T450,40 T600,35" fill="none" stroke="#00FF9D" stroke-width="2" stroke-dasharray="4 3"/>
+                </svg>
+                <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--text-dim);">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 4: MEDIA HUB -->
+            <div id="mockView_media" class="mockup-view-pane" style="width:100%;height:100%;padding:22px;overflow-y:auto;flex-direction:column;gap:18px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:14px;">
+                <div>
+                  <div style="font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+                    <span>🎨 Cloud Media Library & Polotno Studio</span>
+                    <span style="font-size:11px;background:rgba(124,58,237,0.15);color:#a78bfa;border:1px solid rgba(124,58,237,0.3);padding:2px 8px;border-radius:999px;">100 GB NVMe Storage</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Centralized image and video assets with automatic 1:1, 9:16 and 16:9 transcoding.</div>
+                </div>
+                <button style="background:var(--primary);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Upload Media &uarr;</button>
+              </div>
+
+              <!-- Storage Bar -->
+              <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text);margin-bottom:6px;">
+                  <span>Dedicated NVMe Storage Allocation</span>
+                  <span style="color:#00a3ff;font-weight:700;">18.4 GB / 100 GB (18.4%)</span>
+                </div>
+                <div style="width:100%;height:6px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden;">
+                  <div style="width:18.4%;height:100%;background:linear-gradient(90deg, #00A3FF, #00FF9D);"></div>
+                </div>
+              </div>
+
+              <!-- Media Cards Grid -->
+              <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:14px;">
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+                  <div style="height:100px;background:linear-gradient(135deg, #1e293b, #0f172a);display:flex;align-items:center;justify-content:center;color:#00a3ff;font-size:28px;">🎬</div>
+                  <div style="padding:10px;">
+                    <div style="font-size:12px;font-weight:700;color:#fff;">Eid_Promo_Reel.mp4</div>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">9:16 &bull; 4K 60fps &bull; 24.8MB</div>
+                  </div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+                  <div style="height:100px;background:linear-gradient(135deg, #334155, #1e293b);display:flex;align-items:center;justify-content:center;color:#00ff9d;font-size:28px;">🖼️</div>
+                  <div style="padding:10px;">
+                    <div style="font-size:12px;font-weight:700;color:#fff;">Panjabi_Banner_1200x630.png</div>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">1.91:1 &bull; PNG &bull; 3.2MB</div>
+                  </div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+                  <div style="height:100px;background:linear-gradient(135deg, #1e1b4b, #312e81);display:flex;align-items:center;justify-content:center;color:#a78bfa;font-size:28px;">📱</div>
+                  <div style="padding:10px;">
+                    <div style="font-size:12px;font-weight:700;color:#fff;">Square_Offer_1080x1080.webp</div>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">1:1 &bull; WebP &bull; 180KB</div>
+                  </div>
+                </div>
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+                  <div style="height:100px;background:linear-gradient(135deg, #3b0764, #581c87);display:flex;align-items:center;justify-content:center;color:#ec4899;font-size:28px;">▶️</div>
+                  <div style="padding:10px;">
+                    <div style="font-size:12px;font-weight:700;color:#fff;">YouTube_Short_Cover.jpg</div>
+                    <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Vertical &bull; JPG &bull; 420KB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 5: PLUGS / CHANNELS HEALTH -->
+            <div id="mockView_plugs" class="mockup-view-pane" style="width:100%;height:100%;padding:22px;overflow-y:auto;flex-direction:column;gap:18px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:14px;">
+                <div>
+                  <div style="font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+                    <span>⚡ OAuth2 Connected Platform Gateways</span>
+                    <span style="font-size:11px;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);padding:2px 8px;border-radius:999px;">Zero-Expiry Active</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Continuous token health monitor and automatic background token rotation.</div>
+                </div>
+                <button style="background:var(--bg-surface);color:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;">+ Connect Channel</button>
+              </div>
+
+              <!-- Integration Cards -->
+              <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:14px;">
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">Meta Graph API v21.0</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Facebook Pages & Instagram Professional</div>
+                  <div style="font-size:11px;color:#00a3ff;">Auto-refreshed via Temporal 2h ago</div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">TikTok Commercial API</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Direct Video Posting & Sound Library</div>
+                  <div style="font-size:11px;color:#00a3ff;">Quota: 1,000 daily uploads allowed</div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">YouTube Data API v3</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Shorts & Video Syndication</div>
+                  <div style="font-size:11px;color:#00a3ff;">Verified Partner Token Active</div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">LinkedIn B2B Company</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Organization Page & Article Publishing</div>
+                  <div style="font-size:11px;color:#00a3ff;">Full Admin Access Token</div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">X (Twitter) Developer v2</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Automated Threads & Polls</div>
+                  <div style="font-size:11px;color:#00a3ff;">OAuth 2.0 PKCE Active</div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-weight:700;font-size:14px;color:#fff;">Telegram Bot Broadcast</span>
+                    <span style="color:#10b981;font-size:12px;font-weight:700;">● Online</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-dim);margin:6px 0;">Instant Push to Channel Subscribers</div>
+                  <div style="font-size:11px;color:#00a3ff;">Sub-second delivery latency</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 6: SETTINGS & GOVERNANCE -->
+            <div id="mockView_settings" class="mockup-view-pane" style="width:100%;height:100%;padding:22px;overflow-y:auto;flex-direction:column;gap:18px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:14px;">
+                <div>
+                  <div style="font-size:17px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;">
+                    <span>⚙️ Organization & Team Settings</span>
+                    <span style="font-size:11px;background:rgba(255,255,255,0.08);color:#fff;padding:2px 8px;border-radius:999px;">Amana Mart HQ</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Role-based access control, billing configuration, and Postiz MCP API endpoints.</div>
+                </div>
+                <a href="/settings" class="btn btn-secondary" style="padding:6px 14px;font-size:12px;">Open Full Settings &rarr;</a>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;">Team Collaborators (3 Active)</div>
+                  <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span>Mahmudul Hassan</span>
+                      <span style="background:rgba(0,163,255,0.15);color:#00a3ff;padding:2px 6px;border-radius:4px;font-weight:700;">Owner</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span>Social Content Lead</span>
+                      <span style="background:rgba(16,185,129,0.15);color:#10b981;padding:2px 6px;border-radius:4px;font-weight:700;">Admin</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <span>Marketing Copywriter</span>
+                      <span style="background:rgba(255,255,255,0.06);color:var(--text-dim);padding:2px 6px;border-radius:4px;">Editor</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:14px;">
+                  <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;">PipraPay Active Subscription</div>
+                  <div style="font-size:12px;color:var(--text);line-height:1.6;">
+                    Plan: <strong style="color:#00FF9D;">Pro Creator Tier</strong> (All 30 Channels)<br/>
+                    Payment Gateway: <strong>PipraPay (bKash / Nagad / Visa)</strong><br/>
+                    Status: <span style="color:#10b981;font-weight:700;">Active &bull; Renews in 28 Days</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div></div>
       </div>
     </div>
   </section>
@@ -1805,26 +2458,32 @@ function generateIndexHtml() {
       </p>
 
       <div class="filter-tabs">
-        <button class="filter-btn active">All 30 Channels</button>
-        <button class="filter-btn">Social Networks</button>
-        <button class="filter-btn">Video & Shorts</button>
-        <button class="filter-btn">Business & Pro</button>
-        <button class="filter-btn">Communities</button>
-        <button class="filter-btn">Publishing & CMS</button>
+        <button type="button" class="filter-btn active" onclick="filterChannels('all', this)">All 30 Channels</button>
+        <button type="button" class="filter-btn" onclick="filterChannels('social', this)">Social Networks</button>
+        <button type="button" class="filter-btn" onclick="filterChannels('video', this)">Video & Shorts</button>
+        <button type="button" class="filter-btn" onclick="filterChannels('pro', this)">Professional & CMS</button>
+        <button type="button" class="filter-btn" onclick="filterChannels('community', this)">Communities</button>
       </div>
 
       <div class="channels-grid">
         ${allChannels.map(c => `
-          <div class="channel-card" style="cursor:pointer;" onclick="openChannelModal('${c.slug}')" title="Click to view ${c.name} specs & options">
-            <div class="channel-card-left">
-              <div class="channel-card-icon">${c.icon}</div>
-              <div>
-                <div class="channel-card-name">${c.name}</div>
-                <div class="channel-card-desc">${c.desc}</div>
+          <div class="channel-card" data-cat="${c.cat}" style="cursor:pointer;" onclick="openChannelModal('${c.slug}')" title="Click to view ${c.name} integration details">
+            <div class="channel-card-left" style="min-width:0;flex:1;">
+              <div class="channel-card-icon" style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                ${c.icon}
+              </div>
+              <div style="min-width:0;flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+                  <span class="channel-card-name" style="font-size:15px;font-weight:700;color:#fff;">${c.name}</span>
+                  <span class="channel-cat-pill">${c.cat.split(' ')[0]}</span>
+                </div>
+                <div class="channel-card-desc" style="font-size:12px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                  ${c.desc}
+                </div>
               </div>
             </div>
-            <div class="channel-quick-btn" style="color:#a78bfa;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;">
-              Details &rarr;
+            <div class="channel-card-arrow">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
         `).join('')}
@@ -1832,7 +2491,6 @@ function generateIndexHtml() {
     </div>
   </section>
 
-  <!-- Architecture & Specifications -->
   <section id="architecture" class="section-arch">
     <div class="container">
       <h2 class="section-title">Engineered for Sovereign Performance</h2>
@@ -1870,38 +2528,61 @@ function generateIndexHtml() {
   <!-- ========================================================================= -->
   <!-- ðŸ’Ž OPEN DESIGN PRICING & PIPRAPAY AUTOMATED BILLING SECTION -->
   <!-- ========================================================================= -->
-  <section id="pricing" class="section-pricing" style="padding:100px 0;background:radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 60%);border-top:1px solid var(--border);">
+  <section id="pricing" class="section-pricing" style="padding:100px 0;background:radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.08) 0%, transparent 70%);">
     <div class="container">
-      <div style="text-align:center;max-width:760px;margin:0 auto 48px;">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124, 58, 237, 0.15);border:1px solid rgba(124, 58, 237, 0.4);padding:6px 18px;border-radius:999px;font-size:12.5px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">
-          <span>âš¡ Transparent & Sovereign Pricing</span>
+      <div style="text-align:center;max-width:760px;margin:0 auto 36px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0, 163, 255, 0.1);border:1px solid rgba(0, 163, 255, 0.3);padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;color:#00a3ff;margin-bottom:16px;">
+          <span>⚡ Transparent & Sovereign Pricing</span>
         </div>
-        <h2 style="font-family:var(--font-heading);font-size:clamp(32px, 4vw, 46px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;" data-i18n="pricing_title">
+        <h2 style="font-family:var(--font-heading);font-size:clamp(30px, 3.8vw, 44px);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:12px;">
           Simple, Predictable Plans for Brands & Creators
         </h2>
-        <p style="color:var(--text-muted);font-size:16px;line-height:1.65;" data-i18n="pricing_sub">
-          No per-seat penalties. Unlock enterprise multi-agent automation with instant local payments via <strong>PipraPay (bKash, Nagad, Rocket)</strong> and international cards.
+        <p style="color:var(--text-muted);font-size:15px;line-height:1.6;" data-i18n="pricing_desc">
+          No per-seat penalties. Unlock enterprise multi-agent automation with instant local & global checkout.
         </p>
 
-        <!-- Top 5 Currency Selector (BDT, USD, EUR, GBP, INR) -->
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:24px;flex-wrap:wrap;gap:12px;">
-          <span style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;" data-i18n="select_currency">Currency:</span>
-          <div style="display:inline-flex;align-items:center;background:var(--bg-surface);border:1px solid var(--border);border-radius:999px;padding:4px;gap:4px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
-            <button type="button" onclick="changePricingCurrency('BDT')" id="curBtn_BDT" class="btn-cur active">🇧🇩 BDT (&#2547;)</button>
-            <button type="button" onclick="changePricingCurrency('USD')" id="curBtn_USD" class="btn-cur">🇺🇸 USD ($)</button>
-            <button type="button" onclick="changePricingCurrency('EUR')" id="curBtn_EUR" class="btn-cur">🇪🇺 EUR (€)</button>
-            <button type="button" onclick="changePricingCurrency('GBP')" id="curBtn_GBP" class="btn-cur">🇬🇧 GBP (£)</button>
-            <button type="button" onclick="changePricingCurrency('INR')" id="curBtn_INR" class="btn-cur">🇮🇳 INR (₹)</button>
+        <!-- Centered Unified Controls: Billing Cycle + Currency Dropdown (ONLY BDT, USD, EUR) -->
+        <div class="pricing-controls-wrapper">
+          <!-- Billing Cycle Pill -->
+          <div class="billing-pill">
+            <button type="button" id="billingMonthlyBtn" onclick="setBillingCycle('monthly')" class="billing-btn active">Monthly</button>
+            <button type="button" id="billingYearlyBtn" onclick="setBillingCycle('yearly')" class="billing-btn">
+              <span>Yearly</span>
+              <span class="save-badge">SAVE 20%</span>
+            </button>
           </div>
-        </div>
 
-        <!-- Billing Switcher (Open Design Pill) -->
-        <div style="display:inline-flex;align-items:center;gap:12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:999px;padding:6px 8px;margin-top:24px;">
-          <button id="billingMonthlyBtn" onclick="setBillingCycle('monthly')" style="background:var(--primary);color:#fff;border:none;padding:8px 22px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;">Monthly</button>
-          <button id="billingYearlyBtn" onclick="setBillingCycle('yearly')" style="background:transparent;color:var(--text-muted);border:none;padding:8px 22px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px;">
-            <span>Yearly</span>
-            <span style="background:rgba(16, 185, 129, 0.2);color:#10b981;border:1px solid rgba(16, 185, 129, 0.4);border-radius:999px;padding:2px 8px;font-size:11px;font-weight:800;">SAVE 20%</span>
-          </button>
+          <!-- Currency Selector Dropdown (Strictly BDT, USD, EUR) -->
+          <div style="position:relative;display:inline-block;">
+            <button type="button" id="currencyDropdownBtn" onclick="toggleCurrencyDropdown(event)" style="display:flex;align-items:center;gap:8px;padding:9px 18px;background:var(--bg-surface);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:13.5px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+              <span id="curFlag">🇧🇩</span>
+              <span id="curLabel">BDT (৳)</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div id="currencyDropdownMenu" style="display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,0.6);min-width:185px;padding:6px;z-index:99999;">
+              <div onclick="selectCurrency('BDT')" class="cur-dropdown-item active" id="curOpt_BDT">
+                <span style="font-size:18px;">🇧🇩</span>
+                <div style="flex:1;text-align:left;">
+                  <div style="font-weight:700;font-size:13px;color:#fff;">BDT (৳)</div>
+                  <div style="font-size:11px;color:var(--text-dim);">Bangladeshi Taka</div>
+                </div>
+              </div>
+              <div onclick="selectCurrency('USD')" class="cur-dropdown-item" id="curOpt_USD">
+                <span style="font-size:18px;">🇺🇸</span>
+                <div style="flex:1;text-align:left;">
+                  <div style="font-weight:700;font-size:13px;color:#fff;">USD ($)</div>
+                  <div style="font-size:11px;color:var(--text-dim);">US Dollar</div>
+                </div>
+              </div>
+              <div onclick="selectCurrency('EUR')" class="cur-dropdown-item" id="curOpt_EUR">
+                <span style="font-size:18px;">🇪🇺</span>
+                <div style="flex:1;text-align:left;">
+                  <div style="font-weight:700;font-size:13px;color:#fff;">EUR (€)</div>
+                  <div style="font-size:11px;color:var(--text-dim);">Euro</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1914,16 +2595,16 @@ function generateIndexHtml() {
             <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Starter Suite</div>
             <p style="color:var(--text-dim);font-size:13.5px;min-height:38px;">Ideal for personal creators and single brand operations.</p>
             <div style="margin:24px 0 28px;">
-              <span style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;0</span>
+              <span id="priceStarter" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">৳0</span>
               <span style="color:var(--text-dim);font-size:14px;"> / forever free</span>
             </div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text-muted);">
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Connect up to 3 Social Accounts</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> 30 Scheduled Posts per Month</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Core Calendar Drag-and-Drop</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Basic Media Uploader (Images/Videos)</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:var(--text-dim);">âœ–</span> <span style="color:var(--text-dim);text-decoration:line-through;">AI Multi-Agent Generation</span></li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:var(--text-dim);">âœ–</span> <span style="color:var(--text-dim);text-decoration:line-through;">PipraPay Automated Billing</span></li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Connect up to 3 Social Accounts</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 30 Scheduled Posts per Month</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Core Calendar Drag-and-Drop</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Basic Media Uploader (Images/Videos)</li>
+              <li style="display:flex;align-items:center;gap:10px;color:var(--text-dim);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span style="text-decoration:line-through;">AI Multi-Agent Generation</span></li>
+              <li style="display:flex;align-items:center;gap:10px;color:var(--text-dim);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span style="text-decoration:line-through;">PipraPay Automated Billing</span></li>
             </ul>
           </div>
           <a href="/auth" class="btn btn-secondary" style="width:100%;text-align:center;padding:14px;font-weight:700;">Get Started Free &rarr;</a>
@@ -1931,27 +2612,28 @@ function generateIndexHtml() {
 
         <!-- Tier 2: Pro Creator (Highlighted) -->
         <div style="background:linear-gradient(180deg, rgba(28, 20, 52, 0.9) 0%, rgba(18, 15, 32, 0.95) 100%);border:2px solid #8b5cf6;border-radius:var(--radius-lg);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;position:relative;box-shadow:0 20px 40px -10px rgba(124, 58, 237, 0.35);transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-          <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg, #8b5cf6, #ec4899);color:#fff;border-radius:999px;padding:4px 16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;">
+          <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg, #00A3FF, #00FF9D);color:#0B0F19;border-radius:999px;padding:4px 16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;">
             MOST POPULAR
           </div>
           <div>
             <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Pro Creator</div>
             <p style="color:var(--text-muted);font-size:13.5px;min-height:38px;">For active e-commerce brands, agencies & content teams.</p>
             <div style="margin:24px 0 28px;">
-              <span id="pricePro" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;1,499</span>
+              <span id="pricePro" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">৳1,499</span>
               <span id="cyclePro" style="color:var(--text-dim);font-size:14px;"> / month</span>
+              <div id="billedPro" style="font-size:11.5px;color:#10b981;font-weight:700;margin-top:4px;">Billed monthly via PipraPay</div>
             </div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text);">
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Unlimited Social Accounts</strong> (All 30 Channels)</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Unlimited Scheduled Launches</strong> via Temporal</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Multi-Agent AI Studio</strong> (GPT-4o, Claude, Gemini)</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Full Postiz MCP Server API Connectivity</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Up to 5 Dedicated Workspace Collaborators</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>Instant PipraPay Checkout</strong> (bKash/Nagad/Rocket)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Social Accounts</strong> (All 30 Channels)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Scheduled Launches</strong> via Temporal</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Multi-Agent AI Studio</strong> (GPT-4o, Claude, Gemini)</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full Postiz MCP Server API Connectivity</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 5 Dedicated Workspace Collaborators</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Instant Checkout</strong> (bKash/Nagad/Cards)</li>
             </ul>
           </div>
           <button onclick="openPipraPayModal('pro')" class="btn btn-primary" style="width:100%;text-align:center;padding:14px;font-weight:800;font-size:15px;cursor:pointer;">
-            Subscribe with bKash / Nagad &rarr;
+            Subscribe with bKash / Nagad / Cards &rarr;
           </button>
         </div>
 
@@ -1959,53 +2641,30 @@ function generateIndexHtml() {
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 30px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
           <div>
             <div style="font-size:18px;font-weight:800;color:#fff;font-family:var(--font-heading);margin-bottom:6px;">Agency & Super-App</div>
-            <p style="color:var(--text-dim);font-size:13.5px;min-height:38px;">White-labeled corporate solution for unlimited organizations.</p>
+            <p style="color:var(--text-dim);font-size:13.5px;min-height:38px;">Complete multi-tenant isolation, whitelabeling & custom nodes.</p>
             <div style="margin:24px 0 28px;">
-              <span id="priceEnt" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">&#2547;4,499</span>
-              <span id="cycleEnt" style="color:var(--text-dim);font-size:14px;"> / month</span>
+              <span id="priceEnterprise" style="font-size:42px;font-weight:900;color:#fff;font-family:var(--font-heading);">৳4,499</span>
+              <span id="cycleEnterprise" style="color:var(--text-dim);font-size:14px;"> / month</span>
+              <div id="billedEnterprise" style="font-size:11.5px;color:#10b981;font-weight:700;margin-top:4px;">Billed monthly via PipraPay</div>
             </div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:13px;padding:0;margin-bottom:32px;font-size:14px;color:var(--text-muted);">
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> <strong>100% Full White-Labeling</strong> (Custom Domain & Logo)</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Unlimited Client Workspaces & Sub-teams</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Dedicated NVMe VPS Priority Isolation</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Automated Local Webhooks & Custom Gateway</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> 24/7 Dedicated Technical & WhatsApp Support</li>
-              <li style="display:flex;align-items:center;gap:10px;"><span style="color:#10b981;">âœ”</span> Multi-Year Data Storage & Automated Backups</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dedicated VPS Node & Isolated Database</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Workspaces & Team Members</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Custom CNAME & Fully Whitelabeled Domain</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Direct PostgreSQL 17 Database Read Access</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Automated Hourly Offsite S3 Backups</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Priority WhatsApp & Dedicated Engineer</li>
             </ul>
           </div>
-          <button onclick="openPipraPayModal('enterprise')" class="btn btn-secondary" style="width:100%;text-align:center;padding:14px;font-weight:700;cursor:pointer;">
-            Get Enterprise Access &rarr;
+          <button onclick="openPipraPayModal('enterprise')" class="btn btn-secondary" style="width:100%;text-align:center;padding:14px;font-weight:700;">
+            Launch Enterprise Suite &rarr;
           </button>
         </div>
 
       </div>
-
-      <!-- PipraPay Payment Method Trust Banner -->
-      <div style="background:rgba(18, 22, 34, 0.85);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
-        <div style="display:flex;align-items:center;gap:16px;">
-          <div style="background:#fff;border-radius:10px;padding:6px 12px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-weight:900;font-size:16px;color:#0b0f19;letter-spacing:-0.5px;">ðŸœ PipraPay</span>
-          </div>
-          <div>
-            <div style="font-size:14.5px;font-weight:700;color:#fff;">Automated Payment Gateway Powered by PipraPay</div>
-            <div style="font-size:12.5px;color:var(--text-dim);">Instant automated verification for bKash, Nagad, Rocket, Upay & Credit Cards</div>
-          </div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-          <span style="background:#e2136e;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">bKash à¦¬à¦¿à¦•à¦¾à¦¶</span>
-          <span style="background:#f7941d;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Nagad à¦¨à¦—à¦¦</span>
-          <span style="background:#8c3494;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Rocket à¦°à¦•à§‡à¦Ÿ</span>
-          <span style="background:#025492;color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:6px;">Upay à¦‰à¦ªà¦¾à§Ÿ</span>
-          <span style="background:#1e293b;color:#fff;font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:6px;border:1px solid var(--border);">Visa / Master</span>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ========================================================================= -->
-  <!-- ðŸ” INTERACTIVE CHANNEL INTELLIGENCE MODAL -->
-  <!-- ========================================================================= -->
   <div id="channelModalBackdrop" style="display:none;position:fixed;inset:0;background:rgba(5, 7, 12, 0.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
     <div style="background:#0e111a;border:1px solid rgba(255,255,255,0.12);border-radius:20px;max-width:560px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.8);overflow:hidden;position:relative;" onclick="event.stopPropagation()">
       <div style="padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
@@ -2112,31 +2771,68 @@ function generateIndexHtml() {
 
   <!-- Client-side script for Billing, Modals, and Auth sync -->
   <script>
-    const CHANNELS_MAP = ${JSON.stringify(allChannels.reduce((acc, c) => {
-      acc[c.slug] = { name: c.name, desc: c.desc, icon: c.icon, slug: c.slug };
+    // Channel Specs Data Store
+    const channelSpecsData = ${JSON.stringify(allChannels.reduce((acc, c) => {
+      acc[c.slug] = {
+        name: c.name,
+        slug: c.slug,
+        category: c.cat,
+        color: c.color,
+        desc: c.desc
+      };
       return acc;
     }, {}))};
 
+    // 1. Channel Details Modal
     function openChannelModal(slug) {
-      const data = CHANNELS_MAP[slug];
+      const data = channelSpecsData[slug];
       if (!data) return;
-      document.getElementById('cmName').textContent = data.name;
+      document.getElementById('cmTitle').textContent = data.name + ' Integration Specs';
+      document.getElementById('cmCat').textContent = data.category.toUpperCase();
       document.getElementById('cmDesc').textContent = data.desc;
-      document.getElementById('cmIcon').innerHTML = data.icon;
       document.getElementById('cmDocsLink').href = '/channels/' + data.slug + '.html';
-      const modal = document.getElementById('channelModalBackdrop');
-      modal.style.display = 'flex';
+      document.getElementById('channelModalBackdrop').style.display = 'flex';
     }
 
     function closeChannelModal() {
       document.getElementById('channelModalBackdrop').style.display = 'none';
     }
 
-    // =========================================================================
-    // 🎨 THEME, LANGUAGE & MULTI-CURRENCY ENGINE
-    // =========================================================================
+    // 2. Mockup Interactive Tab Switcher (Calendar, Agent, Analytics, Media, Plugs, Settings)
+    function switchMockupTab(tabId, el) {
+      document.querySelectorAll('.app-icon-item').forEach(item => item.classList.remove('active'));
+      if (el) el.classList.add('active');
+      const targetBtn = document.getElementById('mockTab_' + tabId);
+      if (targetBtn) targetBtn.classList.add('active');
 
-    // 1. Theme Management (Dark / Light / System)
+      document.querySelectorAll('.mockup-view-pane').forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none';
+      });
+
+      const activePane = document.getElementById('mockView_' + tabId);
+      if (activePane) {
+        activePane.classList.add('active');
+        activePane.style.display = 'flex';
+      }
+    }
+
+    // 3. Channels Category Filter
+    function filterChannels(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.querySelectorAll('.channel-card').forEach(card => {
+        const cardCat = card.getAttribute('data-cat') || '';
+        if (cat === 'all' || cardCat.includes(cat)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 4. Theme Mode Switcher
     function toggleThemeDropdown(e) {
       if (e) e.stopPropagation();
       const menu = document.getElementById('themeDropdownMenu');
@@ -2155,46 +2851,53 @@ function generateIndexHtml() {
     function applyTheme(theme) {
       const root = document.documentElement;
       const icon = document.getElementById('themeModeIcon');
-      if (theme === 'system') {
+      if (theme === 'light') {
+        root.setAttribute('data-theme', 'light');
+        if (icon) icon.textContent = '☀️';
+      } else if (theme === 'system') {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         root.setAttribute('data-theme', isDark ? 'dark' : 'light');
         if (icon) icon.textContent = '💻';
       } else {
-        root.setAttribute('data-theme', theme);
-        if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+        root.setAttribute('data-theme', 'dark');
+        if (icon) icon.textContent = '🌙';
       }
     }
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (localStorage.getItem('site_theme') === 'system') {
-        applyTheme('system');
-      }
-    });
-
-    // 2. Language Management (EN / বাংলা)
+    // 5. 15-Language Localization (Setting i18next cookie for Postiz compatibility)
     const siteTranslations = {
       en: {
         nav_login: 'Log In',
         nav_dashboard: 'Open Dashboard →',
-        brand_sub: 'Enterprise Unified Suite',
-        pricing_title: 'Simple, Predictable Plans for Brands & Creators',
-        pricing_sub: 'No per-seat penalties. Unlock enterprise multi-agent automation with instant local payments via PipraPay (bKash, Nagad, Rocket) and international cards.',
-        select_currency: 'Currency:',
-        starter_billed: 'Free forever • No credit card required',
-        subscribe_pro: 'Subscribe with PipraPay →',
-        subscribe_ent: 'Get Enterprise Access →'
+        pricing_desc: 'No per-seat penalties. Unlock enterprise multi-agent automation with instant local & global checkout.',
+        subscribe_pro: 'Subscribe with bKash / Nagad / Cards →',
+        subscribe_ent: 'Launch Enterprise Suite →'
       },
       bn: {
-        nav_login: 'লগইন',
+        nav_login: 'লগ ইন করুন',
         nav_dashboard: 'ড্যাশবোর্ড খুলুন →',
-        brand_sub: 'এন্টারপ্রাইজ সেলফ-হোস্টেড স্যুইট',
-        pricing_title: 'ব্র্যান্ড ও ক্রিয়েটরদের জন্য লাভজনক ও ফ্লেক্সিবল প্ল্যান',
-        pricing_sub: 'কোনো হিডেন ফি নেই। সেলফ-হোস্টেড চালান অথবা পিপড়াপে (বিকাশ, নগদ, রকেট) এবং আন্তর্জাতিক কার্ড দিয়ে অটোমেটেড এআই এজেন্ট সাবস্ক্রিপশন নিন।',
-        select_currency: 'কারেন্সি:',
-        starter_billed: 'চিরতরে সম্পূর্ণ ফ্রি • কোনো কার্ড লাগবে না',
-        subscribe_pro: 'পিপড়াপে দিয়ে সাবস্ক্রাইব করুন →',
+        pricing_desc: 'কোন সিট লিমিট নেই। বিকাশ, নগদ ও কার্ড দিয়ে তাৎক্ষণিক সাবস্ক্রিপশন নিয়ে মাল্টি-এজেন্ট সোশ্যাল অটোমেশন চালু করুন।',
+        subscribe_pro: 'বিকাশ / নগদ দিয়ে সাবস্ক্রাইব করুন →',
         subscribe_ent: 'এন্টারপ্রাইজ সাবস্ক্রিপশন নিন →'
       }
+    };
+
+    const langMeta = {
+      en: { flag: '🇬🇧', label: 'EN' },
+      bn: { flag: '🇧🇩', label: 'BN' },
+      es: { flag: '🇪🇸', label: 'ES' },
+      fr: { flag: '🇫🇷', label: 'FR' },
+      de: { flag: '🇩🇪', label: 'DE' },
+      it: { flag: '🇮🇹', label: 'IT' },
+      pt: { flag: '🇵🇹', label: 'PT' },
+      ru: { flag: '🇷🇺', label: 'RU' },
+      zh: { flag: '🇨🇳', label: 'ZH' },
+      ja: { flag: '🇯🇵', label: 'JA' },
+      ko: { flag: '🇰🇷', label: 'KO' },
+      ar: { flag: '🇸🇦', label: 'AR' },
+      tr: { flag: '🇹🇷', label: 'TR' },
+      vi: { flag: '🇻🇳', label: 'VI' },
+      he: { flag: '🇮🇱', label: 'HE' }
     };
 
     function toggleLangDropdown(e) {
@@ -2203,20 +2906,24 @@ function generateIndexHtml() {
       if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
       const themeMenu = document.getElementById('themeDropdownMenu');
       if (themeMenu) themeMenu.style.display = 'none';
+      const curMenu = document.getElementById('currencyDropdownMenu');
+      if (curMenu) curMenu.style.display = 'none';
     }
 
     function setAppLanguage(lang) {
       localStorage.setItem('site_lang', lang);
+      document.cookie = 'i18next=' + lang + '; path=/; max-age=31536000; SameSite=Lax';
       applyLanguage(lang);
       const menu = document.getElementById('langDropdownMenu');
       if (menu) menu.style.display = 'none';
     }
 
     function applyLanguage(lang) {
+      const meta = langMeta[lang] || langMeta.en;
       const flag = document.getElementById('langFlagIcon');
       const label = document.getElementById('langTextLabel');
-      if (flag) flag.textContent = lang === 'bn' ? '🇧🇩' : '🇬🇧';
-      if (label) label.textContent = lang === 'bn' ? 'BN' : 'EN';
+      if (flag) flag.textContent = meta.flag;
+      if (label) label.textContent = meta.label;
 
       const dict = siteTranslations[lang] || siteTranslations.en;
       document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -2227,56 +2934,62 @@ function generateIndexHtml() {
       });
     }
 
-    // Close dropdowns on outside click
-    window.addEventListener('click', () => {
-      const themeMenu = document.getElementById('themeDropdownMenu');
-      if (themeMenu) themeMenu.style.display = 'none';
-      const langMenu = document.getElementById('langDropdownMenu');
-      if (langMenu) langMenu.style.display = 'none';
-    });
-
-    // 3. Multi-Currency 5-Tier Pricing Matrix (BDT, USD, EUR, GBP, INR)
+    // 6. Multi-Currency 3-Tier Matrix (Strictly: BDT, USD, EUR - GBP & INR Removed)
     let currentCurrency = 'BDT';
     let currentBillingCycle = 'monthly';
 
     const pricingMatrix = {
       BDT: {
-        symbol: '&#2547;',
-        starter: { monthly: '&#2547;0', yearly: '&#2547;0', desc: 'চিরতরে ফ্রি' },
-        pro: { monthly: 1499, yearly: 1199, strMonthly: '&#2547;1,499', strYearly: '&#2547;1,199' },
-        enterprise: { monthly: 4499, yearly: 3599, strMonthly: '&#2547;4,499', strYearly: '&#2547;3,599' }
+        flag: '🇧🇩',
+        label: 'BDT (৳)',
+        symbol: '৳',
+        starter: { monthly: '৳0', yearly: '৳0' },
+        pro: { monthly: 1499, yearly: 1199, strMonthly: '৳1,499', strYearly: '৳1,199' },
+        enterprise: { monthly: 4499, yearly: 3599, strMonthly: '৳4,499', strYearly: '৳3,599' }
       },
       USD: {
+        flag: '🇺🇸',
+        label: 'USD ($)',
         symbol: '$',
-        starter: { monthly: '$0', yearly: '$0', desc: 'Free Forever' },
+        starter: { monthly: '$0', yearly: '$0' },
         pro: { monthly: 15, yearly: 12, strMonthly: '$15', strYearly: '$12' },
         enterprise: { monthly: 45, yearly: 36, strMonthly: '$45', strYearly: '$36' }
       },
       EUR: {
+        flag: '🇪🇺',
+        label: 'EUR (€)',
         symbol: '€',
-        starter: { monthly: '€0', yearly: '€0', desc: 'Kostenlos' },
+        starter: { monthly: '€0', yearly: '€0' },
         pro: { monthly: 14, yearly: 11, strMonthly: '€14', strYearly: '€11' },
         enterprise: { monthly: 42, yearly: 34, strMonthly: '€42', strYearly: '€34' }
-      },
-      GBP: {
-        symbol: '£',
-        starter: { monthly: '£0', yearly: '£0', desc: 'Free Forever' },
-        pro: { monthly: 12, yearly: 10, strMonthly: '£12', strYearly: '£10' },
-        enterprise: { monthly: 36, yearly: 29, strMonthly: '£36', strYearly: '£29' }
-      },
-      INR: {
-        symbol: '₹',
-        starter: { monthly: '₹0', yearly: '₹0', desc: 'मुफ़्त' },
-        pro: { monthly: 1250, yearly: 999, strMonthly: '₹1,250', strYearly: '₹999' },
-        enterprise: { monthly: 3750, yearly: 2999, strMonthly: '₹3,750', strYearly: '₹2,999' }
       }
     };
 
-    function changePricingCurrency(cur) {
+    function toggleCurrencyDropdown(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('currencyDropdownMenu');
+      if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      const langMenu = document.getElementById('langDropdownMenu');
+      if (langMenu) langMenu.style.display = 'none';
+      const themeMenu = document.getElementById('themeDropdownMenu');
+      if (themeMenu) themeMenu.style.display = 'none';
+    }
+
+    function selectCurrency(cur) {
       currentCurrency = cur;
-      document.querySelectorAll('.btn-cur').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById('curBtn_' + cur);
-      if (activeBtn) activeBtn.classList.add('active');
+      const curData = pricingMatrix[cur] || pricingMatrix.BDT;
+      const flagEl = document.getElementById('curFlag');
+      const labelEl = document.getElementById('curLabel');
+      if (flagEl) flagEl.textContent = curData.flag;
+      if (labelEl) labelEl.textContent = curData.label;
+
+      document.querySelectorAll('.cur-dropdown-item').forEach(el => el.classList.remove('active'));
+      const activeOpt = document.getElementById('curOpt_' + cur);
+      if (activeOpt) activeOpt.classList.add('active');
+
+      const menu = document.getElementById('currencyDropdownMenu');
+      if (menu) menu.style.display = 'none';
+
       renderPricingCards();
     }
 
@@ -2286,11 +2999,11 @@ function generateIndexHtml() {
       const yBtn = document.getElementById('billingYearlyBtn');
 
       if (cycle === 'yearly') {
-        if (mBtn) { mBtn.style.background = 'transparent'; mBtn.style.color = 'var(--text-muted)'; }
-        if (yBtn) { yBtn.style.background = 'var(--primary)'; yBtn.style.color = '#fff'; }
+        if (mBtn) mBtn.classList.remove('active');
+        if (yBtn) yBtn.classList.add('active');
       } else {
-        if (mBtn) { mBtn.style.background = 'var(--primary)'; mBtn.style.color = '#fff'; }
-        if (yBtn) { yBtn.style.background = 'transparent'; yBtn.style.color = 'var(--text-muted)'; }
+        if (mBtn) mBtn.classList.add('active');
+        if (yBtn) yBtn.classList.remove('active');
       }
       renderPricingCards();
     }
@@ -2301,13 +3014,19 @@ function generateIndexHtml() {
 
       const pPro = isYearly ? curData.pro.strYearly : curData.pro.strMonthly;
       const pEnt = isYearly ? curData.enterprise.strYearly : curData.enterprise.strMonthly;
-      const period = isYearly ? '/month (billed annually)' : '/month';
+      const period = isYearly ? ' / month (billed annually)' : ' / month';
 
       const elPro = document.getElementById('pricePro');
-      if (elPro) elPro.innerHTML = pPro + '<span style="font-size:15px;color:var(--text-dim);font-weight:600;">' + period + '</span>';
+      if (elPro) elPro.textContent = pPro;
+
+      const cyclePro = document.getElementById('cyclePro');
+      if (cyclePro) cyclePro.textContent = period;
 
       const elEnt = document.getElementById('priceEnterprise');
-      if (elEnt) elEnt.innerHTML = pEnt + '<span style="font-size:15px;color:var(--text-dim);font-weight:600;">' + period + '</span>';
+      if (elEnt) elEnt.textContent = pEnt;
+
+      const cycleEnt = document.getElementById('cycleEnterprise');
+      if (cycleEnt) cycleEnt.textContent = period;
 
       const billedPro = document.getElementById('billedPro');
       if (billedPro) {
@@ -2320,18 +3039,20 @@ function generateIndexHtml() {
       }
     }
 
+    // 7. PipraPay Modal Integration
     let activeModalPlan = 'pro';
     function openPipraPayModal(planKey) {
       activeModalPlan = planKey;
       const curData = pricingMatrix[currentCurrency] || pricingMatrix.BDT;
       const isYearly = currentBillingCycle === 'yearly';
       const planName = planKey === 'enterprise' ? 'Agency & Super-App' : 'Pro Creator';
-      const planAmount = isYearly ? (planKey === 'enterprise' ? curData.enterprise.yearly * 12 : curData.pro.yearly * 12) : (planKey === 'enterprise' ? curData.enterprise.monthly : curData.pro.monthly);
+      const planAmount = isYearly 
+        ? (planKey === 'enterprise' ? curData.enterprise.yearly * 12 : curData.pro.yearly * 12) 
+        : (planKey === 'enterprise' ? curData.enterprise.monthly : curData.pro.monthly);
 
       document.getElementById('ppPlanName').textContent = planName + ' Plan (' + currentBillingCycle.toUpperCase() + ')';
-      document.getElementById('ppPlanPrice').innerHTML = curData.symbol + planAmount.toLocaleString('en-US');
-      
-      // Update modal payment method pills based on currency
+      document.getElementById('ppPlanPrice').textContent = curData.symbol + planAmount.toLocaleString('en-US');
+
       const mfsBox = document.getElementById('ppMfsOptions');
       if (mfsBox) {
         if (currentCurrency === 'BDT') {
@@ -2349,55 +3070,61 @@ function generateIndexHtml() {
     }
 
     function selectPaymentMethod(elem) {
-      document.querySelectorAll('.pay-method-opt').forEach(el => {
-        el.style.border = '1px solid var(--border)';
+      document.querySelectorAll('#ppMfsOptions > div').forEach(d => {
+        d.style.borderColor = 'var(--border)';
+        d.style.background = 'rgba(255,255,255,0.02)';
       });
-      elem.style.border = '2px solid #00A3FF';
+      elem.style.borderColor = 'var(--primary)';
+      elem.style.background = 'rgba(124, 58, 237, 0.12)';
     }
 
     function executePipraPayRedirect() {
-      const email = document.getElementById('ppEmail').value.trim();
-      if (!email) {
-        alert('Please enter your account email to proceed with PipraPay.');
-        return;
+      const curData = pricingMatrix[currentCurrency] || pricingMatrix.BDT;
+      const isYearly = currentBillingCycle === 'yearly';
+      const planAmount = isYearly 
+        ? (activeModalPlan === 'enterprise' ? curData.enterprise.yearly * 12 : curData.pro.yearly * 12) 
+        : (activeModalPlan === 'enterprise' ? curData.enterprise.monthly : curData.pro.monthly);
+
+      const btn = document.getElementById('ppSubmitBtn');
+      if (btn) {
+        btn.textContent = 'Redirecting to Gateway...';
+        btn.disabled = true;
       }
-      alert('Connecting to PipraPay payment automation gateway (' + currentCurrency + ')... Redirecting for ' + email);
-      window.location.href = 'https://piprapay.com/checkout?app=amanaflow&email=' + encodeURIComponent(email) + '&currency=' + currentCurrency + '&plan=' + activeModalPlan + '&cycle=' + currentBillingCycle;
+
+      const checkoutUrl = 'https://pay.amanaflow.com/pay' +
+        '?amount=' + encodeURIComponent(planAmount) +
+        '&currency=' + encodeURIComponent(currentCurrency) +
+        '&order_id=ORD-PF-' + Date.now() +
+        '&customer_name=' + encodeURIComponent('Amana Flow Subscriber') +
+        '&customer_email=' + encodeURIComponent('billing@amanaflow.com') +
+        '&desc=' + encodeURIComponent('Amana Flow Postiz - ' + activeModalPlan.toUpperCase() + ' (' + currentCurrency + ')') +
+        '&success_url=' + encodeURIComponent(window.location.origin + '/launches?subscribed=true&plan=' + activeModalPlan) +
+        '&cancel_url=' + encodeURIComponent(window.location.origin + '/#pricing');
+
+      window.location.href = checkoutUrl;
     }
 
-    // Initialize Theme & Language on Page Load
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('site_theme') || 'dark';
-      applyTheme(savedTheme);
-
-      const savedLang = localStorage.getItem('site_lang') || 'en';
-      applyLanguage(savedLang);
-
-      renderPricingCards();
-    });
-      alert('Connecting to PipraPay payment gateway API... Redirecting to secure checkout for ' + email);
-      window.location.href = 'https://piprapay.com/checkout?app=amanaflow&email=' + encodeURIComponent(email);
-    }
-
-    // Close modals on escape key
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeChannelModal();
-        closePipraPayModal();
-      }
+    // Close dropdowns on outside click
+    window.addEventListener('click', () => {
+      const themeMenu = document.getElementById('themeDropdownMenu');
+      if (themeMenu) themeMenu.style.display = 'none';
+      const langMenu = document.getElementById('langDropdownMenu');
+      if (langMenu) langMenu.style.display = 'none';
+      const curMenu = document.getElementById('currencyDropdownMenu');
+      if (curMenu) curMenu.style.display = 'none';
     });
 
-    // Client-side authentication detector for Header buttons
+    // 8. Dynamic Auth Detection
     (function syncAuthHeader() {
       try {
-        const c = document.cookie;
-        const loggedIn = c.includes('jwt=') || c.includes('token=') || c.includes('auth=') || localStorage.getItem('isLoggedIn') === 'true';
+        const cookies = document.cookie.split(';').map(c => c.trim());
+        const hasAuth = cookies.some(c => c.startsWith('auth=') && c.split('=')[1].length > 10);
         const loginBtn = document.getElementById('navLoginBtn');
         const dashBtn = document.getElementById('navDashboardBtn');
         const mLogin = document.getElementById('mobileNavLogin');
         const mDash = document.getElementById('mobileNavDash');
 
-        if (loggedIn) {
+        if (hasAuth) {
           if (loginBtn) loginBtn.style.display = 'none';
           if (dashBtn) dashBtn.style.display = 'inline-flex';
           if (mLogin) mLogin.style.display = 'none';
@@ -2410,6 +3137,10 @@ function generateIndexHtml() {
         }
       } catch (err) {}
     })();
+
+    // Initialize Theme and Language on load
+    applyTheme(localStorage.getItem('site_theme') || 'dark');
+    applyLanguage(localStorage.getItem('site_lang') || 'en');
   </script>
 
   <!-- Ready to Automate CTA -->
@@ -2966,7 +3697,7 @@ function generateAdminCustomersHtml() {
         </div>
         <div style="display:flex;gap:12px;">
           <a href="/launches" class="btn btn-primary">Open Postiz Console &rarr;</a>
-          <a href="/auth" class="btn btn-secondary">Login Portal</a>
+          <a href="/auth/login" class="btn btn-secondary">Login Portal</a>
         </div>
       </div>
 
