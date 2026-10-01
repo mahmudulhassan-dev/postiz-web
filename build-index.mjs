@@ -186,7 +186,8 @@ const indexHtml = `<!DOCTYPE html>
   <link rel="canonical" href="https://post.amanaflow.com/" />
   
   <!-- Favicon & Fonts -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='%238b5cf6'><rect width='40' height='40' rx='10' fill='%2312151e'/><path d='M12 28V12h9.5c4.1 0 7.5 3.4 7.5 7.5s-3.4 7.5-7.5 7.5H17.5V28z' fill='%238b5cf6'/></svg>" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -198,16 +199,17 @@ const indexHtml = `<!DOCTYPE html>
       --bg-card: rgba(18, 22, 34, 0.7);
       --bg-card-hover: rgba(28, 34, 52, 0.85);
       --border: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(139, 92, 246, 0.45);
+      --border-focus: rgba(16, 185, 129, 0.45);
       --text: #f3f4f6;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      --primary: #8b5cf6;
-      --primary-glow: rgba(139, 92, 246, 0.35);
-      --secondary: #ec4899;
+      --primary: #06b6d4;
+      --primary-glow: rgba(6, 182, 212, 0.35);
+      --secondary: #10b981;
       --cyan: #06b6d4;
       --emerald: #10b981;
-      --gradient-main: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
+      --blue: #2563eb;
+      --gradient-main: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #2563eb 100%);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -281,6 +283,18 @@ const indexHtml = `<!DOCTYPE html>
       color: #fff;
     }
 
+    .brand-logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.35));
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .brand:hover .brand-logo-img {
+      transform: scale(1.06);
+    }
+
     .brand-text {
       font-family: var(--font-heading);
       font-size: 21px;
@@ -292,7 +306,7 @@ const indexHtml = `<!DOCTYPE html>
     }
 
     .brand-text span.gradient-text {
-      background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #00f2fe 100%);
+      background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-left: 1px;
@@ -1071,7 +1085,7 @@ const indexHtml = `<!DOCTYPE html>
   <header>
     <div class="container nav-inner">
       <a href="/home" class="brand">
-        ${postFlowLogo}
+        <img src="/assets/amana-flow-logo-clean.png" alt="Amana Flow" class="brand-logo-img" />
         <div>
           <div class="brand-text">Post<span class="gradient-text">Flow</span></div>
           <div class="brand-sub"><span class="brand-sub-dot"></span>by Amana Flow</div>
@@ -1455,7 +1469,7 @@ const indexHtml = `<!DOCTYPE html>
       <div class="footer-grid">
         <div>
           <div class="brand" style="margin-bottom: 16px;">
-            ${postFlowLogo}
+            <img src="/assets/amana-flow-logo-clean.png" alt="Amana Flow" class="brand-logo-img" />
             <div>
               <div class="brand-text">Post<span class="gradient-text">Flow</span></div>
               <div class="brand-sub"><span class="brand-sub-dot"></span>by Amana Flow</div>

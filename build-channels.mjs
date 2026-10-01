@@ -495,7 +495,8 @@ function generateChannelHtml(channel) {
   <title>${channel.name} Post Scheduler & Management — PostFlow</title>
   <meta name="description" content="${channel.tagline}. Automate, schedule, and orchestrate ${channel.name} marketing with PostFlow by Amana Flow." />
   <link rel="canonical" href="https://post.amanaflow.com/channels/${channel.slug}" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -654,7 +655,7 @@ function generateChannelHtml(channel) {
 <body>
   <header>
     <a href="/home" class="brand">
-      ${postFlowLogoSvg}
+      <img src="/assets/amana-flow-logo-clean.png" alt="Amana Flow Logo" style="height: 38px; width: auto; object-fit: contain;" />
       Post<span>Flow</span>
     </a>
     <div class="nav-actions">
