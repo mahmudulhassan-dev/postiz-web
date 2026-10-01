@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Data Deletion Instructions — Amana Flow Postiz</title>
+  <meta name="description" content="Step-by-step instructions for deleting your user data and revoking permissions on Amana Flow Postiz." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-card: rgba(19, 27, 46, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #a855f7;
+      --gradient: linear-gradient(135deg, #a855f7, #ec4899);
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text-muted);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+    }
+    .header-bar {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 9, 14, 0.85);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      z-index: 50;
+    }
+    .brand {
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+    }
+    .brand span { color: var(--primary); }
+    .back-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { color: #fff; border-color: var(--primary); }
+    .container {
+      max-width: 860px;
+      margin: 50px auto 100px;
+      padding: 0 24px;
+    }
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #fff;
+      font-size: 34px;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .last-updated {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .step-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+    p, ul {
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 8px; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .platform-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .platform-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .platform-box h4 {
+      color: #fff;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .contact-box {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 30px;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <a href="/home" class="back-btn">&larr; Return to Home</a>
+  </div>
+
+  <div class="container">
+    <h1>User Data Deletion Instructions</h1>
+    <div class="last-updated">In compliance with TikTok, Meta (Facebook & Instagram), Google, and LinkedIn Developer Policies & GDPR</div>
+
+    <p>
+      At Amana Flow Postiz (<strong>https://post.amanaflow.com</strong>), we respect your privacy and provide transparent, automated, and manual options to permanently delete your data, revoke OAuth tokens, and remove all associated media files from our servers.
+    </p>
+
+    <!-- Method 1: Instant Self-Service -->
+    <div class="step-card">
+      <div class="step-title">
+        <span class="step-num">1</span>
+        Method 1: Instant Self-Service Deletion (Recommended)
+      </div>
+      <p>You can immediately delete any connected social media account, associated tokens, and draft data directly from your dashboard:</p>
+      <ul>
+        <li>Log in to your Postiz workspace at <a href="/auth">https://post.amanaflow.com/auth</a>.</li>
+        <li>Navigate to <strong>Settings &rarr; Integrations</strong>.</li>
+        <li>Locate the channel you wish to remove (e.g., TikTok, Facebook, Instagram, YouTube, LinkedIn).</li>
+        <li>Click the <strong>Delete / Disconnect</strong> (Trash) icon next to the channel.</li>
+        <li>Confirm the action. Our system will immediately purge the access tokens, refresh tokens, and channel identifiers from our database.</li>
+      </ul>
+    </div>
+
+    <!-- Method 2: Revoking via Platform Settings -->
+    <div class="step-card">
+      <div class="step-title">
+        <span class="step-num">2</span>
+        Method 2: Revoke Access Directly from Social Platforms
+      </div>
+      <p>You can also revoke Amana Flow Postiz's permissions directly through the native settings of each social network:</p>
+      <div class="platform-list">
+        <div class="platform-box">
+          <h4>TikTok</h4>
+          <p style="font-size:13px;">Open TikTok app &rarr; Profile &rarr; Settings & Privacy &rarr; Security & Permissions &rarr; Apps and Services &rarr; Select <strong>Amana Flow</strong> &rarr; Click <strong>Remove Access</strong>.</p>
+        </div>
+        <div class="platform-box">
+          <h4>Facebook / Meta</h4>
+          <p style="font-size:13px;">Go to Facebook Settings & Privacy &rarr; Settings &rarr; Apps and Websites &rarr; Select <strong>Amana Flow</strong> &rarr; Click <strong>Remove</strong>.</p>
+        </div>
+        <div class="platform-box">
+          <h4>Google / YouTube</h4>
+          <p style="font-size:13px;">Visit <a href="https://myaccount.google.com/permissions" target="_blank">Google Account Permissions</a> &rarr; Select <strong>Postiz</strong> &rarr; Click <strong>Remove Access</strong>.</p>
+        </div>
+        <div class="platform-box">
+          <h4>LinkedIn</h4>
+          <p style="font-size:13px;">Go to LinkedIn Settings & Privacy &rarr; Data Privacy &rarr; Permitted Services &rarr; Locate <strong>Postiz</strong> &rarr; Click <strong>Remove</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Method 3: Manual Full Data Purge Request -->
+    <div class="step-card">
+      <div class="step-title">
+        <span class="step-num">3</span>
+        Method 3: Request Full Workspace & Account Purge
+      </div>
+      <p>If you want us to completely erase your entire user profile, workspace history, scheduled posts, and all media uploads from our database and backups, please submit a deletion request:</p>
+      <ul>
+        <li>Send an email to: <a href="mailto:privacy@amanaflow.com"><strong>privacy@amanaflow.com</strong></a> or <a href="mailto:support@amanaflow.com"><strong>support@amanaflow.com</strong></a>.</li>
+        <li>Subject line: <strong>Data Deletion Request - [Your Registered Email]</strong>.</li>
+        <li>Include your registered email address and organization name.</li>
+        <li>Our data engineering team will execute the database purge within <strong>24-48 hours</strong> and send you a confirmation of complete eradication.</li>
+      </ul>
+    </div>
+
+    <div class="contact-box">
+      <h3 style="color:#fff;margin-bottom:8px;">Questions or Assistance?</h3>
+      <p style="margin-bottom:0;">Contact our Data Protection Officer at <a href="mailto:privacy@amanaflow.com">privacy@amanaflow.com</a> or visit our corporate headquarters at <a href="https://amanaflow.com" target="_blank">https://amanaflow.com</a>.</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Amana Flow. All Rights Reserved. &bull; <a href="/terms">Terms of Service</a> &bull; <a href="/privacy">Privacy Policy</a>
+  </footer>
+</body>
+</html>

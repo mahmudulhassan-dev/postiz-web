@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Scheduler: Feed, Reels & Carousels — Amana Flow Postiz</title>
+  <meta name="description" content="Schedule Instagram Feed posts, Reels, and Carousels for Amana Mart (@amanamartbd) with Amana Flow Postiz." />
+  <link rel="canonical" href="https://post.amanaflow.com/channels/instagram" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(19, 27, 46, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #e4405f;
+      --gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text-muted); font-family: 'Inter', sans-serif; line-height: 1.7; }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 9, 14, 0.85);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .brand { color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 18px; text-decoration: none; }
+    .brand span { color: #a855f7; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; padding: 8px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+    .btn-secondary { color: #fff; border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--primary); }
+    .btn-primary { background: var(--gradient); color: #fff; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 50px 24px 80px; }
+    .channel-hero { text-align: center; margin-bottom: 60px; }
+    .channel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(228, 64, 95, 0.1);
+      border: 1px solid rgba(228, 64, 95, 0.3);
+      color: #f472b6;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 18px; line-height: 1.2; }
+    .hero-p { font-size: 18px; max-width: 680px; margin: 0 auto 30px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+    .card h3 { font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; font-size: 20px; margin-bottom: 12px; }
+    .card p { font-size: 15px; margin-bottom: 14px; }
+    .account-badge {
+      background: rgba(228, 64, 95, 0.08);
+      border: 1px solid rgba(228, 64, 95, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 40px 0;
+    }
+    footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; font-size: 13px; color: #64748b; }
+    footer a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <div class="nav-actions">
+      <a href="/home" class="btn btn-secondary">&larr; Back to Home</a>
+      <a href="/auth" class="btn btn-primary">Connect Instagram &rarr;</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="channel-hero">
+      <div class="channel-badge">
+        <span>●</span> Official Instagram Graph API Integration
+      </div>
+      <h1>Schedule Instagram Feed, Reels & Carousels</h1>
+      <p class="hero-p">
+        Plan your visual aesthetic, schedule carousel lookbooks, and publish viral Reels directly to Instagram with zero push notifications required.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;">
+        <a href="/auth" class="btn btn-primary" style="padding:12px 28px;font-size:15px;">Launch Dashboard & Connect</a>
+        <a href="/data-deletion" class="btn btn-secondary" style="padding:12px 24px;font-size:15px;">Data Deletion Policy</a>
+      </div>
+    </div>
+
+    <div class="account-badge">
+      <h4 style="color:#fff;font-size:18px;margin-bottom:10px;">📸 Active Connected Account</h4>
+      <p style="font-size:14px;color:#cbd5e1;">
+        Instagram Business Account: <strong>@amanamartbd</strong> (Amana Mart Official Store)
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>🎨 Visual Grid & Feed Planner</h3>
+        <p>Preview your 9-grid feed layout before scheduling. Rearrange upcoming product images to create a cohesive brand story.</p>
+      </div>
+
+      <div class="card">
+        <h3>🎥 Direct Instagram Reels Publishing</h3>
+        <p>Auto-publish vertical 9:16 videos directly into the Reels algorithm with cover images and targeted hashtags.</p>
+      </div>
+
+      <div class="card">
+        <h3>📚 Multi-Image Carousels</h3>
+        <p>Upload up to 10 photos or graphics per carousel post to showcase catalogs, step-by-step guides, and customer reviews.</p>
+      </div>
+
+      <div class="card">
+        <h3>💬 Automated First Comment</h3>
+        <p>Keep your caption clean by scheduling targeted hashtags automatically in the first comment upon post publishing.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Amana Flow. All Rights Reserved. &bull;
+    <a href="/terms">Terms of Service</a> &bull;
+    <a href="/privacy">Privacy Policy</a> &bull;
+    <a href="/data-deletion">Data Deletion Instructions</a> &bull;
+    <a href="https://amanaflow.com">Amana Flow Hub</a>
+  </footer>
+</body>
+</html>

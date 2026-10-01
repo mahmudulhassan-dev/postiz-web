@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amana Flow Postiz — The Agentic Social Media Management Platform</title>
+  <meta name="description" content="Amana Flow Social Suite powered by Postiz: Plan, schedule, and publish to 30+ social media channels from one unified visual calendar with AI copilot integration on private VPS infrastructure." />
+  <link rel="canonical" href="https://post.amanaflow.com/" />
+  
+  <!-- Favicon & Fonts -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a855f7'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(19, 27, 46, 0.7);
+      --bg-card-hover: rgba(28, 38, 64, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(168, 85, 247, 0.45);
+      --text: #f3f4f6;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #a855f7;
+      --primary-glow: rgba(168, 85, 247, 0.35);
+      --secondary: #ec4899;
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --gradient-main: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #06b6d4 100%);
+      --gradient-tiktok: linear-gradient(135deg, #00f2fe 0%, #fe0979 100%);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 50px -10px var(--primary-glow);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient background glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(236, 72, 153, 0.08) 40%, transparent 70%);
+      filter: blur(100px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-main);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .brand-logo svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-text span {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 24px 0;
+    }
+
+    .nav-link:hover, .nav-item:hover .nav-link {
+      color: #fff;
+    }
+
+    .nav-link svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-item:hover .nav-link svg {
+      transform: rotate(180deg);
+    }
+
+    /* MEGA MENUS */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(14, 19, 31, 0.96);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px -10px var(--primary-glow);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 300;
+      pointer-events: none;
+    }
+
+    .nav-item:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Channels Mega Menu: 5 columns */
+    .mega-channels {
+      width: 1040px;
+      left: calc(50% - 140px);
+    }
+
+    .mega-channels-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .mega-col-title {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mega-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mega-item-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .mega-item-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .mega-item-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .badge-active {
+      font-size: 10px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      padding: 1px 6px;
+      border-radius: 999px;
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .mega-footer-bar {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .mega-footer-bar a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* AI Agents Mega Menu: 3 columns */
+    .mega-agents {
+      width: 780px;
+    }
+
+    .mega-agents-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .mega-card-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .mega-card-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-focus);
+      transform: translateY(-2px);
+    }
+
+    .mega-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mega-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Platform Mega Menu */
+    .mega-platform {
+      width: 620px;
+    }
+
+    .mega-platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-primary {
+      background: var(--gradient-main);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 28px rgba(236, 72, 153, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile toggle */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      padding: 7px 20px;
+      border-radius: var(--radius-full);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #d8b4fe;
+      margin-bottom: 28px;
+      box-shadow: 0 0 24px rgba(168, 85, 247, 0.2);
+    }
+
+    .pill-badge span.dot {
+      width: 9px;
+      height: 9px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      max-width: 960px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-title span.gradient {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .hero-btn {
+      padding: 15px 34px;
+      font-size: 16px;
+    }
+
+    /* Live Multi-Platform Mockup */
+    .dashboard-mockup {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      overflow: hidden;
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .mockup-status {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .mockup-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 18px;
+      padding-top: 18px;
+      min-height: 440px;
+      text-align: left;
+    }
+
+    .mockup-sidebar {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-channel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #e2e8f0;
+      transition: background 0.15s;
+    }
+
+    .sidebar-channel:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .channel-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .mockup-calendar {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .calendar-title {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      height: 100%;
+    }
+
+    .calendar-day {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .day-num {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .post-card {
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .post-card.fb {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+
+    .post-card.yt {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    .post-card.tt {
+      background: rgba(0, 242, 254, 0.1);
+      border-color: rgba(0, 242, 254, 0.35);
+    }
+
+    .post-card.in {
+      background: rgba(10, 102, 194, 0.12);
+      border-color: rgba(10, 102, 194, 0.35);
+    }
+
+    .post-time {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* Channels Grid Section */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .section-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 16.5px;
+    }
+
+    /* Channel Filter Bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .search-box {
+      max-width: 360px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      padding: 12px 20px 12px 42px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 16px;
+    }
+
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .channel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    .channel-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px -10px var(--primary-glow);
+    }
+
+    .channel-card-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .channel-card-name {
+      font-family: var(--font-heading);
+      font-size: 16.5px;
+      font-weight: 700;
+    }
+
+    .channel-card-tag {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .card-badge-verified {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 34px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-icon-wrap {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .feature-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .feature-text {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Self-Host Architecture Spec */
+    .specs-section {
+      background: linear-gradient(180deg, rgba(14, 19, 31, 0.6) 0%, rgba(7, 9, 14, 0.95) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .spec-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .spec-item:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .spec-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .spec-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .spec-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* Multi-Brand Workspaces */
+    .brands-section {
+      background: rgba(14, 19, 31, 0.3);
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .brand-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      text-align: left;
+    }
+
+    .brand-box-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .brand-box-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .brand-box-channels {
+      font-size: 12px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 840px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-question {
+      padding: 22px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16.5px;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      color: var(--primary);
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.65;
+      padding: 0 26px;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 26px 22px;
+      max-height: 300px;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.18), transparent 50%),
+                  radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.18), transparent 50%),
+                  var(--bg-surface);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 70px 40px;
+      text-align: center;
+      margin: 40px 0 80px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-desc {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 34px;
+      font-size: 16.5px;
+    }
+
+    /* Footer */
+    footer {
+      background: #040609;
+      border-top: 1px solid var(--border);
+      padding: 70px 0 35px;
+      margin-top: auto;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 36px;
+      margin-bottom: 45px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+      font-size: 13.5px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Mobile Menu Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(7, 9, 14, 0.98);
+      backdrop-filter: blur(20px);
+      padding: 24px;
+      z-index: 199;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-drawer.active {
+      display: flex;
+    }
+
+    .mobile-nav-link {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .mega-channels { width: 90vw; left: 50%; }
+      .mega-channels-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .mockup-body { grid-template-columns: 1fr; }
+      .mockup-sidebar { display: none; }
+      .nav-menu { display: none; }
+      .mobile-toggle { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-title { font-size: 36px; }
+      .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .calendar-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Effect -->
+  <div class="ambient-glow"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <a href="/home" class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand-text">Amana Flow <span>Postiz</span></div>
+      </a>
+
+      <!-- Desktop Nav with Mega Menus -->
+      <nav>
+        <ul class="nav-menu">
+          <!-- 1. Channels Mega Menu -->
+          <li class="nav-item">
+            <a href="#channels" class="nav-link">
+              Channels <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <div class="mega-menu mega-channels">
+              <div class="mega-channels-grid">
+                <!-- Col 1: Video & Short-Form -->
+                <div>
+                  <div class="mega-col-title">🎥 Video & Shorts</div>
+                  <ul class="mega-list">
+                    <li><a href="/channels/tiktok" class="mega-item-link"><div class="mega-item-icon" style="background:#000;color:#00f2fe;">tt</div> TikTok Direct <span class="badge-active">Active</span></a></li>
+                    <li><a href="/channels/youtube" class="mega-item-link"><div class="mega-item-icon" style="background:#ff0000;color:#fff;">yt</div> YouTube & Shorts <span class="badge-active">Active</span></a></li>
+                    <li><a href="/channels/instagram" class="mega-item-link"><div class="mega-item-icon" style="background:#e4405f;color:#fff;">ig</div> Instagram Reels <span class="badge-active">Active</span></a></li>
+                    <li><a href="/channels/facebook" class="mega-item-link"><div class="mega-item-icon" style="background:#1877f2;color:#fff;">f</div> Facebook Reels <span class="badge-active">Active</span></a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 2: Social Networks -->
+                <div>
+                  <div class="mega-col-title">🌐 Social Networks</div>
+                  <ul class="mega-list">
+                    <li><a href="/channels/facebook" class="mega-item-link"><div class="mega-item-icon" style="background:#1877f2;color:#fff;">f</div> Facebook Pages <span class="badge-active">7 Pages</span></a></li>
+                    <li><a href="/channels/instagram" class="mega-item-link"><div class="mega-item-icon" style="background:#e4405f;color:#fff;">ig</div> Instagram Business</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#000;color:#fff;">@</div> Threads</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#000;color:#fff;">𝕏</div> X (Twitter)</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#0284c7;color:#fff;">bs</div> Bluesky</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#6364ff;color:#fff;">m</div> Mastodon</a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 3: Business & Pro -->
+                <div>
+                  <div class="mega-col-title">💼 Business & Pro</div>
+                  <ul class="mega-list">
+                    <li><a href="/channels/linkedin" class="mega-item-link"><div class="mega-item-icon" style="background:#0a66c2;color:#fff;">in</div> LinkedIn Pages <span class="badge-active">Active</span></a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#22c55e;color:#fff;">g</div> Google Business</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#bd081c;color:#fff;">p</div> Pinterest</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#ea4c89;color:#fff;">dr</div> Dribbble</a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 4: Communities & Chat -->
+                <div>
+                  <div class="mega-col-title">💬 Communities</div>
+                  <ul class="mega-list">
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#ff4500;color:#fff;">r</div> Reddit Subs</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#229ed9;color:#fff;">tg</div> Telegram</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#5865f2;color:#fff;">dc</div> Discord</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#4a154b;color:#fff;">sk</div> Slack</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#9146ff;color:#fff;">tw</div> Twitch</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#53fc18;color:#000;">kc</div> Kick</a></li>
+                  </ul>
+                </div>
+
+                <!-- Col 5: Publishing & Web3 -->
+                <div>
+                  <div class="mega-col-title">✍️ Publishing & Web3</div>
+                  <ul class="mega-list">
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#21759b;color:#fff;">wp</div> WordPress</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#000;color:#fff;">m</div> Medium</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#2962ff;color:#fff;">hn</div> Hashnode</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#000;color:#fff;">dev</div> Dev.to</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#8b5cf6;color:#fff;">no</div> Nostr</a></li>
+                    <li><a href="#channels" class="mega-item-link"><div class="mega-item-icon" style="background:#f43f5e;color:#fff;">lm</div> Listmonk</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mega-footer-bar">
+                <span>⚡ Orchestrate 30+ networks simultaneously with custom captions per platform.</span>
+                <a href="#channels">View All Supported Channels &rarr;</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- 2. AI Agents Mega Menu -->
+          <li class="nav-item">
+            <a href="#ai-agents" class="nav-link">
+              AI Agents <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <div class="mega-menu mega-agents">
+              <div class="mega-agents-grid">
+                <div>
+                  <div class="mega-col-title">🤖 AI Copilot</div>
+                  <a href="#ai-agents" class="mega-card-item">
+                    <div class="mega-card-title">✨ Smart Caption Writer</div>
+                    <div class="mega-card-desc">Automatically craft hooks, captions, and hashtags tailored for each platform.</div>
+                  </a>
+                  <a href="#ai-agents" class="mega-card-item" style="margin-top:8px;">
+                    <div class="mega-card-title">🎬 Agent-Media (UGC)</div>
+                    <div class="mega-card-desc">Generate AI UGC videos directly with autonomous agents.</div>
+                  </a>
+                </div>
+
+                <div>
+                  <div class="mega-col-title">⚡ Protocols & MCP</div>
+                  <a href="#ai-agents" class="mega-card-item">
+                    <div class="mega-card-title">🔌 Model Context Protocol</div>
+                    <div class="mega-card-desc">Connect Claude Desktop, Cursor, Antigravity, or ChatGPT to Postiz via MCP.</div>
+                  </a>
+                  <a href="#ai-agents" class="mega-card-item" style="margin-top:8px;">
+                    <div class="mega-card-title">💻 Postiz CLI Suite</div>
+                    <div class="mega-card-desc">Execute commands, draft posts, and automate pipelines from terminal scripts.</div>
+                  </a>
+                </div>
+
+                <div>
+                  <div class="mega-col-title">🧠 Agent Integrations</div>
+                  <ul class="mega-list">
+                    <li><a href="#ai-agents" class="mega-item-link">Claude / Claude Cowork</a></li>
+                    <li><a href="#ai-agents" class="mega-item-link">ChatGPT & OpenAI Dots</a></li>
+                    <li><a href="#ai-agents" class="mega-item-link">Cursor & GitHub Codex</a></li>
+                    <li><a href="#ai-agents" class="mega-item-link">Google Gemini & DeepSeek</a></li>
+                    <li><a href="#ai-agents" class="mega-item-link">Grok Build & Hermes Agent</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 3. Platform & Architecture -->
+          <li class="nav-item">
+            <a href="#architecture" class="nav-link">
+              Platform <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+            <div class="mega-menu mega-platform">
+              <div class="mega-platform-grid">
+                <div>
+                  <div class="mega-col-title">🎯 Core Capabilities</div>
+                  <ul class="mega-list">
+                    <li><a href="#features" class="mega-item-link">📅 Visual Content Calendar</a></li>
+                    <li><a href="#workspaces" class="mega-item-link">🏢 Multi-Brand Workspaces</a></li>
+                    <li><a href="#features" class="mega-item-link">💬 Unified Social Inbox</a></li>
+                    <li><a href="#features" class="mega-item-link">🔄 Evergreen Recycling & RSS</a></li>
+                    <li><a href="#features" class="mega-item-link">📊 Performance Analytics</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <div class="mega-col-title">🛡️ Self-Hosted Stack</div>
+                  <ul class="mega-list">
+                    <li><a href="#architecture" class="mega-item-link">⚡ Temporal Distributed Engine</a></li>
+                    <li><a href="#architecture" class="mega-item-link">🐘 PostgreSQL 17 Database</a></li>
+                    <li><a href="#architecture" class="mega-item-link">🔴 Redis 7.2 Cache & Queue</a></li>
+                    <li><a href="#architecture" class="mega-item-link">🔒 Nginx TLS 1.3 Reverse Proxy</a></li>
+                    <li><a href="#architecture" class="mega-item-link">🐳 Docker Containerized Cluster</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 4. Developers & Legal -->
+          <li class="nav-item">
+            <a href="#faq" class="nav-link">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a href="/terms" class="nav-link">Terms</a>
+          </li>
+          <li class="nav-item">
+            <a href="/privacy" class="nav-link">Privacy</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <a href="/auth" class="btn btn-secondary">Sign In</a>
+        <a href="/launches" class="btn btn-primary">Open Dashboard &rarr;</a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <a href="/home" class="mobile-nav-link">Home</a>
+    <a href="/channels/facebook" class="mobile-nav-link">Facebook Channels</a>
+    <a href="/channels/tiktok" class="mobile-nav-link">TikTok Direct Publishing</a>
+    <a href="/channels/youtube" class="mobile-nav-link">YouTube & Shorts</a>
+    <a href="/channels/instagram" class="mobile-nav-link">Instagram Reels & Feed</a>
+    <a href="/channels/linkedin" class="mobile-nav-link">LinkedIn Company Pages</a>
+    <a href="#features" class="mobile-nav-link">Features</a>
+    <a href="#architecture" class="mobile-nav-link">Architecture (Self-Hosted)</a>
+    <a href="/terms" class="mobile-nav-link">Terms of Service</a>
+    <a href="/privacy" class="mobile-nav-link">Privacy Policy</a>
+    <a href="/data-deletion" class="mobile-nav-link">User Data Deletion</a>
+    <div style="display:flex;gap:12px;margin-top:20px;">
+      <a href="/auth" class="btn btn-secondary" style="flex:1;">Sign In</a>
+      <a href="/launches" class="btn btn-primary" style="flex:1;">Open Dashboard</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="pill-badge">
+        <span class="dot"></span> Self-Hosted Social Media Orchestration Engine
+      </div>
+      <h1 class="hero-title">
+        Schedule, Automate & Publish to <br />
+        <span class="gradient">30+ Social Networks</span> from One Place
+      </h1>
+      <p class="hero-sub">
+        The ultimate agentic scheduling platform for Amana Flow. Manage multiple brand accounts, schedule multi-platform posts, and orchestrate campaigns with AI precision on private infrastructure.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="/auth" class="btn btn-primary hero-btn">Launch Workspace &rarr;</a>
+        <a href="#channels" class="btn btn-secondary hero-btn">Explore 30+ Channels</a>
+      </div>
+
+      <!-- Live Mockup Component -->
+      <div class="dashboard-mockup">
+        <div class="mockup-header">
+          <div class="window-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+          </div>
+          <div class="mockup-status">
+            <span>Server: <strong>148.230.98.190</strong></span>
+            <span class="status-badge">&bull; Temporal Engine Active</span>
+          </div>
+        </div>
+
+        <div class="mockup-body">
+          <!-- Sidebar -->
+          <div class="mockup-sidebar">
+            <div class="sidebar-section-title">Connected Brand Channels</div>
+            <a href="/channels/facebook" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#1877f2;color:#fff;">f</div>
+                <div><strong>Amana Mart</strong><br><span style="font-size:11px;color:#94a3b8;">Facebook (7 Pages)</span></div>
+              </div>
+            </a>
+            <a href="/channels/instagram" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#e4405f;color:#fff;">ig</div>
+                <div><strong>@amanamartbd</strong><br><span style="font-size:11px;color:#94a3b8;">Instagram Store</span></div>
+              </div>
+            </a>
+            <a href="/channels/youtube" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#ff0000;color:#fff;">yt</div>
+                <div><strong>Amana Flow</strong><br><span style="font-size:11px;color:#94a3b8;">YouTube (@amanaflow)</span></div>
+              </div>
+            </a>
+            <a href="/channels/youtube" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#ff0000;color:#fff;">yt</div>
+                <div><strong>Amana Academy</strong><br><span style="font-size:11px;color:#94a3b8;">YouTube (@amana-academy)</span></div>
+              </div>
+            </a>
+            <a href="/channels/linkedin" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#0a66c2;color:#fff;">in</div>
+                <div><strong>Amana Suite</strong><br><span style="font-size:11px;color:#94a3b8;">LinkedIn Page</span></div>
+              </div>
+            </a>
+            <a href="/channels/tiktok" style="text-decoration:none;">
+              <div class="sidebar-channel">
+                <div class="channel-icon" style="background:#000;color:#00f2fe;border:1px solid #334155;">tt</div>
+                <div><strong>TikTok Creator</strong><br><span style="font-size:11px;color:#94a3b8;">Direct Video Post</span></div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Calendar Preview -->
+          <div class="mockup-calendar">
+            <div class="calendar-header">
+              <div class="calendar-title">Content Calendar &mdash; October 2026</div>
+              <a href="/auth" style="font-size:13px;color:#a855f7;font-weight:700;text-decoration:none;">+ Quick Schedule &rarr;</a>
+            </div>
+
+            <div class="calendar-grid">
+              <div class="calendar-day">
+                <div class="day-num">Today &bull; 01 Oct</div>
+                <div class="post-card fb">
+                  <strong>Special Offer Post</strong>
+                  <div class="post-time">10:00 AM &bull; Facebook Pages</div>
+                </div>
+                <div class="post-card yt">
+                  <strong>Tutorial Video #04</strong>
+                  <div class="post-time">02:30 PM &bull; YouTube</div>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="day-num">02 Oct</div>
+                <div class="post-card tt">
+                  <strong>Viral Reel Showcase</strong>
+                  <div class="post-time">12:00 PM &bull; TikTok Video</div>
+                </div>
+                <div class="post-card">
+                  <strong>Brand Story Update</strong>
+                  <div class="post-time">05:00 PM &bull; Instagram</div>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="day-num">03 Oct</div>
+                <div class="post-card in">
+                  <strong>Product Launch Thread</strong>
+                  <div class="post-time">09:15 AM &bull; LinkedIn</div>
+                </div>
+                <div class="post-card fb">
+                  <strong>Customer Spotlight</strong>
+                  <div class="post-time">06:00 PM &bull; Meta</div>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="day-num">04 Oct</div>
+                <div class="post-card yt">
+                  <strong>Weekly Highlights</strong>
+                  <div class="post-time">04:00 PM &bull; Shorts</div>
+                </div>
+                <div class="post-card tt">
+                  <strong>Behind the Scenes</strong>
+                  <div class="post-time">08:00 PM &bull; TikTok</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Channels Grid with Search & Filters -->
+  <section class="section" id="channels">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Supported Ecosystems</span>
+        <h2 class="section-title">One Visual Calendar, 30+ Social Networks</h2>
+        <p class="section-desc">
+          Official API integrations with top social, video, community, and publishing platforms. Everything self-hosted on our private infrastructure.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Channels (30+)</button>
+        <button class="filter-btn" data-filter="video">Video & Shorts</button>
+        <button class="filter-btn" data-filter="social">Social Networks</button>
+        <button class="filter-btn" data-filter="pro">Business & Pro</button>
+        <button class="filter-btn" data-filter="community">Communities</button>
+        <button class="filter-btn" data-filter="cms">Publishing & CMS</button>
+      </div>
+
+      <!-- Quick Search -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="channelSearch" class="search-input" placeholder="Search platforms (e.g. TikTok, Facebook, YouTube)..." />
+      </div>
+
+      <!-- Channels Grid -->
+      <div class="channels-grid" id="channelsContainer">
+        <!-- Facebook -->
+        <a href="/channels/facebook" class="channel-card" data-category="social video">
+          <span class="card-badge-verified">7 Connected</span>
+          <div class="channel-card-icon" style="background:#1877f2;color:#fff;">f</div>
+          <div class="channel-card-name">Facebook</div>
+          <div class="channel-card-tag">Pages, Groups & Reels</div>
+        </a>
+
+        <!-- TikTok -->
+        <a href="/channels/tiktok" class="channel-card" data-category="video">
+          <span class="card-badge-verified" style="background:rgba(0,242,254,0.15);color:#00f2fe;border-color:rgba(0,242,254,0.3);">OAuth Ready</span>
+          <div class="channel-card-icon" style="background:#000;color:#00f2fe;box-shadow:2px 2px #fe0979;">tt</div>
+          <div class="channel-card-name">TikTok</div>
+          <div class="channel-card-tag">Direct Video Publishing API</div>
+        </a>
+
+        <!-- YouTube -->
+        <a href="/channels/youtube" class="channel-card" data-category="video">
+          <span class="card-badge-verified">2 Connected</span>
+          <div class="channel-card-icon" style="background:#ff0000;color:#fff;">yt</div>
+          <div class="channel-card-name">YouTube</div>
+          <div class="channel-card-tag">Shorts & Long Videos</div>
+        </a>
+
+        <!-- Instagram -->
+        <a href="/channels/instagram" class="channel-card" data-category="social video">
+          <span class="card-badge-verified">Connected</span>
+          <div class="channel-card-icon" style="background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);color:#fff;">ig</div>
+          <div class="channel-card-name">Instagram</div>
+          <div class="channel-card-tag">Feed, Reels & Stories</div>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="/channels/linkedin" class="channel-card" data-category="pro">
+          <span class="card-badge-verified">OAuth Ready</span>
+          <div class="channel-card-icon" style="background:#0a66c2;color:#fff;">in</div>
+          <div class="channel-card-name">LinkedIn</div>
+          <div class="channel-card-tag">Profiles & Company Pages</div>
+        </a>
+
+        <!-- Threads -->
+        <a href="#channels" class="channel-card" data-category="social">
+          <div class="channel-card-icon" style="background:#000;color:#fff;">@</div>
+          <div class="channel-card-name">Threads</div>
+          <div class="channel-card-tag">Microblogging & Threads</div>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="#channels" class="channel-card" data-category="social">
+          <div class="channel-card-icon" style="background:#000;color:#fff;">𝕏</div>
+          <div class="channel-card-name">X (Twitter)</div>
+          <div class="channel-card-tag">Posts, Polls & Threads</div>
+        </a>
+
+        <!-- Google Business -->
+        <a href="#channels" class="channel-card" data-category="pro">
+          <div class="channel-card-icon" style="background:#22c55e;color:#fff;">g</div>
+          <div class="channel-card-name">Google Business</div>
+          <div class="channel-card-tag">Search & Maps Updates</div>
+        </a>
+
+        <!-- Pinterest -->
+        <a href="#channels" class="channel-card" data-category="pro">
+          <div class="channel-card-icon" style="background:#bd081c;color:#fff;">p</div>
+          <div class="channel-card-name">Pinterest</div>
+          <div class="channel-card-tag">Pins & Board Planner</div>
+        </a>
+
+        <!-- Bluesky -->
+        <a href="#channels" class="channel-card" data-category="social">
+          <div class="channel-card-icon" style="background:#0284c7;color:#fff;">bs</div>
+          <div class="channel-card-name">Bluesky</div>
+          <div class="channel-card-tag">AT Protocol Decentralized</div>
+        </a>
+
+        <!-- Mastodon -->
+        <a href="#channels" class="channel-card" data-category="social">
+          <div class="channel-card-icon" style="background:#6364ff;color:#fff;">m</div>
+          <div class="channel-card-name">Mastodon</div>
+          <div class="channel-card-tag">Fediverse ActivityPub</div>
+        </a>
+
+        <!-- Reddit -->
+        <a href="#channels" class="channel-card" data-category="community">
+          <div class="channel-card-icon" style="background:#ff4500;color:#fff;">r</div>
+          <div class="channel-card-name">Reddit</div>
+          <div class="channel-card-tag">Targeted Subreddits</div>
+        </a>
+
+        <!-- Telegram -->
+        <a href="#channels" class="channel-card" data-category="community">
+          <div class="channel-card-icon" style="background:#229ed9;color:#fff;">tg</div>
+          <div class="channel-card-name">Telegram</div>
+          <div class="channel-card-tag">Broadcast Channels & Bots</div>
+        </a>
+
+        <!-- Discord -->
+        <a href="#channels" class="channel-card" data-category="community">
+          <div class="channel-card-icon" style="background:#5865f2;color:#fff;">dc</div>
+          <div class="channel-card-name">Discord</div>
+          <div class="channel-card-tag">Server Webhook Channels</div>
+        </a>
+
+        <!-- Slack -->
+        <a href="#channels" class="channel-card" data-category="community">
+          <div class="channel-card-icon" style="background:#4a154b;color:#fff;">sk</div>
+          <div class="channel-card-name">Slack</div>
+          <div class="channel-card-tag">Internal Team Updates</div>
+        </a>
+
+        <!-- WordPress -->
+        <a href="#channels" class="channel-card" data-category="cms">
+          <div class="channel-card-icon" style="background:#21759b;color:#fff;">wp</div>
+          <div class="channel-card-name">WordPress</div>
+          <div class="channel-card-tag">Blog Articles & Drafts</div>
+        </a>
+
+        <!-- Medium -->
+        <a href="#channels" class="channel-card" data-category="cms">
+          <div class="channel-card-icon" style="background:#000;color:#fff;">m</div>
+          <div class="channel-card-name">Medium</div>
+          <div class="channel-card-tag">Tech Publications</div>
+        </a>
+
+        <!-- Dev.to -->
+        <a href="#channels" class="channel-card" data-category="cms">
+          <div class="channel-card-icon" style="background:#000;color:#fff;">dev</div>
+          <div class="channel-card-name">Dev.to</div>
+          <div class="channel-card-tag">Developer Articles</div>
+        </a>
+
+        <!-- Hashnode -->
+        <a href="#channels" class="channel-card" data-category="cms">
+          <div class="channel-card-icon" style="background:#2962ff;color:#fff;">hn</div>
+          <div class="channel-card-name">Hashnode</div>
+          <div class="channel-card-tag">Engineering Blogs</div>
+        </a>
+
+        <!-- Listmonk -->
+        <a href="#channels" class="channel-card" data-category="cms">
+          <div class="channel-card-icon" style="background:#f43f5e;color:#fff;">lm</div>
+          <div class="channel-card-name">Listmonk</div>
+          <div class="channel-card-tag">Self-Hosted Newsletters</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Brand Workspaces Section -->
+  <section class="section brands-section" id="workspaces">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Organization Architecture</span>
+        <h2 class="section-title">Multi-Brand Workspace Isolation</h2>
+        <p class="section-desc">
+          Amana Flow Postiz organizes campaigns across separate brand workspaces, preventing cross-posting mistakes while enabling shared asset libraries.
+        </p>
+      </div>
+
+      <div class="brands-grid">
+        <div class="brand-box">
+          <div class="brand-box-title">🛒 Amana Mart</div>
+          <div class="brand-box-desc">Retail promotions, seasonal campaigns, and multi-branch updates across Uttara, Lakshmipur, Fashion, and Express.</div>
+          <div class="brand-box-channels">5 Facebook Pages &bull; Instagram (@amanamartbd)</div>
+        </div>
+
+        <div class="brand-box">
+          <div class="brand-box-title">💼 Amana Suite</div>
+          <div class="brand-box-desc">Enterprise software, ERP announcements, B2B thought leadership, and operational guides.</div>
+          <div class="brand-box-channels">LinkedIn Page &bull; Facebook Corporate</div>
+        </div>
+
+        <div class="brand-box">
+          <div class="brand-box-title">🎓 Amana Academy</div>
+          <div class="brand-box-desc">Educational webinars, tech workshops, coding bootcamps, and instructional video series.</div>
+          <div class="brand-box-channels">YouTube (@amana-academy) &bull; Social Feeds</div>
+        </div>
+
+        <div class="brand-box">
+          <div class="brand-box-title">⚡ Amana Flow Hub</div>
+          <div class="brand-box-desc">Core technology releases, AI agent automation demos, and platform milestone updates.</div>
+          <div class="brand-box-channels">YouTube (@amanaflow) &bull; TikTok &bull; Developer Feeds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-title">Engineered for Performance & Scale</h2>
+        <p class="section-desc">
+          Complete toolset to automate your social distribution pipeline with zero third-party data tracking.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">📅</div>
+          <h3 class="feature-title">Unified Visual Calendar</h3>
+          <p class="feature-text">
+            Drag, drop, and rearrange scheduled posts on an interactive calendar. Preview how your post will render on each channel before it goes live.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🤖</div>
+          <h3 class="feature-title">AI Copilot & Repurposing</h3>
+          <p class="feature-text">
+            Automatically craft hooks, captions, and hashtags optimized for each platform's character limits and algorithmic engagement preferences.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">🔄</div>
+          <h3 class="feature-title">Evergreen Recycling & RSS</h3>
+          <p class="feature-text">
+            Automatically recycle top-performing evergreen content on recurring intervals or trigger automated posts straight from your blog RSS feeds.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">💬</div>
+          <h3 class="feature-title">Unified Comment Inbox</h3>
+          <p class="feature-text">
+            Read and reply to comments across Facebook, Instagram, YouTube, and TikTok in one window. Auto-triage customer inquiries with AI tags.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">📊</div>
+          <h3 class="feature-title">Consolidated Analytics</h3>
+          <p class="feature-text">
+            Monitor impressions, reach, clicks, and engagement rates across all networks in a unified dashboard without jumping between multiple apps.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrap">⚡</div>
+          <h3 class="feature-title">Model Context Protocol (MCP)</h3>
+          <p class="feature-text">
+            Native MCP server allows AI agents (Claude, ChatGPT, Codex, Antigravity) to view analytics, draft posts, and schedule directly via natural language.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Self-Hosted Architecture Specs -->
+  <section class="section specs-section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">System Specs</span>
+        <h2 class="section-title">Enterprise Self-Hosted Infrastructure</h2>
+        <p class="section-desc">
+          Deployed on our secure high-speed VPS, backed by production-grade components for 99.9% scheduling reliability.
+        </p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="spec-badge">Workflow Orchestration</div>
+          <div class="spec-name">Temporal Engine</div>
+          <div class="spec-desc">Reliable distributed task execution with zero dropped posts even across server restarts or upstream API outages.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-badge">Database & State</div>
+          <div class="spec-name">PostgreSQL 17</div>
+          <div class="spec-desc">High-performance ACID relational storage keeping integrations, organization schemas, and post histories intact.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-badge">Caching & Queuing</div>
+          <div class="spec-name">Redis 7.2</div>
+          <div class="spec-desc">Sub-millisecond state caching, rate limit tracking, and fast background job queues.</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-badge">Proxy & Security</div>
+          <div class="spec-name">Nginx + HTTP/2 SSL</div>
+          <div class="spec-desc">Hardened TLS 1.3 reverse proxy with HSTS, Gzip compression, and 500MB media upload capacity.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Common Questions</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is Amana Flow Postiz?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Amana Flow Postiz is a self-hosted social media management and scheduling platform based on the open-source Postiz architecture. It allows us to manage and cross-post content across Facebook, Instagram, YouTube, TikTok, LinkedIn, and 25+ other platforms simultaneously.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do I connect my social media accounts?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Log in to the dashboard at <a href="/auth" style="color:#a855f7;">post.amanaflow.com/auth</a>, navigate to the "Integrations" tab, and click on any channel (e.g., Facebook, YouTube, LinkedIn, TikTok). Authorize access with your account, and the channel will immediately be ready for scheduling.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How does TikTok Content Posting API work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Via TikTok's official Content Posting API, our application uploads videos up to 500MB directly to your TikTok account at designated schedule times without requiring manual mobile push approvals. See our <a href="/channels/tiktok" style="color:#a855f7;">TikTok Channel Overview</a> for complete details.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can AI agents schedule posts automatically?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Our deployment features a native Model Context Protocol (MCP) server. External AI agents such as Claude, ChatGPT, Codex, and Antigravity can connect via our MCP endpoint to draft, review, and schedule social posts directly.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Where is my data stored and how do I delete it?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            All data, media files, and authentication tokens are hosted on our dedicated private VPS server located in a secure datacenter. You can disconnect channels anytime or submit a full data deletion request via our <a href="/data-deletion" style="color:#a855f7;">Data Deletion Instructions</a>.
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-banner">
+        <h2 class="cta-title">Ready to streamline your social presence?</h2>
+        <p class="cta-desc">Log in to the Amana Flow Postiz workspace and start planning your next campaign in minutes.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <a href="/auth" class="btn btn-primary" style="padding:14px 36px;font-size:16px;">Sign In to Workspace &rarr;</a>
+          <a href="https://amanaflow.com" class="btn btn-secondary" style="padding:14px 28px;font-size:16px;">Amana Flow Main Website</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:16px;">
+            <div class="brand-logo" style="width:34px;height:34px;">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="brand-text" style="font-size:18px;">Amana Flow <span>Postiz</span></div>
+          </div>
+          <p style="color:var(--text-muted);font-size:13.5px;max-width:320px;line-height:1.6;">
+            Self-hosted agentic social media management platform for multi-brand scheduling, automated cross-posting, and AI orchestration.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="/auth" class="footer-link">Sign In</a></li>
+            <li><a href="/launches" class="footer-link">Dashboard</a></li>
+            <li><a href="#channels" class="footer-link">Supported Channels</a></li>
+            <li><a href="#features" class="footer-link">Features</a></li>
+            <li><a href="#workspaces" class="footer-link">Workspaces</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Channels</div>
+          <ul class="footer-links">
+            <li><a href="/channels/facebook" class="footer-link">Facebook Pages</a></li>
+            <li><a href="/channels/tiktok" class="footer-link">TikTok Publishing</a></li>
+            <li><a href="/channels/youtube" class="footer-link">YouTube & Shorts</a></li>
+            <li><a href="/channels/instagram" class="footer-link">Instagram Reels</a></li>
+            <li><a href="/channels/linkedin" class="footer-link">LinkedIn Business</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Resources</div>
+          <ul class="footer-links">
+            <li><a href="https://amanaflow.com" class="footer-link" target="_blank">Amana Flow Hub</a></li>
+            <li><a href="https://docs.postiz.com" class="footer-link" target="_blank">Postiz Dev Docs</a></li>
+            <li><a href="https://github.com/gitroomhq/postiz-app" class="footer-link" target="_blank">Open Source GitHub</a></li>
+            <li><a href="https://post.amanaflow.com/api" class="footer-link">REST API Endpoint</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Legal & Security</div>
+          <ul class="footer-links">
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/data-deletion" class="footer-link">Data Deletion Instructions</a></li>
+            <li><a href="https://amanaflow.com/terms-of-service/" class="footer-link" target="_blank">Corporate Terms</a></li>
+            <li><a href="https://amanaflow.com/privacy-policy/" class="footer-link" target="_blank">Corporate Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Amana Flow. All Rights Reserved. Built on Postiz Self-Hosted Architecture.</div>
+        <div style="display:flex;gap:20px;">
+          <a href="/terms" class="footer-link">Terms</a>
+          <a href="/privacy" class="footer-link">Privacy</a>
+          <a href="/data-deletion" class="footer-link">Data Deletion</a>
+          <a href="https://amanaflow.com" class="footer-link">amanaflow.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Mobile nav toggle
+    const toggle = document.querySelector('.mobile-toggle');
+    const drawer = document.querySelector('.mobile-drawer');
+    if (toggle && drawer) {
+      toggle.addEventListener('click', () => {
+        drawer.classList.toggle('active');
+      });
+    }
+
+    // Channel Category Filters
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const channelCards = document.querySelectorAll('.channel-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        channelCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'flex';
+          } else {
+            const categories = card.getAttribute('data-category') || '';
+            if (categories.includes(filter)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+
+    // Channel Search Filter
+    const searchInput = document.getElementById('channelSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        channelCards.forEach(card => {
+          const name = card.querySelector('.channel-card-name')?.textContent.toLowerCase() || '';
+          const tag = card.querySelector('.channel-card-tag')?.textContent.toLowerCase() || '';
+          if (name.includes(query) || tag.includes(query)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

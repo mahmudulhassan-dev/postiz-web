@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Post Scheduler & Company Pages — Amana Flow Postiz</title>
+  <meta name="description" content="Schedule LinkedIn articles, documents, and updates across company pages and personal executive profiles with Amana Flow Postiz." />
+  <link rel="canonical" href="https://post.amanaflow.com/channels/linkedin" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(19, 27, 46, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #0a66c2;
+      --gradient: linear-gradient(135deg, #0a66c2 0%, #00a0dc 100%);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text-muted); font-family: 'Inter', sans-serif; line-height: 1.7; }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 9, 14, 0.85);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .brand { color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 18px; text-decoration: none; }
+    .brand span { color: #a855f7; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; padding: 8px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+    .btn-secondary { color: #fff; border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--primary); }
+    .btn-primary { background: var(--gradient); color: #fff; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 50px 24px 80px; }
+    .channel-hero { text-align: center; margin-bottom: 60px; }
+    .channel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(10, 102, 194, 0.1);
+      border: 1px solid rgba(10, 102, 194, 0.3);
+      color: #60a5fa;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; font-size: clamp(32px, 5vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 18px; line-height: 1.2; }
+    .hero-p { font-size: 18px; max-width: 680px; margin: 0 auto 30px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+    .card h3 { font-family: 'Plus Jakarta Sans', sans-serif; color: #fff; font-size: 20px; margin-bottom: 12px; }
+    .card p { font-size: 15px; margin-bottom: 14px; }
+    footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; font-size: 13px; color: #64748b; }
+    footer a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/home" class="brand">Amana Flow <span>Postiz</span></a>
+    <div class="nav-actions">
+      <a href="/home" class="btn btn-secondary">&larr; Back to Home</a>
+      <a href="/auth" class="btn btn-primary">Connect LinkedIn &rarr;</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="channel-hero">
+      <div class="channel-badge">
+        <span>●</span> Official LinkedIn Community Management API Integration
+      </div>
+      <h1>LinkedIn B2B Thought Leadership & Company Scheduling</h1>
+      <p class="hero-p">
+        Publish high-authority industry perspectives, PDF slide documents, and corporate announcements directly to Amana Suite and Amana Flow LinkedIn company pages.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;">
+        <a href="/auth" class="btn btn-primary" style="padding:12px 28px;font-size:15px;">Launch Dashboard & Connect</a>
+        <a href="/data-deletion" class="btn btn-secondary" style="padding:12px 24px;font-size:15px;">Data Deletion Policy</a>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>🏢 Company Pages & Personal Profiles</h3>
+        <p>Post as an organization or publish as an executive thought leader from the same unified editor window.</p>
+      </div>
+
+      <div class="card">
+        <h3>📄 PDF Carousels & Document Uploads</h3>
+        <p>Distribute multi-page presentation decks, case study summaries, and infocards that generate maximum dwell time in the LinkedIn algorithm.</p>
+      </div>
+
+      <div class="card">
+        <h3>📊 Analytics & Performance</h3>
+        <p>Track post impressions, click-through rates, and demographic engagement to refine your B2B marketing strategy.</p>
+      </div>
+
+      <div class="card">
+        <h3>🛡️ Enterprise Token Security</h3>
+        <p>LinkedIn OAuth tokens are encrypted at rest using industry-standard AES encryption on our secure PostgreSQL cluster.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Amana Flow. All Rights Reserved. &bull;
+    <a href="/terms">Terms of Service</a> &bull;
+    <a href="/privacy">Privacy Policy</a> &bull;
+    <a href="/data-deletion">Data Deletion Instructions</a> &bull;
+    <a href="https://amanaflow.com">Amana Flow Hub</a>
+  </footer>
+</body>
+</html>
