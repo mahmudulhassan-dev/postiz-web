@@ -253,7 +253,8 @@ const indexHtml = `<!DOCTYPE html>
       transition: transform 0.2s ease;
     }
 
-    .nav-item:hover .nav-link svg.arrow {
+    .nav-item:hover .nav-link svg.arrow,
+    .nav-item.open .nav-link svg.arrow {
       transform: rotate(180deg);
     }
 
@@ -262,13 +263,13 @@ const indexHtml = `<!DOCTYPE html>
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      background: #14151b;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      transform: translateX(-50%) translateY(4px);
+      background: #1c1c1e;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 16px;
       padding: 16px;
-      width: 600px;
-      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+      width: 610px;
+      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85), 0 0 1px 1px rgba(255, 255, 255, 0.08);
       opacity: 0;
       visibility: hidden;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -279,11 +280,32 @@ const indexHtml = `<!DOCTYPE html>
       pointer-events: none;
     }
 
-    .nav-item:hover .dropdown-postiz {
+    /* Invisible hover bridge to prevent premature closing */
+    .dropdown-postiz::before {
+      content: "";
+      position: absolute;
+      top: -14px;
+      left: 0;
+      right: 0;
+      height: 14px;
+    }
+
+    .dropdown-agents {
+      left: 0;
+      transform: translateX(-15px) translateY(4px);
+    }
+
+    .nav-item:hover .dropdown-postiz,
+    .nav-item.open .dropdown-postiz {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
       pointer-events: auto;
+    }
+
+    .nav-item.nav-item-agents:hover .dropdown-agents,
+    .nav-item.nav-item-agents.open .dropdown-agents {
+      transform: translateX(-15px) translateY(0);
     }
 
     .dropdown-col {
@@ -948,12 +970,12 @@ const indexHtml = `<!DOCTYPE html>
       <nav>
         <ul class="nav-menu">
           <!-- 1. AI Agents Dropdown (Matching Screenshot 3) -->
-          <li class="nav-item">
+          <li class="nav-item nav-item-agents">
             <a class="nav-link">
               AI Agents 
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </a>
-            <div class="dropdown-postiz" style="width: 580px;">
+            <div class="dropdown-postiz dropdown-agents" style="width: 580px;">
               <div class="dropdown-col">
                 ${col1Agents.map(a => `<a href="#ai-agents" class="dropdown-item"><span class="dropdown-item-icon">${a.icon}</span> ${a.name}</a>`).join('')}
               </div>
@@ -1475,6 +1497,25 @@ const indexHtml = `<!DOCTYPE html>
   </footer>
 
   <script>
+    // Navigation Dropdown Click & Touch Toggle
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const link = item.querySelector('.nav-link');
+      const dropdown = item.querySelector('.dropdown-postiz');
+      if (link && dropdown) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
+      }
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    });
+
     // FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(q => {
       q.addEventListener('click', () => {
