@@ -1246,7 +1246,7 @@ function generateIndexHtml() {
     /* Mockup Layout: 3 Columns (Narrow Nav + Channels Sidebar + Calendar Main) */
     .mockup-app-layout {
       display: grid;
-      grid-template-columns: 52px 230px 1fr;
+      grid-template-columns: 52px 1fr;
       height: 500px;
       max-height: 500px;
       background: #090b12;
@@ -1519,9 +1519,10 @@ function generateIndexHtml() {
     /* Week Columns Grid (7 Equal Days) */
     .week-columns-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       background: #07090e;
+      width: 100%;
     }
 
     .week-day-header {
@@ -1562,11 +1563,12 @@ function generateIndexHtml() {
     /* Calendar Events Body Grid */
     .cal-time-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       padding: 8px 0;
-      height: 400px;
+      height: 440px;
       overflow-y: auto;
       background: #090b12;
+      width: 100%;
     }
 
     .cal-col {
@@ -1992,7 +1994,7 @@ function generateIndexHtml() {
           <div class="mockup-content-area" style="flex:1;display:flex;min-width:0;position:relative;overflow:hidden;background:#090b12;">
             
             <!-- PANE 1: CALENDAR VIEW (Active Default) -->
-            <div id="mockView_calendar" class="mockup-view-pane active" style="width:100%;height:100%;display:flex;">
+            <div id="mockView_calendar" class="mockup-view-pane active" style="width:100%;height:100%;display:grid;grid-template-columns:220px 1fr;overflow:hidden;">
               
               <!-- Left: Connected Channels Panel -->
               <div class="app-channels-panel">
