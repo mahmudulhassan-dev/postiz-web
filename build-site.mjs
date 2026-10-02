@@ -310,21 +310,76 @@ const allAgents = [...col1Agents, ...col2Agents, ...col3Agents];
 
 const sharedStyles = `
   
-  /* Theme Support: Dark / Light / System */
+  /* Theme Support: Dark / Light / System (AmanaFlow Brand Standard) */
+  :root, [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0B0F19;
+    --bg-surface: #111827;
+    --bg-card: rgba(17, 24, 39, 0.85);
+    --bg-card-hover: rgba(31, 41, 55, 0.95);
+    --border: rgba(255, 255, 255, 0.12);
+    --border-focus: #00A3FF;
+    --text: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --text-dim: #6B7280;
+    --primary: #00A3FF;
+    --primary-glow: rgba(0, 163, 255, 0.35);
+    --secondary: #00FF9D;
+    --gradient-brand: linear-gradient(135deg, #00A3FF 0%, #00FF9D 100%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.15) 0%, transparent 60%);
+  }
+
   [data-theme="light"] {
-    --bg: #f8fafc;
-    --bg-surface: #ffffff;
+    color-scheme: light;
+    --bg: #F8FAFC;
+    --bg-surface: #FFFFFF;
     --bg-card: rgba(255, 255, 255, 0.95);
-    --bg-card-hover: #f1f5f9;
+    --bg-card-hover: #F1F5F9;
     --border: rgba(15, 23, 42, 0.12);
-    --border-focus: rgba(0, 163, 255, 0.5);
-    --text: #0f172a;
+    --border-focus: #0284C7;
+    --text: #0F172A;
     --text-muted: #475569;
-    --text-dim: #64748b;
-    --primary: #0284c7;
+    --text-dim: #64748B;
+    --primary: #0284C7;
     --primary-glow: rgba(2, 132, 199, 0.25);
     --secondary: #059669;
+    --gradient-brand: linear-gradient(135deg, #00A3FF 0%, #00FF9D 100%);
     --gradient-glow: radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.1) 0%, transparent 60%);
+  }
+
+  /* Universal Theme Contrast Enforcer */
+  [data-theme="dark"] body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+  }
+  [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] .section-title {
+    color: #FFFFFF !important;
+  }
+  [data-theme="dark"] .channel-card-name {
+    color: #FFFFFF !important;
+  }
+  [data-theme="dark"] .pricing-card {
+    background: rgba(17, 24, 39, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  [data-theme="dark"] .btn-secondary {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  [data-theme="light"] body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+  }
+  [data-theme="light"] .channel-card-name {
+    color: #0F172A !important;
+  }
+  [data-theme="light"] [style*="color:#fff"],
+  [data-theme="light"] [style*="color: #fff"] {
+    color: #0F172A !important;
+  }
+  [data-theme="light"] .btn-primary, [data-theme="light"] .save-badge, [data-theme="light"] .filter-btn.active {
+    color: #0B0F19 !important;
   }
 
   [data-theme="light"] .master-header {
@@ -951,29 +1006,85 @@ function renderMasterHeader(activePage = '') {
   <!-- Master Global Navigation Header -->
   <header class="master-header">
     <div class="container nav-inner">
-      <a href="/" class="brand" title="Amana Flow Postiz">
+      <a href="/" class="brand" title="AmanaFlow">
         <div class="brand-logo-wrap" style="background:transparent;border:none;box-shadow:none;padding:0;">
           <img src="/assets/logo.png" alt="Amana Flow" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,163,255,0.45));" />
         </div>
         <div class="brand-text-wrap">
-          <div class="brand-title-row">
-            <span class="brand-name">Amana Flow</span>
-            <span class="brand-badge-postiz">POSTIZ</span>
+          <div class="brand-title-row" style="display:flex;align-items:center;gap:8px;">
+            <span class="brand-name" style="font-weight:800;font-size:20px;letter-spacing:-0.5px;color:var(--text);">Amana<span style="color:#00FF9D;">Flow</span></span>
+            <span class="brand-badge-af" style="background:rgba(0,163,255,0.12);border:1px solid rgba(0,163,255,0.3);color:#00A3FF;font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;letter-spacing:0.8px;">SOVEREIGN</span>
           </div>
           <span class="brand-sub">Sovereign Social Media & AI Orchestration</span>
         </div>
       </a>
 
-      <!-- Desktop Nav Menu (Strictly: Features, Channels, Agents, Pricing - Flat Sleek Horizontal Row) -->
+      <!-- Desktop Nav Menu -->
       <nav class="nav-menu" style="display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0;">
         <a href="/#features" class="nav-link ${activePage === 'features' ? 'active' : ''}">Features</a>
-        <a href="/#channels" class="nav-link ${activePage === 'channels' ? 'active' : ''}">Channels</a>
-        <a href="/agents.html" class="nav-link ${activePage === 'agents' ? 'active' : ''}">Agents</a>
+
+        <!-- Channels Dropdown -->
+        <div class="nav-dropdown-wrapper" style="position:relative;" onmouseenter="showChannelsDropdown()" onmouseleave="hideChannelsDropdown()">
+          <a href="/#channels" class="nav-link dropdown-toggle ${activePage === 'channels' ? 'active' : ''}" onclick="toggleChannelsDropdown(event)" style="display:inline-flex;align-items:center;gap:4px;">
+            <span>Channels</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <div id="channelsDropdownMenu" class="channels-dropdown-menu" style="display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 25px 60px rgba(0,0,0,0.65);width:520px;padding:16px;z-index:999999;backdrop-filter:blur(20px);">
+            <div style="font-size:11px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+              <span>30+ Certified Social & Media Channels</span>
+              <span style="color:#00FF9D;font-size:10px;">● Native OAuth2 Verified</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <a href="/#channels" onclick="filterChannelsFromNav('social')" class="nav-cat-box" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all 0.2s;">
+                <span style="font-size:20px;line-height:1;">🌐</span>
+                <div>
+                  <div style="font-weight:700;font-size:13px;color:var(--text);">Social Networks</div>
+                  <div style="font-size:11px;color:var(--text-dim);line-height:1.3;">Facebook, Instagram, Threads, X, Bluesky, Mastodon</div>
+                </div>
+              </a>
+              <a href="/#channels" onclick="filterChannelsFromNav('video')" class="nav-cat-box" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all 0.2s;">
+                <span style="font-size:20px;line-height:1;">🎬</span>
+                <div>
+                  <div style="font-weight:700;font-size:13px;color:var(--text);">Video & Shorts</div>
+                  <div style="font-size:11px;color:var(--text-dim);line-height:1.3;">YouTube, TikTok, Kick, Twitch</div>
+                </div>
+              </a>
+              <a href="/#channels" onclick="filterChannelsFromNav('pro')" class="nav-cat-box" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all 0.2s;">
+                <span style="font-size:20px;line-height:1;">💼</span>
+                <div>
+                  <div style="font-weight:700;font-size:13px;color:var(--text);">Professional & Dev</div>
+                  <div style="font-size:11px;color:var(--text-dim);line-height:1.3;">LinkedIn, Pinterest, Google Business, Dribbble</div>
+                </div>
+              </a>
+              <a href="/#channels" onclick="filterChannelsFromNav('cms')" class="nav-cat-box" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all 0.2s;">
+                <span style="font-size:20px;line-height:1;">📝</span>
+                <div>
+                  <div style="font-weight:700;font-size:13px;color:var(--text);">CMS & Publishing</div>
+                  <div style="font-size:11px;color:var(--text-dim);line-height:1.3;">WordPress, Medium, Hashnode, Dev.to, Nostr</div>
+                </div>
+              </a>
+            </div>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+              <a href="/#channels" onclick="filterChannelsFromNav('community')" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text);font-weight:600;text-decoration:none;">
+                <span>💬</span> <strong>Community & Chat:</strong> Discord, Telegram, Slack, Reddit
+              </a>
+              <a href="/#channels" onclick="filterChannelsFromNav('social')" style="font-size:12px;font-weight:700;color:#00A3FF;text-decoration:none;">Explore All 30 &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/integrations.html" class="nav-link ${activePage === 'integrations' ? 'active' : ''}">Integrations</a>
         <a href="/#pricing" class="nav-link ${activePage === 'pricing' ? 'active' : ''}">Pricing</a>
       </nav>
 
       <!-- Action Buttons with Dynamic Auth Detection & All 15 Languages -->
       <div class="nav-actions">
+        <!-- Bangladesh Sovereign Node Flag Badge -->
+        <div class="bd-sovereign-badge" title="Bangladesh Sovereign Node with Instant bKash / Nagad / Rocket Checkout" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(0,106,78,0.18);border:1px solid rgba(0,255,157,0.35);border-radius:999px;font-size:12px;font-weight:700;color:#00FF9D;cursor:default;">
+          <span style="font-size:15px;line-height:1;">🇧🇩</span>
+          <span class="bd-node-text" style="letter-spacing:0.3px;">Bangladesh Node</span>
+          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00FF9D;box-shadow:0 0 8px #00FF9D;"></span>
+        </div>
         <!-- Theme Mode Switcher (Dark / Light / System) -->
         <div style="position:relative;display:inline-block;">
           <button id="themeModeBtn" onclick="toggleThemeDropdown(event)" class="btn-theme-toggle" title="Switch Theme" style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);cursor:pointer;transition:all 0.2s;">
@@ -986,7 +1097,7 @@ function renderMasterHeader(activePage = '') {
           </div>
         </div>
 
-        <!-- 15-Language Switcher (Matching Postiz Backend) -->
+        <!-- 15-Language Switcher (Matching AmanaFlow Backend) -->
         <div style="position:relative;display:inline-block;">
           <button id="langToggleBtn" onclick="toggleLangDropdown(event)" class="btn-lang-toggle" title="Switch Language" style="display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;">
             <span id="langFlagIcon">🇬🇧</span> <span id="langTextLabel">EN</span>
@@ -1026,7 +1137,7 @@ function renderMasterHeader(activePage = '') {
   <div class="mobile-drawer">
     <a href="/#features" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>Features & Capabilities</span> &rarr;</a>
     <a href="/#channels" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>30+ Social Networks</span> &rarr;</a>
-    <a href="/agents.html" class="mobile-nav-link"><span>AI Agent Studio & MCP</span> &rarr;</a>
+    <a href="/integrations.html" class="mobile-nav-link"><span>AI & MCP Integrations</span> &rarr;</a>
     <a href="/#pricing" class="mobile-nav-link" onclick="document.querySelector('.mobile-drawer').classList.remove('open')"><span>Pricing & Plans</span> &rarr;</a>
     
     <!-- Mobile Language Selector Row -->
@@ -1104,8 +1215,8 @@ function renderMasterFooter() {
         <div class="footer-col-title">Developers & AI</div>
         <ul class="footer-links">
           <li><a href="/docs.html">Developer Docs & REST API</a></li>
-          <li><a href="/agents.html">AI Agents Studio</a></li>
-          <li><a href="/agents.html#postiz-mcp">Postiz MCP Server</a></li>
+          <li><a href="/integrations.html">AI & MCP Integrations</a></li>
+          <li><a href="/agents.html#amanaflow-mcp">AmanaFlow MCP Server</a></li>
           <li><a href="/#architecture">VPS Node Specs</a></li>
           <li><a href="/auth/login">Login Portal</a></li>
         </ul>
@@ -1127,7 +1238,7 @@ function renderMasterFooter() {
 
     <!-- Bottom Copyright -->
     <div class="container footer-bottom">
-      <div>&copy; ${new Date().getFullYear()} Amana Flow Postiz. All rights reserved. Operating under official platform partner developer policies.</div>
+      <div>&copy; ${new Date().getFullYear()} AmanaFlow. All rights reserved. Operating under official platform partner developer policies.</div>
       <div style="display:flex;gap:20px;align-items:center;">
         <a href="/terms.html">Terms</a>
         <a href="/privacy.html">Privacy</a>
@@ -1205,7 +1316,7 @@ function generateIndexHtml() {
     }
 
     /* ==========================================================
-       AUTHENTIC POSTIZ CALENDAR MOCKUP (Amana Flow Precision UI)
+       AUTHENTIC AmanaFlow CALENDAR MOCKUP
        ========================================================== */
     .mockup-wrapper {
       max-width: 1060px;
@@ -1895,7 +2006,7 @@ function generateIndexHtml() {
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amana Flow Postiz — Sovereign Social Media Orchestration Platform</title>
+  <title>AmanaFlow — Sovereign Social Media Orchestration Platform</title>
   <meta name="description" content="Schedule, automate, and publish to 30+ social media channels and connect AI agents from one visual calendar on our high-speed private VPS." />
   <link rel="canonical" href="https://post.amanaflow.com/" />
   
@@ -1927,7 +2038,7 @@ function generateIndexHtml() {
       </h1>
 
       <p class="hero-desc">
-        Amana Flow Postiz empowers media teams and managed brands to schedule multi-platform posts, orchestrate viral campaigns, and automate publishing with AI precision on private sovereign VPS infrastructure.
+        AmanaFlow empowers media teams and managed brands to schedule multi-platform posts, orchestrate viral campaigns, and automate publishing with AI precision on private sovereign VPS infrastructure.
       </p>
 
       <div class="hero-cta">
@@ -1944,9 +2055,9 @@ function generateIndexHtml() {
             <span class="mockup-dot dot-green"></span>
           </div>
           <div style="font-weight:600;display:flex;align-items:center;gap:6px;">
-            <span>Amana Flow Postiz</span>
+            <span>AmanaFlow</span>
             <span style="opacity:0.4;">&bull;</span>
-            <span style="color:#94a3b8;">VPS Node 148.230.98.190</span>
+            <span style="color:#94a3b8;">VPS Node [server-ip]</span>
             <span style="opacity:0.4;">&bull;</span>
             <span style="color:#00A3FF;">Temporal 1.28 Active</span>
           </div>
@@ -2593,7 +2704,7 @@ function generateIndexHtml() {
                     <span>⚙️ Organization & Team Settings</span>
                     <span style="font-size:11px;background:rgba(255,255,255,0.08);color:#fff;padding:2px 8px;border-radius:999px;">Amana Mart HQ</span>
                   </div>
-                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Role-based access control, billing configuration, and Postiz MCP API endpoints.</div>
+                  <div style="font-size:12.5px;color:var(--text-dim);margin-top:2px;">Role-based access control, billing configuration, and AmanaFlow MCP API endpoints.</div>
                 </div>
                 <a href="/settings" class="btn btn-secondary" style="padding:6px 14px;font-size:12px;">Open Full Settings &rarr;</a>
               </div>
@@ -2641,12 +2752,22 @@ function generateIndexHtml() {
         Every social channel is powered by native, high-performance OAuth2 integrations compliant with official platform policies.
       </p>
 
-      <div class="filter-tabs">
-        <button type="button" class="filter-btn active" onclick="filterChannels('all', this)">All 30 Channels</button>
-        <button type="button" class="filter-btn" onclick="filterChannels('social', this)">Social Networks</button>
-        <button type="button" class="filter-btn" onclick="filterChannels('video', this)">Video & Shorts</button>
-        <button type="button" class="filter-btn" onclick="filterChannels('pro', this)">Professional & CMS</button>
-        <button type="button" class="filter-btn" onclick="filterChannels('community', this)">Communities</button>
+      <div class="filter-tabs" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:32px;">
+        <button type="button" class="filter-btn active" data-cat="social" onclick="filterChannels('social', this)">
+          <span>🌐 Social Networks (9)</span>
+        </button>
+        <button type="button" class="filter-btn" data-cat="video" onclick="filterChannels('video', this)">
+          <span>🎬 Video & Shorts (4)</span>
+        </button>
+        <button type="button" class="filter-btn" data-cat="pro" onclick="filterChannels('pro', this)">
+          <span>💼 Professional & Dev (4)</span>
+        </button>
+        <button type="button" class="filter-btn" data-cat="cms" onclick="filterChannels('cms', this)">
+          <span>📝 CMS & Publishing (7)</span>
+        </button>
+        <button type="button" class="filter-btn" data-cat="community" onclick="filterChannels('community', this)">
+          <span>💬 Community & Chat (7)</span>
+        </button>
       </div>
 
       <div class="channels-grid">
@@ -2686,7 +2807,7 @@ function generateIndexHtml() {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
           </div>
           <div class="arch-card-title">NVMe Cloud VPS Instance</div>
-          <div class="arch-card-desc">Hosted on dedicated node 148.230.98.190 with enterprise KVM virtualization, high clock-frequency vCPUs, and ultra-low latency connection.</div>
+          <div class="arch-card-desc">Hosted on dedicated node [server-ip] with enterprise KVM virtualization, high clock-frequency vCPUs, and ultra-low latency connection.</div>
         </div>
 
         <div class="arch-card">
@@ -2724,6 +2845,26 @@ function generateIndexHtml() {
         <p style="color:var(--text-muted);font-size:15px;line-height:1.6;" data-i18n="pricing_desc">
           No per-seat penalties. Unlock enterprise multi-agent automation with instant local & global checkout.
         </p>
+
+        <!-- Bangladeshi MFS (bKash, Nagad, Rocket) & Global Payment Methods -->
+        <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:20px auto 26px;">
+          <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(226,19,110,0.12);border:1px solid rgba(226,19,110,0.35);border-radius:10px;">
+            <span style="font-weight:900;color:#e2136e;font-size:12px;">bKash</span>
+            <span style="font-size:11px;color:var(--text-muted);">বিকাশ Merchant API</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(247,148,29,0.12);border:1px solid rgba(247,148,29,0.35);border-radius:10px;">
+            <span style="font-weight:900;color:#f7941d;font-size:12px;">Nagad</span>
+            <span style="font-size:11px;color:var(--text-muted);">নগদ Direct PGW</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(139,36,136,0.12);border:1px solid rgba(139,36,136,0.35);border-radius:10px;">
+            <span style="font-weight:900;color:#c084fc;font-size:12px;">Rocket</span>
+            <span style="font-size:11px;color:var(--text-muted);">রকেট DBBL API</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(0,163,255,0.12);border:1px solid rgba(0,163,255,0.35);border-radius:10px;">
+            <span style="font-weight:700;color:#00A3FF;font-size:12px;">💳 Global Cards</span>
+            <span style="font-size:11px;color:var(--text-muted);">Visa & Mastercard</span>
+          </div>
+        </div>
 
         <!-- Centered Unified Controls: Billing Cycle + Currency Dropdown (ONLY BDT, USD, EUR) -->
         <div class="pricing-controls-wrapper">
@@ -2811,7 +2952,7 @@ function generateIndexHtml() {
               <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Social Accounts</strong> (All 30 Channels)</li>
               <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Scheduled Launches</strong> via Temporal</li>
               <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Multi-Agent AI Studio</strong> (GPT-4o, Claude, Gemini)</li>
-              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full Postiz MCP Server API Connectivity</li>
+              <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full AmanaFlow MCP Server API Connectivity</li>
               <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 5 Dedicated Workspace Collaborators</li>
               <li style="display:flex;align-items:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Instant Checkout</strong> (bKash/Nagad/Cards)</li>
             </ul>
@@ -3001,19 +3142,49 @@ function generateIndexHtml() {
       }
     }
 
-    // 3. Channels Category Filter
+    // 3. Channels Category Filter & Dropdown Management
     function filterChannels(cat, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-tabs .filter-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
+      else {
+        const matchingBtn = document.querySelector('.filter-tabs .filter-btn[data-cat="' + cat + '"]');
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
 
       document.querySelectorAll('.channel-card').forEach(card => {
         const cardCat = card.getAttribute('data-cat') || '';
-        if (cat === 'all' || cardCat.includes(cat)) {
+        if (cardCat.includes(cat)) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
         }
       });
+    }
+
+    function showChannelsDropdown() {
+      const menu = document.getElementById('channelsDropdownMenu');
+      if (menu) menu.style.display = 'block';
+    }
+
+    function hideChannelsDropdown() {
+      const menu = document.getElementById('channelsDropdownMenu');
+      if (menu) menu.style.display = 'none';
+    }
+
+    function toggleChannelsDropdown(e) {
+      if (e) e.preventDefault();
+      const menu = document.getElementById('channelsDropdownMenu');
+      if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function filterChannelsFromNav(cat) {
+      const btn = document.querySelector('.filter-tabs .filter-btn[data-cat="' + cat + '"]');
+      filterChannels(cat, btn);
+      hideChannelsDropdown();
+      const chSection = document.getElementById('channels');
+      if (chSection) {
+        chSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     // 4. Theme Mode Switcher
@@ -3048,7 +3219,7 @@ function generateIndexHtml() {
       }
     }
 
-    // 5. 15-Language Localization (Setting i18next cookie for Postiz compatibility)
+    // 5. 15-Language Localization
     const siteTranslations = {
       en: {
         nav_login: 'Log In',
@@ -3281,7 +3452,7 @@ function generateIndexHtml() {
         '&order_id=ORD-PF-' + Date.now() +
         '&customer_name=' + encodeURIComponent('Amana Flow Subscriber') +
         '&customer_email=' + encodeURIComponent('billing@amanaflow.com') +
-        '&desc=' + encodeURIComponent('Amana Flow Postiz - ' + activeModalPlan.toUpperCase() + ' (' + currentCurrency + ')') +
+        '&desc=' + encodeURIComponent('AmanaFlow - ' + activeModalPlan.toUpperCase() + ' (' + currentCurrency + ')') +
         '&success_url=' + encodeURIComponent(window.location.origin + '/launches?subscribed=true&plan=' + activeModalPlan) +
         '&cancel_url=' + encodeURIComponent(window.location.origin + '/#pricing');
 
@@ -3289,14 +3460,29 @@ function generateIndexHtml() {
     }
 
     // Close dropdowns on outside click
-    window.addEventListener('click', () => {
+    window.addEventListener('click', (e) => {
       const themeMenu = document.getElementById('themeDropdownMenu');
-      if (themeMenu) themeMenu.style.display = 'none';
+      if (themeMenu && !e.target.closest('#themeModeBtn')) themeMenu.style.display = 'none';
       const langMenu = document.getElementById('langDropdownMenu');
-      if (langMenu) langMenu.style.display = 'none';
+      if (langMenu && !e.target.closest('#langToggleBtn')) langMenu.style.display = 'none';
       const curMenu = document.getElementById('currencyDropdownMenu');
-      if (curMenu) curMenu.style.display = 'none';
+      if (curMenu && !e.target.closest('#currencyDropdownBtn')) curMenu.style.display = 'none';
+      const chMenu = document.getElementById('channelsDropdownMenu');
+      if (chMenu && !e.target.closest('.nav-dropdown-wrapper')) chMenu.style.display = 'none';
     });
+
+    // Default initial channel category to 'social' (clean layout without 30-channel clutter)
+    function initDefaultChannelTab() {
+      const socialBtn = document.querySelector('.filter-tabs .filter-btn[data-cat="social"]');
+      if (socialBtn && typeof filterChannels === 'function') {
+        filterChannels('social', socialBtn);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDefaultChannelTab);
+    } else {
+      initDefaultChannelTab();
+    }
 
     // 8. Dynamic Auth Detection
     (function syncAuthHeader() {
@@ -3332,7 +3518,7 @@ function generateIndexHtml() {
     <div class="container">
       <div class="cta-box">
         <h2 class="cta-title">Ready to Automate Your Brand Distribution?</h2>
-        <p class="cta-desc">Access the Amana Flow Postiz workspace now to manage all 30+ social media channels from one unified calendar.</p>
+        <p class="cta-desc">Access the AmanaFlow workspace now to manage all 30+ social media channels from one unified calendar.</p>
         <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
           <a href="/launches" class="btn btn-primary btn-lg">Open Dashboard &rarr;</a>
           <a href="/docs.html" class="btn btn-secondary btn-lg">Read Dev Docs</a>
@@ -3360,11 +3546,11 @@ function generateTermsHtml() {
       </div>
 
       <div style="color:var(--text-muted);font-size:15px;line-height:1.75;display:flex;flex-direction:column;gap:30px;">
-        <p>Welcome to <strong>Amana Flow Postiz</strong> ("Platform," "Service," "we," "us," or "our"), operated by Amana Flow and accessible at <a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>. By creating an account, accessing, or using this social media management and scheduling application, you agree to comply with and be bound by the following Terms of Service.</p>
+        <p>Welcome to <strong>AmanaFlow</strong> ("Platform," "Service," "we," "us," or "our"), operated by Amana Flow and accessible at <a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>. By creating an account, accessing, or using this social media management and scheduling application, you agree to comply with and be bound by the following Terms of Service.</p>
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">1. Service Overview & Dedicated VPS Architecture</h2>
-          <p>Amana Flow Postiz is an enterprise social media management, calendar scheduling, content orchestration, and analytics platform powered by open-source Postiz architecture. The Service allows authorized users to plan, draft, generate, and schedule posts across multiple connected social networks (including TikTok, Facebook, Instagram, YouTube, LinkedIn, Threads, X, Pinterest, and others) via official APIs.</p>
+          <p>AmanaFlow is an enterprise social media management, calendar scheduling, content orchestration, and analytics platform powered by open-source Postiz architecture. The Service allows authorized users to plan, draft, generate, and schedule posts across multiple connected social networks (including TikTok, Facebook, Instagram, YouTube, LinkedIn, Threads, X, Pinterest, and others) via official APIs.</p>
         </div>
 
         <div>
@@ -3385,7 +3571,7 @@ function generateTermsHtml() {
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">4. Content Rights & Intellectual Property</h2>
-          <p>You retain 100% ownership and all intellectual property rights to the copy, images, audio, and videos you submit, schedule, or publish through Amana Flow Postiz. You represent and warrant that you hold all necessary rights, licenses, and permissions to publish the content you submit and that your content does not infringe on any third party's intellectual property or privacy rights.</p>
+          <p>You retain 100% ownership and all intellectual property rights to the copy, images, audio, and videos you submit, schedule, or publish through AmanaFlow. You represent and warrant that you hold all necessary rights, licenses, and permissions to publish the content you submit and that your content does not infringe on any third party's intellectual property or privacy rights.</p>
         </div>
 
         <div>
@@ -3421,8 +3607,8 @@ function generateTermsHtml() {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms of Service — Amana Flow Postiz</title>
-  <meta name="description" content="Official Terms of Service for Amana Flow Postiz social media orchestration suite." />
+  <title>Terms of Service — AmanaFlow</title>
+  <meta name="description" content="Official Terms of Service for AmanaFlow social media orchestration suite." />
   <link rel="canonical" href="https://post.amanaflow.com/terms" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3450,7 +3636,7 @@ function generatePrivacyHtml() {
       </div>
 
       <div style="color:var(--text-muted);font-size:15px;line-height:1.75;display:flex;flex-direction:column;gap:30px;">
-        <p>Amana Flow ("we," "our," or "us") operates <strong>Amana Flow Postiz</strong> (<a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>). This Privacy Policy explains our practices regarding the collection, use, disclosure, and protection of personal data and OAuth credentials when you use our enterprise social media management suite.</p>
+        <p>Amana Flow ("we," "our," or "us") operates <strong>AmanaFlow</strong> (<a href="https://post.amanaflow.com" style="color:#a78bfa;">https://post.amanaflow.com</a>). This Privacy Policy explains our practices regarding the collection, use, disclosure, and protection of personal data and OAuth credentials when you use our enterprise social media management suite.</p>
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">1. Information We Collect</h2>
@@ -3480,12 +3666,12 @@ function generatePrivacyHtml() {
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">4. Data Security & Storage Architecture</h2>
-          <p>All data is hosted on our private dedicated VPS node (IP: <code>148.230.98.190</code>). All data transmitted between your browser and our server is encrypted in transit using Transport Layer Security (TLS 1.3/HTTP2). OAuth tokens are stored securely in an isolated, private PostgreSQL database protected behind Docker networks and Linux firewalls.</p>
+          <p>All data is hosted on our private dedicated VPS node (IP: <code>[server-ip]</code>). All data transmitted between your browser and our server is encrypted in transit using Transport Layer Security (TLS 1.3/HTTP2). OAuth tokens are stored securely in an isolated, private PostgreSQL database protected behind Docker networks and Linux firewalls.</p>
         </div>
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">5. User Rights & Data Deletion</h2>
-          <p>You have full sovereign control over your data. You may disconnect any channel at any time from your Postiz Settings, which immediately deletes the respective OAuth tokens from our database. To delete your entire account and all associated scheduled media, please follow our <a href="/data-deletion.html" style="color:#10b981;font-weight:600;">Data Deletion Instructions</a> or email <a href="mailto:privacy@amanaflow.com" style="color:#a78bfa;">privacy@amanaflow.com</a>.</p>
+          <p>You have full sovereign control over your data. You may disconnect any channel at any time from your AmanaFlow Settings, which immediately deletes the respective OAuth tokens from our database. To delete your entire account and all associated scheduled media, please follow our <a href="/data-deletion.html" style="color:#10b981;font-weight:600;">Data Deletion Instructions</a> or email <a href="mailto:privacy@amanaflow.com" style="color:#a78bfa;">privacy@amanaflow.com</a>.</p>
         </div>
       </div>
     </div>
@@ -3496,8 +3682,8 @@ function generatePrivacyHtml() {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — Amana Flow Postiz</title>
-  <meta name="description" content="Privacy Policy and Developer API compliance documentation for Amana Flow Postiz." />
+  <title>Privacy Policy — AmanaFlow</title>
+  <meta name="description" content="Privacy Policy and Developer API compliance documentation for AmanaFlow." />
   <link rel="canonical" href="https://post.amanaflow.com/privacy" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3525,7 +3711,7 @@ function generateDataDeletionHtml() {
       </div>
 
       <div style="color:var(--text-muted);font-size:15px;line-height:1.75;display:flex;flex-direction:column;gap:30px;">
-        <p>In accordance with GDPR, CCPA, and official developer platform policies (including Meta Platform Terms and TikTok Developer Review Rules), Amana Flow Postiz provides three transparent methods for users to request and verify the immediate deletion of their data and connected social credentials.</p>
+        <p>In accordance with GDPR, CCPA, and official developer platform policies (including Meta Platform Terms and TikTok Developer Review Rules), AmanaFlow provides three transparent methods for users to request and verify the immediate deletion of their data and connected social credentials.</p>
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">Method 1: Instant In-App Channel Disconnection (Self-Service)</h2>
@@ -3541,10 +3727,10 @@ function generateDataDeletionHtml() {
 
         <div>
           <h2 style="color:#fff;font-size:20px;font-family:var(--font-heading);margin-bottom:12px;">Method 2: Revoking Access Directly from Social Platforms</h2>
-          <p>You can revoke Amana Flow Postiz permissions from your native account settings at any time:</p>
+          <p>You can revoke AmanaFlow permissions from your native account settings at any time:</p>
           <ul style="margin:8px 0 0 20px;display:flex;flex-direction:column;gap:8px;">
-            <li><strong>TikTok:</strong> Settings and Privacy &rarr; Security &amp; Permissions &rarr; Apps and Services Permissions &rarr; Amana Flow Postiz &rarr; Remove Access.</li>
-            <li><strong>Facebook &amp; Instagram:</strong> Settings &amp; Privacy &rarr; Settings &rarr; Business Integrations &rarr; Amana Flow Postiz &rarr; Remove.</li>
+            <li><strong>TikTok:</strong> Settings and Privacy &rarr; Security &amp; Permissions &rarr; Apps and Services Permissions &rarr; AmanaFlow &rarr; Remove Access.</li>
+            <li><strong>Facebook &amp; Instagram:</strong> Settings &amp; Privacy &rarr; Settings &rarr; Business Integrations &rarr; AmanaFlow &rarr; Remove.</li>
             <li><strong>Google &amp; YouTube:</strong> Google Account Settings &rarr; Security &rarr; Third-party apps with account access &rarr; Remove Access.</li>
             <li><strong>LinkedIn:</strong> Settings &amp; Privacy &rarr; Data Privacy &rarr; Other Applications &rarr; Permitted Services &rarr; Revoke.</li>
           </ul>
@@ -3568,8 +3754,8 @@ function generateDataDeletionHtml() {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Data Deletion Instructions — Amana Flow Postiz</title>
-  <meta name="description" content="Step-by-step user data deletion instructions for Amana Flow Postiz." />
+  <title>User Data Deletion Instructions — AmanaFlow</title>
+  <meta name="description" content="Step-by-step user data deletion instructions for AmanaFlow." />
   <link rel="canonical" href="https://post.amanaflow.com/data-deletion" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3595,7 +3781,7 @@ function generateDocsHtml() {
   const content = `
     <div class="container" style="max-width:1040px;padding:60px 24px 100px;">
       <div style="margin-bottom:40px;border-bottom:1px solid var(--border);padding-bottom:24px;">
-        <span style="font-size:12px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;">Postiz Sovereign Architecture</span>
+        <span style="font-size:12px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;">AmanaFlow Sovereign Architecture</span>
         <h1 style="font-family:var(--font-heading);font-size:clamp(32px,4vw,46px);font-weight:800;color:#fff;margin:8px 0 10px;">Documentation Hub</h1>
         <p style="color:var(--text-muted);font-size:16px;">Comprehensive guide to configuring, orchestrating, and automating social channels on private VPS infrastructure.</p>
       </div>
@@ -3615,7 +3801,7 @@ function generateDocsHtml() {
 
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
           <h3 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:10px;">🤖 AI Agents & MCP</h3>
-          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Connect Cursor, Claude Code, ChatGPT, and n8n directly to your Postiz workspace via Model Context Protocol (MCP) server endpoints.</p>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">Connect AI tools to your AmanaFlow workspace via Model Context Protocol (MCP) server endpoints.</p>
           <a href="/agents.html" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:12px;">Explore Agent Setup &rarr;</a>
         </div>
       </div>
@@ -3656,10 +3842,10 @@ LINKEDIN_CLIENT_SECRET: '****************'
       <div id="self-hosting" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;">
         <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;margin-bottom:14px;">3. Cloud Infrastructure & Security Isolation</h2>
         <div style="color:var(--text-muted);font-size:15px;line-height:1.7;display:flex;flex-direction:column;gap:12px;">
-          <p>Amana Flow Postiz is deployed using a decoupled architecture on Ubuntu VPS (<code>148.230.98.190</code>):</p>
+          <p>AmanaFlow is deployed using a decoupled architecture on VPS infrastructure:</p>
           <ul style="margin:6px 0 0 20px;display:flex;flex-direction:column;gap:8px;">
             <li><strong>Presentation & Compliance Webroot:</strong> <code>/www/wwwroot/post.amanaflow.com/</code> served directly by Nginx for sub-millisecond response speeds.</li>
-            <li><strong>Core Docker Stack:</strong> <code>/opt/postiz-docker-compose/</code> running Postiz App (:4007), PostgreSQL 17 (:5432), Redis 7.2 (:6379), and Temporal (:7233).</li>
+            <li><strong>Core Docker Stack:</strong> <code>[app-directory]/</code> running AmanaFlow App, PostgreSQL 17 (:5432), Redis 7.2 (:6379), and Temporal (:7233).</li>
             <li><strong>Reverse Proxy:</strong> Nginx routes <code>/home</code>, <code>/terms</code>, <code>/privacy</code>, <code>/docs</code>, and <code>/channels/*</code> to static files, while reverse-proxying <code>/auth</code>, <code>/launches</code>, <code>/api</code>, and <code>/.well-known/oauth-protected-resource</code> to Postiz.</li>
           </ul>
         </div>
@@ -3672,8 +3858,8 @@ LINKEDIN_CLIENT_SECRET: '****************'
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Documentation Hub — Amana Flow Postiz</title>
-  <meta name="description" content="Technical documentation and self-hosting guides for Amana Flow Postiz." />
+  <title>Documentation Hub — AmanaFlow</title>
+  <meta name="description" content="Technical documentation and self-hosting guides for AmanaFlow." />
   <link rel="canonical" href="https://post.amanaflow.com/docs" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3691,7 +3877,7 @@ LINKEDIN_CLIENT_SECRET: '****************'
 </html>`;
 }
 
-function generateAgentsHtml() {
+function generateIntegrationsHtml() {
   const content = `
     <div class="container" style="max-width:1040px;padding:60px 24px 100px;">
       <div style="margin-bottom:40px;border-bottom:1px solid var(--border);padding-bottom:24px;">
@@ -3700,20 +3886,20 @@ function generateAgentsHtml() {
         <p style="color:var(--text-muted);font-size:16px;">Automate your social media scheduling by connecting AI coding assistants and autonomous agents via Model Context Protocol (MCP).</p>
       </div>
 
-      <!-- Featured: Postiz MCP Server -->
+      <!-- Featured: AmanaFlow MCP Server -->
       <div id="postiz-mcp" style="background:linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);border:1px solid rgba(124, 58, 237, 0.4);border-radius:var(--radius-lg);padding:32px;margin-bottom:50px;">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
           <div style="width:44px;height:44px;border-radius:10px;background:#7c3aed;display:flex;align-items:center;justify-content:center;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><line x1="9" y1="12" x2="15" y2="8" stroke="#fff" stroke-width="1.8"/><line x1="9" y1="12" x2="15" y2="16" stroke="#fff" stroke-width="1.8"/></svg>
           </div>
           <div>
-            <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;">Native Postiz MCP Server Configuration</h2>
-            <div style="color:#a78bfa;font-size:13px;font-weight:600;">Connect Claude Code, Cursor, Windsurf, or Antigravity to your Postiz instance</div>
+            <h2 style="color:#fff;font-family:var(--font-heading);font-size:22px;">Native AmanaFlow MCP Server Configuration</h2>
+            <div style="color:#a78bfa;font-size:13px;font-weight:600;">Connect AI tools to your AmanaFlow instance</div>
           </div>
         </div>
 
         <p style="color:var(--text-muted);font-size:14.5px;line-height:1.65;margin-bottom:20px;">
-          Postiz exposes a native Model Context Protocol (MCP) endpoint that enables AI tools to list connected channels, draft multi-platform posts, upload media assets, and trigger scheduled campaigns without human browser interaction.
+          AmanaFlow exposes a native Model Context Protocol (MCP) endpoint that enables AI tools to list connected channels, draft multi-platform posts, upload media assets, and trigger scheduled campaigns without human browser interaction.
         </p>
 
         <div style="background:#07090e;border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;font-family:monospace;font-size:13px;color:#cbd5e1;overflow-x:auto;line-height:1.6;">
@@ -3723,7 +3909,7 @@ function generateAgentsHtml() {
 &nbsp;&nbsp;&nbsp;&nbsp;"postiz": {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://post.amanaflow.com/api/mcp",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"headers": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Authorization": "Bearer YOUR_POSTIZ_API_KEY"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Authorization": "Bearer YOUR_AMANAFLOW_API_KEY"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;}<br/>
@@ -3758,8 +3944,8 @@ function generateAgentsHtml() {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Agent Setup Guides — Amana Flow Postiz</title>
-  <meta name="description" content="Connect AI Agents, Claude Code, Cursor, and ChatGPT to Amana Flow Postiz." />
+  <title>AI Integrations & MCP Studio — AmanaFlow</title>
+  <meta name="description" content="Connect AI Agents, Claude Code, Cursor, and ChatGPT to AmanaFlow." />
   <link rel="canonical" href="https://post.amanaflow.com/agents" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3770,7 +3956,7 @@ function generateAgentsHtml() {
 </head>
 <body>
   <div class="ambient-glow"></div>
-  ${renderMasterHeader('agents')}
+  ${renderMasterHeader('integrations')}
   ${content}
   ${renderMasterFooter()}
 </body>
@@ -3796,7 +3982,7 @@ function generateChannelHtml(channel) {
         </h1>
 
         <p style="font-size:17px;max-width:700px;margin:0 auto 30px;color:var(--text-muted);line-height:1.65;">
-          ${channel.desc}. Seamlessly connect your ${channel.name} profile, automate post publishing, and schedule campaigns from Amana Flow Postiz.
+          ${channel.desc}. Seamlessly connect your ${channel.name} profile, automate post publishing, and schedule campaigns from AmanaFlow.
         </p>
 
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
@@ -3827,7 +4013,7 @@ function generateChannelHtml(channel) {
       <div id="compliance" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:30px;margin-top:40px;">
         <h4 style="color:#fff;font-family:var(--font-heading);font-size:18px;margin-bottom:12px;">🛡️ Developer App Review & Policy Compliance</h4>
         <p style="color:var(--text-muted);font-size:14px;line-height:1.65;margin-bottom:16px;">
-          Amana Flow Postiz strictly adheres to official ${channel.name} Developer Policies and Terms of Service. We do not engage in automated scraping, inauthentic engagements, or non-consensual posting. User data can be purged at any moment via our self-service deletion tools.
+          AmanaFlow strictly adheres to official ${channel.name} Developer Policies and Terms of Service. We do not engage in automated scraping, inauthentic engagements, or non-consensual posting. User data can be purged at any moment via our self-service deletion tools.
         </p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
           <a href="/terms.html" style="color:#a78bfa;font-size:13px;font-weight:600;text-decoration:none;">View Terms &rarr;</a>
@@ -3843,8 +4029,8 @@ function generateChannelHtml(channel) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${channel.name} Scheduling & Management — Amana Flow Postiz</title>
-  <meta name="description" content="Official ${channel.name} post scheduler and automation on Amana Flow Postiz." />
+  <title>${channel.name} Scheduling & Management — AmanaFlow</title>
+  <meta name="description" content="Official ${channel.name} post scheduler and automation on AmanaFlow." />
   <link rel="canonical" href="https://post.amanaflow.com/channels/${channel.slug}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3907,7 +4093,7 @@ function generateAdminCustomersHtml() {
 
         <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
           <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;">Server Node</div>
-          <div style="font-size:32px;font-weight:900;color:#10b981;font-family:var(--font-heading);margin-top:6px;">148.230.98.190</div>
+          <div style="font-size:32px;font-weight:900;color:#10b981;font-family:var(--font-heading);margin-top:6px;">[server-ip]</div>
           <div style="font-size:12px;color:#10b981;margin-top:4px;">Temporal Engine Active</div>
         </div>
       </div>
@@ -3916,7 +4102,7 @@ function generateAdminCustomersHtml() {
       <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:40px;">
         <div style="padding:20px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
           <div style="font-weight:800;color:#fff;font-size:16px;">Registered Customer & Brand Accounts</div>
-          <div style="font-size:13px;color:var(--text-dim);">Live Sync from postiz-postgres</div>
+          <div style="font-size:13px;color:var(--text-dim);">Live Sync from AmanaFlow</div>
         </div>
 
         <div style="overflow-x:auto;">
@@ -3972,10 +4158,10 @@ function generateAdminCustomersHtml() {
         <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:14px;">Administrators can execute customer account commands directly on the VPS via SSH:</p>
         <pre style="background:#090a0f;border:1px solid var(--border);border-radius:8px;padding:14px 18px;color:#a78bfa;font-size:13px;overflow-x:auto;">
 # View all registered customers & workspaces
-python3 /opt/postiz-docker-compose/manage_users.py list
+Contact admin for user management
 
 # Grant Superadmin role to a customer
-python3 /opt/postiz-docker-compose/manage_users.py make-superadmin &lt;email&gt;
+python3 [app-directory]/manage_users.py make-superadmin &lt;email&gt;
         </pre>
       </div>
     </div>
@@ -3986,8 +4172,8 @@ python3 /opt/postiz-docker-compose/manage_users.py make-superadmin &lt;email&gt;
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Customer & User Directory &bull; Amana Flow Postiz</title>
-  <meta name="description" content="View registered customer accounts, organizations, and team roles on Amana Flow Postiz.">
+  <title>Customer & User Directory &bull; AmanaFlow</title>
+  <meta name="description" content="View registered customer accounts, organizations, and team roles on AmanaFlow.">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <style>${sharedStyles}</style>
 </head>
@@ -4011,7 +4197,7 @@ function main() {
     fs.mkdirSync(channelsDir, { recursive: true });
   }
 
-  console.log('Generating Amana Flow Postiz Unified Suite...');
+  console.log('Generating AmanaFlow Unified Suite...');
 
   // 1. Generate index.html
   fs.writeFileSync(path.join(baseDir, 'index.html'), generateIndexHtml(), 'utf-8');
@@ -4031,8 +4217,10 @@ function main() {
   fs.writeFileSync(path.join(baseDir, 'docs.html'), generateDocsHtml(), 'utf-8');
   console.log('✔ Generated docs.html');
 
-  fs.writeFileSync(path.join(baseDir, 'agents.html'), generateAgentsHtml(), 'utf-8');
-  console.log('✔ Generated agents.html');
+  fs.writeFileSync(path.join(baseDir, 'integrations.html'), generateIntegrationsHtml(), 'utf-8');
+  console.log('✔ Generated integrations.html');
+  fs.writeFileSync(path.join(baseDir, 'agents.html'), generateIntegrationsHtml(), 'utf-8');
+  console.log('✔ Generated agents.html (compatible alias)');
   // admin-customers removed from public landing
 
   // 4. Generate all 30 channel pages
